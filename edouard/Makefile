@@ -5,7 +5,7 @@
 ## Login   <puilla_e@epitech.net>
 ## 
 ## Started on  Thu Feb 25 18:45:44 2016 edouard puillandre
-## Last update Thu Feb 25 18:46:35 2016 edouard puillandre
+## Last update Thu Mar  3 17:09:50 2016 edouard puillandre
 ##
 
 DEBUG	=	yes
@@ -26,7 +26,11 @@ endif
 LDFLAGS	=	-lmy	\
 		-L./lib/
 
-SRC	=	src/main.c
+SRC	=	src/main.c		\
+		src/fct_str.c		\
+		src/fct_option.c	\
+		src/fct_opt2.c		\
+		src/fct_opt3.c
 
 RM	=	rm -f
 

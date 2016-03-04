@@ -5,21 +5,16 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:46:48 2016 edouard puillandre
-** Last update Thu Mar  3 11:24:56 2016 edouard puillandre
+** Last update Fri Mar  4 16:28:01 2016 edouard puillandre
 */
 
 #include "tetris.h"
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-  bool	n;
-  (void) argc;
-  (void) argv;
+  t_tetris	*tetris;
+  t_opt		opt[OPT_LEN]
 
-  n = false;
-  if (n)
-    write(1, "yes", 3);
-  else
-    write(1, "no", 2);
+  tetris = my_def_tetris;
   return (0);
 }
