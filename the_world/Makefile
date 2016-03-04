@@ -5,28 +5,17 @@
 ## Login   <puilla_e@epitech.net>
 ## 
 ## Started on  Thu Feb 25 18:45:44 2016 edouard puillandre
-## Last update Thu Feb 25 18:46:35 2016 edouard puillandre
+## Last update Wed Mar  2 19:35:00 2016 Voyevoda
 ##
-
-DEBUG	=	yes
 
 CC	=	gcc
 
-CFLAGS	=	-Iinclude	\
-		-Wall		\
+CFLAGS	=	-Wall		\
 		-Wextra		\
 		-Werror		\
 		-std=c99
 
-ifeq ($(DEBUG), yes)
-CFLAGS	+=	-g		\
-		-D DEBUG	
-endif
-
-LDFLAGS	=	-lmy	\
-		-L./lib/
-
-SRC	=	src/main.c
+SRC	=	main.c
 
 RM	=	rm -f
 
@@ -35,13 +24,6 @@ NAME	=	tetris
 OBJ	=	$(SRC:.c=.o)
 
 $(NAME): $(OBJ)
-ifeq ($(DEBUG), yes)
-	@tput setaf 2; tput bold
-	@echo
-	@echo Debug mode
-	@echo
-	@tput sgr0
-endif
 	$(CC) $(OBJ) -o $(NAME) $(LDFLAGS)
 
 all: $(NAME)
