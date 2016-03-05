@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Fri Mar  4 18:01:51 2016 Voyevoda
+** Last update Sat Mar  5 15:10:47 2016 Voyevoda
 */
 
 #ifndef		TETRIS_H_
@@ -112,5 +112,6 @@ int		set_kp(t_tetris *tetris, int *i, char **argv);
 int		set_debug(t_tetris *tetris, int *i, char **argv);
 t_tetris	*my_def_tetris();
 int		my_check_arg(int argc, char **argv, t_tetris *tetris);
+void		malloc_piece(t_piece *alphabet);
 
 #endif /* !TETRIS_H_ */

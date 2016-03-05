@@ -5,55 +5,56 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Fri Mar  4 19:45:22 2016 Voyevoda
+** Last update Sat Mar  5 17:29:09 2016 Voyevoda
 */
 #include "../include/tetris.h"
 
-int	fill_piece(t_piece *alphabet, int nb, int fd, char *av)
+int	fill_piece(t_piece *alphabet, char *buffer, int line)
 {
   int	i;
-  char	*buffer;
+  int	k;
 
-  if ((buffer = get_next_line(fd)) == NULL)
+  k = 0;
+  i = -1;
+  while (buffer[++i] != '\0')
     {
-      fprintf(stderr, "OPEN ERROR\n");
-      return (-1);
-    }
-  i = 0;
-  while (buffer[i] != '\0')
-    {
-      if (i > alphabet->width && buffer[i] != ' ')
+      if (buffer[i] != ' ' && buffer[i] != '*')
 	return (-1);
-      if (nb >= alphabet->height)
+      if (i > alphabet->width && buffer[i] != ' ')
 	return (-1);
     }
   i = -1;
-  while (buffer[++i] != '\0')
-    alphabet->shape[nb][i] = buffer[i];
+  while (++i != alphabet->width)
+    {
+      if (buffer[i] == '*')
+	k++;
+      if (i == alphabet->width && k == 0)
+	return (-1);
+      alphabet->shape[line][i] = buffer[i];
+    }
   return (0);
 }
 
-int	fill_struct(int *tab, t_piece *alphabet, char *av)
+int		fill_struct(t_piece *alphabet, char *av)
 {
   int           fd;
   char          *buffer;
-  int		i;
   int		k;
 
-  i = k = 0;
+  k = -1;
   fd = open(av, O_RDONLY);
-  if ((buffer = get_next_line(fd)) == NULL)
+  while (buffer != NULL && ++k <= alphabet->height)
     {
-      fprintf(stderr, "OPEN ERROR\n");
-      return (-1);
-    }
-  while (buffer[++i] != '\0')
-    {
-      if (buffer[i] != ' ' || buffer[i] != '*')
-	return (-1);
-      if (i > alphabet->width && buffer[i] != ' ')
-	return (-1);
-      if (fill_piece(alphabet, i, fd, av));
+      if ((buffer = get_next_line(fd)) == NULL)
+	{
+	  fprintf(stderr, "OPEN ERROR\n");
+	  return (-1);
+	}
+      if ((fill_piece(alphabet, buffer, k)) == -1)
+	{
+	  fprintf(stderr, "OPEN ERROR\n");
+	  return (-1);
+	}
     }
   return (0);
 }
@@ -71,14 +72,12 @@ int		get_to_space(int i, char *str,t_piece *alphabet)
    while (j != 9 && str[k] >= '0' && str[k] <= '9')
      buffer[j++] = str[k++];
    buffer[++j] = '\0';
-   printf("buffer%s\n", buffer);
-   if (l = 0)
+   if (l == 0)
      alphabet->width = my_getnbr(buffer);
-   else if (l = 1)
+   else if (l == 1)
      alphabet->height = my_getnbr(buffer);
-   else if (l = 2)
+   else if (l == 2)
      alphabet->col = my_getnbr(buffer);
-   printf("%d", alphabet->col);
    l++;
    if (l == 3)
      l = 0;
@@ -89,7 +88,6 @@ int	check_tetrimino(char *str, t_piece *alphabet,char *av)
 {
   int	i;
   int	tab[3];
-  char	*buf;
   int	j;
 
   i = -1;
@@ -98,13 +96,13 @@ int	check_tetrimino(char *str, t_piece *alphabet,char *av)
     {
       if (str[i] >= '0' && str[i] <= '9')
 	{
-	  if ((str[i] != ' ') && str[i] < '0' || str[i] > '9')
+	  if ((str[i] != ' ') && (str[i] < '0' || str[i] > '9'))
 	     return (-1);
 	  else if ((tab[j++] = get_to_space(i, str, alphabet)) == -1)
 	     return (-1);
 	}
     }
-  fill_struct(tab, alphabet, av);
+  fill_struct(alphabet, av);
   return (0);
 }
 
@@ -123,8 +121,6 @@ int		load_info(char *av)
   alphabet = malloc(sizeof(t_piece));
   malloc_piece(alphabet);
   check_tetrimino(buffer, alphabet, av);
-  printf("width%d\n", alphabet->width);
-  printf("lenght%d\n", alphabet->height);
   return (0);
 }
 
@@ -137,6 +133,7 @@ int	main(int ac, char **av)
     }
   else
     {
+       printf("aurevoir");
     }
     return(0);
 }
