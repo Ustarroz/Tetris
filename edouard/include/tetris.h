@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Fri Mar  4 15:59:59 2016 edouard puillandre
+** Last update Sat Mar  5 16:53:10 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -35,6 +35,8 @@
 # define ID_MAP (8)
 # define ID_W (9)
 # define ID_D (10)
+# define ARG_ERR_MSG "Error: incorrect argument "
+# define MALLOC_ERR_MSG "Error: malloc don't work\n"
 
 typedef struct	s_cmd
 {
@@ -75,6 +77,7 @@ typedef struct	s_game
 
 typedef struct	s_tetris
 {
+  int		nb_opt;
   bool		debug;
   t_cmd		cmd[KEY_LEN];
   t_map		*map;
@@ -87,7 +90,7 @@ typedef struct	s_opt
 {
   char		*str;
   char		*eq;
-  int		(*fct)(t_tetris *tetris, int *i, char **argv);
+  int		(*fct)(t_tetris *tetris, int *i, char **argv, bool eq_true);
 }		t_opt;
 
 int		my_strcmp(char *str, char *ptr);
@@ -95,17 +98,19 @@ int		my_strncmp(char *str, char *ptr, int n);
 char		*my_strdup(char *str);
 int		check_int(char *str);
 void		init_tab_opt(t_opt *opt);
-int		set_lvl(t_tetris *tetris, int *i, char **argv);
-int		set_map(t_tetris *tetris, int *i, char **argv);
-int		set_w(t_tetris *tetris, int *i, char **argv);
-int		set_kl(t_tetris *tetris, int *i, char **argv);
-int		set_kr(t_tetris *tetris, int *i, char **argv);
-int		set_kt(t_tetris *tetris, int *i, char **argv);
-int		set_kd(t_tetris *tetris, int *i, char **argv);
-int		set_kq(t_tetris *tetris, int *i, char **argv);
-int		set_kp(t_tetris *tetris, int *i, char **argv);
-int		set_debug(t_tetris *tetris, int *i, char **argv);
-t_tetris	*my_def_tetris();
+int		set_lvl(t_tetris *tetris, int *i, char **argv, bool eq_true);
+int		set_map(t_tetris *tetris, int *i, char **argv, bool eq_true);
+int		set_w(t_tetris *tetris, int *i, char **argv, bool eq_true);
+int		set_kl(t_tetris *tetris, int *i, char **argv, bool eq_true);
+int		set_kr(t_tetris *tetris, int *i, char **argv, bool eq_true);
+int		set_kt(t_tetris *tetris, int *i, char **argv, bool eq_true);
+int		set_kd(t_tetris *tetris, int *i, char **argv, bool eq_true);
+int		set_kq(t_tetris *tetris, int *i, char **argv, bool eq_true);
+int		set_kp(t_tetris *tetris, int *i, char **argv, bool eq_true);
+int		set_debug(t_tetris *tetris, int *i, char **argv, bool eq_true);
+t_tetris	*my_def_tetris(int argc, char **env);
 int		my_check_arg(int argc, char **argv, t_tetris *tetris);
+void		my_putnbr_error(int nb, bool first);
+int		my_map_tab(t_map *map);
 
 #endif /* !TETRIS_H_ */

@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 14:11:01 2016 edouard puillandre
-** Last update Fri Mar  4 11:29:54 2016 edouard puillandre
+** Last update Fri Mar  4 17:40:40 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -35,7 +35,7 @@ int	my_strcmp(char *str, char *ptr)
   if (ptr == NULL)
     return (1);
   i = 0;
-  while (str[i] != '\0' && ptr[i] != '\0' && str[i] != ptr[i])
+  while (str[i] != '\0' && ptr[i] != '\0' && str[i] == ptr[i])
     i = i + 1;
   return (str[i] - ptr[i]);
 }
@@ -49,7 +49,7 @@ int	my_strncmp(char *str, char *ptr, int n)
   if (ptr == NULL)
     return (1);
   i = 0;
-  while (str[i] != '\0' && ptr[i] != '\0' && str[i] != ptr[i] && i < n - 1)
+  while (str[i] != '\0' && ptr[i] != '\0' && str[i] == ptr[i] && i < n - 1)
     i = i + 1;
   return (str[i] - ptr[i]);
 }

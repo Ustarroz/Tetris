@@ -5,34 +5,46 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Fri Mar  4 15:50:25 2016 edouard puillandre
+** Last update Sat Mar  5 16:57:03 2016 edouard puillandre
 */
 
 #include "tetris.h"
 
+int	my_map_tab(t_map *map)
+{
+  int	i;
+  int	j;
+
+  if ((map->tab = malloc(sizeof(char *) * (map->height + 1))) == NULL)
+    {
+      my_putstr_error(MALLOC_ERR_MSG);
+      return (- 1);
+    }
+  i = - 1;
+  while (++i < map->height)
+    {
+      j = - 1;
+      if ((map->tab[i] = malloc(map->width + 1)) == NULL)
+	{
+	  my_putstr_error(MALLOC_ERR_MSG);
+	  return (- 1);
+	}
+      while (++j < map->width)
+	map->tab[i][j] = ' ';
+      map->tab[i][j] = '\0';
+    }
+  map->tab[i] = NULL;
+  return (0);
+}
+
 t_map	*my_def_map()
 {
   t_map	*map;
-  int	i;
-  int	j;
 
   if ((map = malloc(sizeof(t_map))) == NULL)
     return (NULL);
   map->width = HEIGHT_DEF;
   map->height = WIDTH_DEF;
-  if ((map->tab = malloc(sizeof(char *) * (HEIGHT_DEF + 1))) == NULL)
-    return (NULL);
-  i = - 1;
-  while (++i < HEIGHT_DEF)
-    {
-      j = - 1;
-      if ((map->tab[i] = malloc(WIDTH_DEF + 1)) == NULL)
-	return (NULL);
-      while (++j < WIDTH_DEF)
-	map->tab[i][j] = ' ';
-      map->tab[i][j] = '\0';
-    }
-  map->tab[i] = NULL;
   return (map);
 }
 
@@ -48,6 +60,7 @@ t_game		*my_def_game()
   game->t.sec = 0;
   game->score = 0;
   game->high_score = 0;
+  return (game);
 }
 
 void	my_def_cmd(t_tetris *tetris)
@@ -60,17 +73,28 @@ void	my_def_cmd(t_tetris *tetris)
   tetris->cmd[ID_KP].key = my_strdup("kp");
 }
 
-t_tetris	*my_def_tetris()
+t_tetris	*my_def_tetris(int argc, char **env)
 {
   t_tetris	*tetris;
 
+  (void) env;
   if ((tetris = malloc(sizeof(t_tetris))) == NULL)
-    return (NULL);
+    {
+      my_putstr_error(MALLOC_ERR_MSG);
+      return (NULL);
+    }
   tetris->debug = false;
+  tetris->nb_opt = argc - 1;
   if ((tetris->map = my_def_map()) == NULL)
-    return (NULL);
+    {
+      my_putstr_error(MALLOC_ERR_MSG);
+      return (NULL);
+    }
   if ((tetris->game = my_def_game()) == NULL)
-    return (NULL);
+    {
+      my_putstr_error(MALLOC_ERR_MSG);
+      return (NULL);
+    }
   my_def_cmd(tetris);
   return (tetris);
 }
