@@ -9,11 +9,11 @@
 */
 
 #ifndef GET_NEXT_LINE_H_
-#define GET_NEXT_LINE_H_
+# define GET_NEXT_LINE_H_
 
 char	*get_next_line(const int fd);
 
-#ifndef READ_SIZE
-# define READ_SIZE (10)
-#endif /* !READ_SIZE*/
-#endif/* GET_NEXT_LINE_H */
+# ifndef READ_SIZE
+#  define READ_SIZE (10)
+# endif /* !READ_SIZE */
+#endif/* !GET_NEXT_LINE_H_ */
