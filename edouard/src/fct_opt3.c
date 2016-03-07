@@ -5,13 +5,14 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 16:54:44 2016 edouard puillandre
-** Last update Sat Mar  5 16:19:21 2016 edouard puillandre
+** Last update Mon Mar  7 17:49:30 2016 edouard puillandre
 */
 
 #include "tetris.h"
 
 int	set_kt(t_tetris *tetris, int *i, char **argv, bool eq_true)
 {
+  my_printf("kt\n");
   if (eq_true == false)
     {
       *i = *i + 1;
@@ -21,15 +22,20 @@ int	set_kt(t_tetris *tetris, int *i, char **argv, bool eq_true)
 	  my_putnbr_error(*i - 1, true);
 	  return (- 1);
 	}
+      free(tetris->cmd[ID_KT].key);
       tetris->cmd[ID_KT].key = my_strdup(argv[*i]);
     }
   else
-    tetris->cmd[ID_KT].key = my_strdup(argv[*i] + my_strlen("--key-turn="));
+    {
+      free(tetris->cmd[ID_KT].key);
+      tetris->cmd[ID_KT].key = my_strdup(argv[*i] + my_strlen("--key-turn="));
+    }
   return (0);
 }
 
 int	set_kd(t_tetris *tetris, int *i, char **argv, bool eq_true)
 {
+  my_printf("kd\n");
   if (eq_true == false)
     {
       *i = *i + 1;
@@ -39,15 +45,20 @@ int	set_kd(t_tetris *tetris, int *i, char **argv, bool eq_true)
 	  my_putnbr_error(*i - 1, true);
 	  return (- 1);
 	}
+      free(tetris->cmd[ID_KD].key);
       tetris->cmd[ID_KD].key = my_strdup(argv[*i]);
     }
   else
-    tetris->cmd[ID_KD].key = my_strdup(argv[*i] + my_strlen("--key-drop="));
+    {
+      free(tetris->cmd[ID_KD].key);
+      tetris->cmd[ID_KD].key = my_strdup(argv[*i] + my_strlen("--key-drop="));
+    }
   return (0);
 }
 
 int	set_kq(t_tetris *tetris, int *i, char **argv, bool eq_true)
 {
+  my_printf("kq\n");
   if (eq_true == false)
     {
       *i = *i + 1;
@@ -57,15 +68,20 @@ int	set_kq(t_tetris *tetris, int *i, char **argv, bool eq_true)
 	  my_putnbr_error(*i - 1, true);
 	  return (- 1);
 	}
+      free(tetris->cmd[ID_KQ].key);
       tetris->cmd[ID_KQ].key = my_strdup(argv[*i]);
     }
   else
-    tetris->cmd[ID_KQ].key = my_strdup(argv[*i] + my_strlen("--key-quit="));
+    {
+      free(tetris->cmd[ID_KQ].key);
+      tetris->cmd[ID_KQ].key = my_strdup(argv[*i] + my_strlen("--key-quit="));
+    }
   return (0);
 }
 
 int	set_kp(t_tetris *tetris, int *i, char **argv, bool eq_true)
 {
+  my_printf("kp\n");
   if (eq_true == false)
     {
       *i = *i + 1;
@@ -75,15 +91,20 @@ int	set_kp(t_tetris *tetris, int *i, char **argv, bool eq_true)
 	  my_putnbr_error(*i - 1, true);
 	  return (- 1);
 	}
+      free(tetris->cmd[ID_KP].key);
       tetris->cmd[ID_KP].key = my_strdup(argv[*i]);
     }
   else
-    tetris->cmd[ID_KP].key = my_strdup(argv[*i] + my_strlen("--key-pause="));
+    {
+      free(tetris->cmd[ID_KP].key);
+      tetris->cmd[ID_KP].key = my_strdup(argv[*i] + my_strlen("--key-pause="));
+    }
   return (0);
 }
 
 int	set_debug(t_tetris *tetris, int *i, char **argv, bool eq_true)
 {
+  my_printf("debug\n");
   if (eq_true && my_strcmp(argv[*i], "--debug") != 0)
     {
       my_putstr_error(ARG_ERR_MSG);

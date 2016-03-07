@@ -5,10 +5,30 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:46:48 2016 edouard puillandre
-** Last update Sat Mar  5 16:56:38 2016 edouard puillandre
+** Last update Mon Mar  7 19:13:22 2016 edouard puillandre
 */
 
 #include "tetris.h"
+
+int	start_tetris(int argc, char **argv, t_tetris *tetris)
+{
+  int	check;
+
+  if ((check = my_check_arg(argc, argv, tetris)) == 1)
+    {
+      my_free_tetris(tetris, false);
+      return (1);
+    }
+  else if (check == - 1)
+    {
+      my_free_tetris(tetris, false);
+      return (- 1);
+    }
+  if (my_map_tab(tetris->map) == - 1)
+    return (- 1);
+  my_free_tetris(tetris, true);
+  return (0);
+}
 
 int		main(int argc, char **argv, char **env)
 {
@@ -17,11 +37,9 @@ int		main(int argc, char **argv, char **env)
 
   if ((tetris = my_def_tetris(argc, env)) == NULL)
     return (- 1);
-  if ((check = my_check_arg(argc, argv, tetris)) == 1)
+  if ((check = start_tetris(argc, argv, tetris)) == 1)
     return (0);
-  else if (check == - 1)
-    return (- 1);
-  if (my_map_tab(tetris->map) == - 1)
+  else if (check ==- 1)
     return (- 1);
   return (0);
 }

@@ -5,7 +5,7 @@
 ## Login   <puilla_e@epitech.net>
 ## 
 ## Started on  Thu Feb 25 18:45:44 2016 edouard puillandre
-## Last update Sat Mar  5 15:19:42 2016 edouard puillandre
+## Last update Mon Mar  7 17:57:06 2016 edouard puillandre
 ##
 
 DEBUG	=	yes
@@ -33,7 +33,7 @@ SRC	=	src/main.c		\
 		src/fct_opt3.c		\
 		src/fct_check.c		\
 		src/fct_init_tet.c	\
-		src/fct_error.c
+		src/fct_exit.c
 
 RM	=	rm -f
 

@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 17:14:22 2016 edouard puillandre
-** Last update Sat Mar  5 16:28:18 2016 edouard puillandre
+** Last update Mon Mar  7 17:42:55 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -24,22 +24,22 @@ int	check_int(char *str)
   return (0);
 }
 
-int	my_check_opt(char **argv, int k, t_opt opt, t_tetris *tetris)
+int	my_check_opt(char **argv, int *k, t_opt opt, t_tetris *tetris)
 {
   int	check;
 
-  if (my_strcmp(argv[k], opt.str) == 0)
+  if (my_strcmp(argv[*k], opt.str) == 0)
     {
-      if ((check = opt.fct(tetris, &k, argv, false)) != 0)
+      if ((check = opt.fct(tetris, k, argv, false)) != 0)
 	return (check);
       else
 	return (2);
     }
   if (opt.eq == NULL)
     return (0);
-  if (my_strncmp(argv[k], opt.eq, my_strlen(opt.eq)) == 0)
+  if (my_strncmp(argv[*k], opt.eq, my_strlen(opt.eq)) == 0)
     {
-      if ((check = opt.fct(tetris, &k, argv, true)) != 0)
+      if ((check = opt.fct(tetris, k, argv, true)) != 0)
 	return (check);
       else
 	return (2);
@@ -62,14 +62,14 @@ int	my_check_arg(int argc, char **argv, t_tetris *tetris)
       end = false;
       i = - 1;
       while (end == false && ++i < OPT_LEN)
-	if ((check = my_check_opt(argv, k, opt[i], tetris)) == 2)
+	if ((check = my_check_opt(argv, &k, opt[i], tetris)) == 2)
 	  end = true;
 	else if (check != 0)
 	  return (check);
       if (i == OPT_LEN)
 	{
 	  my_putstr_error(ARG_ERR_MSG);
-	  my_putnbr_error(i, true);
+	  my_putnbr_error(k, true);
 	  return (- 1);
 	}
     }

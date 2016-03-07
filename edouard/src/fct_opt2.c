@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 16:51:51 2016 edouard puillandre
-** Last update Sat Mar  5 16:12:18 2016 edouard puillandre
+** Last update Mon Mar  7 17:52:11 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -14,6 +14,7 @@ int	set_lvl(t_tetris *tetris, int *i, char **argv, bool eq_true)
 {
   int	len;
 
+  my_printf("lvl\n");
   if (eq_true == false)
     {
       *i = *i + 1;
@@ -27,7 +28,7 @@ int	set_lvl(t_tetris *tetris, int *i, char **argv, bool eq_true)
     }
   else
     {
-      len = my_strlen("--level==");
+      len = my_strlen("--level=");
       if (check_int(argv[*i] + len) != 0)
  	{
 	  my_putstr_error(ARG_ERR_MSG);
@@ -39,30 +40,28 @@ int	set_lvl(t_tetris *tetris, int *i, char **argv, bool eq_true)
   return (0);
 }
 
-int	get_cpl_nbr(char *str, bool first, int j)
+int	get_cpl_nbr(char *str, bool first)
 {
   int	i;
   int	nb;
+  bool	end;
+  bool	check;
 
   i = - 1;
   nb = 0;
-  while (str[++i] != '\0')
-    if (first && str[i] >= '0' && str[i] <= '9')
+  end = true;
+  check = first;
+  while (str[++i] != '\0' && end)
+    if (check && str[i] >= '0' && str[i] <= '9')
       nb = 10 * nb + str[i] - '0';
-    else if (first && (str[i] < '0' || str[i] > '9'))
-      {
-	my_putstr_error(ARG_ERR_MSG);
-	my_putnbr_error(j, true);
-	return (- 1);
-      }
-    else if (str[i] == ',')
-      first = true;
-  if (nb == 0)
-    {
-      my_putstr_error(ARG_ERR_MSG);
-      my_putnbr_error(i, true);
+    else if (first && str[i] == ',')
+      end = false;
+    else if (check && (str[i] < '0' || str[i] > '9'))
       return (- 1);
-    }
+    else if (str[i] == ',')
+      check = true;
+  if (nb <= 0 || i > my_strlen(INT_MAX))
+    return (- 1);
   return (nb);
 }
 
@@ -91,13 +90,14 @@ int	set_map(t_tetris *tetris, int *i, char **argv, bool eq_true)
 {
   int	len;
 
+  my_printf("map\n");
   if (eq_true == false)
     return (set_map_m(tetris, i, argv));
   else
     {
-      len = my_strlen("--map-size==");
-      tetris->map->width = get_cpl_nbr(argv[*i] + len, true, *i);
-      tetris->map->width = get_cpl_nbr(argv[*i] + len, false, *i);
+      len = my_strlen("--map-size=");
+      tetris->map->width = get_cpl_nbr(argv[*i] + len, true);
+      tetris->map->height = get_cpl_nbr(argv[*i] + len, false);
       if (tetris->map->width == - 1 || tetris->map->height == - 1)
 	{
 	  my_putstr_error(ARG_ERR_MSG);
@@ -110,6 +110,7 @@ int	set_map(t_tetris *tetris, int *i, char **argv, bool eq_true)
 
 int	set_w(t_tetris *tetris, int *i, char **argv, bool eq_true)
 {
+  my_printf("without\n");
   if (eq_true == true && my_strcmp(argv[*i], "--without-next") != 0)
     {
       my_putstr_error(ARG_ERR_MSG);

@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Sat Mar  5 16:53:10 2016 edouard puillandre
+** Last update Mon Mar  7 19:12:39 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -18,7 +18,7 @@
 # include "my.h"
 
 # define PATH_GAME "./ressource/game"
-# define TETRIMINO "./tetriminos"
+# define TETRIMINO "./tetriminos/"
 # define INT_MAX "2147483647"
 # define WIDTH_DEF (12)
 # define HEIGHT_DEF (22)
@@ -112,5 +112,6 @@ t_tetris	*my_def_tetris(int argc, char **env);
 int		my_check_arg(int argc, char **argv, t_tetris *tetris);
 void		my_putnbr_error(int nb, bool first);
 int		my_map_tab(t_map *map);
+void		my_free_tetris(t_tetris *tetris, bool map_true);
 
 #endif /* !TETRIS_H_ */
