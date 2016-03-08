@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Sat Mar  5 17:29:09 2016 Voyevoda
+** Last update Tue Mar  8 14:15:58 2016 Voyevoda
 */
 #include "../include/tetris.h"
 
@@ -35,31 +35,27 @@ int	fill_piece(t_piece *alphabet, char *buffer, int line)
   return (0);
 }
 
-int		fill_struct(t_piece *alphabet, char *av)
+int		fill_struct(t_piece *alphabet, int fd)
 {
-  int           fd;
   char          *buffer;
   int		k;
 
   k = -1;
-  fd = open(av, O_RDONLY);
-  while (buffer != NULL && ++k <= alphabet->height)
+  while ((buffer = get_next_line(fd)) != NULL && ++k < alphabet->height)
     {
-      if ((buffer = get_next_line(fd)) == NULL)
-	{
-	  fprintf(stderr, "OPEN ERROR\n");
-	  return (-1);
-	}
       if ((fill_piece(alphabet, buffer, k)) == -1)
 	{
-	  fprintf(stderr, "OPEN ERROR\n");
+	  printf("%s", buffer);
+	  printf("OPEN ERROR\n");
 	  return (-1);
 	}
+      if (buffer == NULL && (k < alphabet->height || k > alphabet->height))
+	return (-1);
     }
   return (0);
 }
 
-int		get_to_space(int i, char *str,t_piece *alphabet)
+int	get_to_space(int i, char *str,t_piece *alphabet)
  {
    char		buffer[12];
    int		j;
@@ -81,10 +77,11 @@ int		get_to_space(int i, char *str,t_piece *alphabet)
    l++;
    if (l == 3)
      l = 0;
+   malloc_piece(alphabet);
    return (0);
  }
 
-int	check_tetrimino(char *str, t_piece *alphabet,char *av)
+int	check_tetrimino(char *str, t_piece *alphabet, int fd)
 {
   int	i;
   int	tab[3];
@@ -102,7 +99,7 @@ int	check_tetrimino(char *str, t_piece *alphabet,char *av)
 	     return (-1);
 	}
     }
-  fill_struct(alphabet, av);
+  fill_struct(alphabet, fd);
   return (0);
 }
 
@@ -115,12 +112,12 @@ int		load_info(char *av)
   fd = open(av, O_RDONLY);
   if ((buffer = get_next_line(fd)) == NULL)
     {
+      printf("test3");
       fprintf(stderr, "OPEN ERROR\n");
       return (-1);
     }
   alphabet = malloc(sizeof(t_piece));
-  malloc_piece(alphabet);
-  check_tetrimino(buffer, alphabet, av);
+  check_tetrimino(buffer, alphabet, fd);
   return (0);
 }
 
@@ -133,7 +130,7 @@ int	main(int ac, char **av)
     }
   else
     {
-       printf("aurevoir");
+      printf("aurevoir");
     }
-    return(0);
+  return(0);
 }
