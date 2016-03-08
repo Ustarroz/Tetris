@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 14:11:01 2016 edouard puillandre
-** Last update Mon Mar  7 17:49:49 2016 edouard puillandre
+** Last update Tue Mar  8 09:31:37 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -60,9 +60,10 @@ int	set_help(t_tetris *tetris, int *i, char **argv, bool eq_true)
 {
   (void) tetris;
   (void) i;
-  (void) argv;
   (void) eq_true;
-  my_printf("Usage: ./tetris [options]\n");
+  my_printf("Usage: ");
+  my_printf(argv[0]);
+  my_printf(" [options]\n");
   my_printf("Options:\n");
   my_printf("  --help\t\tDisplay this help\n");
   my_printf("  -l --level={num}\tStart Tetris at level num\n");

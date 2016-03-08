@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Mon Mar  7 19:12:39 2016 edouard puillandre
+** Last update Tue Mar  8 10:37:32 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -15,13 +15,14 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <termios.h>
 # include "my.h"
 
 # define PATH_GAME "./ressource/game"
 # define TETRIMINO "./tetriminos/"
 # define INT_MAX "2147483647"
-# define WIDTH_DEF (12)
-# define HEIGHT_DEF (22)
+# define WIDTH_DEF (10)
+# define HEIGHT_DEF (20)
 # define OPT_LEN (11)
 # define KEY_LEN (6)
 # define ID_KL (0)
@@ -113,5 +114,6 @@ int		my_check_arg(int argc, char **argv, t_tetris *tetris);
 void		my_putnbr_error(int nb, bool first);
 int		my_map_tab(t_map *map);
 void		my_free_tetris(t_tetris *tetris, bool map_true);
+int		my_print_debug(t_tetris *tetris);
 
 #endif /* !TETRIS_H_ */

@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:46:48 2016 edouard puillandre
-** Last update Mon Mar  7 19:13:22 2016 edouard puillandre
+** Last update Tue Mar  8 09:26:29 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -26,7 +26,8 @@ int	start_tetris(int argc, char **argv, t_tetris *tetris)
     }
   if (my_map_tab(tetris->map) == - 1)
     return (- 1);
-  my_free_tetris(tetris, true);
+  if (tetris->debug == true)
+    my_print_debug(tetris);
   return (0);
 }
 
@@ -41,5 +42,6 @@ int		main(int argc, char **argv, char **env)
     return (0);
   else if (check ==- 1)
     return (- 1);
+  my_free_tetris(tetris, true);
   return (0);
 }

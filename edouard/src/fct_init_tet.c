@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Sat Mar  5 16:57:03 2016 edouard puillandre
+** Last update Tue Mar  8 09:41:08 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -69,8 +69,8 @@ void	my_def_cmd(t_tetris *tetris)
   tetris->cmd[ID_KR].key = my_strdup("kr");
   tetris->cmd[ID_KT].key = my_strdup("kt");
   tetris->cmd[ID_KD].key = my_strdup("kd");
-  tetris->cmd[ID_KQ].key = my_strdup("kq");
-  tetris->cmd[ID_KP].key = my_strdup("kp");
+  tetris->cmd[ID_KQ].key = my_strdup("q");
+  tetris->cmd[ID_KP].key = my_strdup(" ");
 }
 
 t_tetris	*my_def_tetris(int argc, char **env)
