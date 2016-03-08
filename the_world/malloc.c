@@ -9,6 +9,26 @@
 */
 #include "../include/tetris.h"
 
+int		files()
+{
+  DIR		*dir;
+  struct dirent *file;
+  int		i;
+
+  i = 0;
+  if ((dir = opendir("./tetriminos")) == NULL)
+    {
+      printf("no tetriminos available here");
+      return (-1);
+    }
+  else
+    {
+      file = readdir(dir);
+      file->d_name();
+      return (0);
+    }
+}
+
 void	malloc_piece(t_piece *alphabet)
 {
   int	i;

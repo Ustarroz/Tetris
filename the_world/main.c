@@ -39,7 +39,7 @@ int		fill_struct(t_piece *alphabet, int fd)
 {
   char          *buffer;
   int		k;
-
+  
   k = -1;
   while ((buffer = get_next_line(fd)) != NULL && ++k < alphabet->height)
     {
@@ -112,12 +112,12 @@ int		load_info(char *av)
   fd = open(av, O_RDONLY);
   if ((buffer = get_next_line(fd)) == NULL)
     {
-      printf("test3");
       fprintf(stderr, "OPEN ERROR\n");
       return (-1);
     }
   alphabet = malloc(sizeof(t_piece));
   check_tetrimino(buffer, alphabet, fd);
+  files(alphabet);
   return (0);
 }
 

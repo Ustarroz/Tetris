@@ -16,6 +16,7 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <sys/types.h>
+# include <dirent.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdio.h>
@@ -113,5 +114,6 @@ int		set_debug(t_tetris *tetris, int *i, char **argv);
 t_tetris	*my_def_tetris();
 int		my_check_arg(int argc, char **argv, t_tetris *tetris);
 void		malloc_piece(t_piece *alphabet);
+int		files();
 
 #endif /* !TETRIS_H_ */
