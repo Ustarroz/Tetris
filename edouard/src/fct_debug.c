@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Tue Mar  8 11:31:41 2016 edouard puillandre
+** Last update Tue Mar  8 15:15:49 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -38,17 +38,17 @@ int			my_print_debug(t_tetris *tetris)
   struct termios	save;
   
   my_print_data(tetris);
-  if (tcgetattr(0, &save) == - 1)
+  if (ioctl(0, TCGETS, &save) == - 1)
     return (- 1);
   termios_p = save;
   termios_p.c_lflag = ~ (ICANON | ECHO);
   termios_p.c_cc[VMIN] = 1;
   termios_p.c_cc[VTIME] = 0;
-  if (tcsetattr(0, TCSANOW, &termios_p) == - 1)
+  if (ioctl(0, TCSETS, &termios_p) == - 1)
     return (- 1);
   if (read(1, buff, 1) == - 1)
     return (- 1);
-  if (tcsetattr(0, TCSANOW, &save) == - 1)
+  if (ioctl(0, TCSETS, &save) == - 1)
     return (- 1);
   return (0);
 }

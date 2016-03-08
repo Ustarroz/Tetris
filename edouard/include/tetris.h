@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Tue Mar  8 10:37:32 2016 edouard puillandre
+** Last update Tue Mar  8 15:04:46 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -16,6 +16,7 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <termios.h>
+# include <sys/ioctl.h>
 # include "my.h"
 
 # define PATH_GAME "./ressource/game"
