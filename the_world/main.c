@@ -26,9 +26,9 @@ int	fill_piece(t_piece *alphabet, char *buffer, int line)
   i = -1;
   while (++i != alphabet->width)
     {
-      if (buffer[i] == '*')
+      if (buffer[i] == '*' && i <= alphabet->width)
 	k++;
-      if (i == alphabet->width && k == 0)
+      if (i == alphabet->width && k == 0 && line < alphabet->height)
 	return (-1);
       alphabet->shape[line][i] = buffer[i];
     }
@@ -39,7 +39,11 @@ int		fill_struct(t_piece *alphabet, int fd)
 {
   char          *buffer;
   int		k;
+  int		cols;
+  int		line;
   
+  cols = 0;
+  line = 0;
   k = -1;
   while ((buffer = get_next_line(fd)) != NULL && ++k < alphabet->height)
     {
@@ -115,10 +119,11 @@ int		load_info(char *av)
       fprintf(stderr, "OPEN ERROR\n");
       return (-1);
     }
-  alphabet = malloc(sizeof(t_piece));
-  check_tetrimino(buffer, alphabet, fd);
-  files(alphabet);
-  return (0);
+  if ((alphabet = malloc(sizeof(t_piece)) == NULL)
+      return (-2);
+      if ((check_tetrimino(buffer, alphabet, fd)) == -1)
+	return (-1);
+      return (0);
 }
 
 int	main(int ac, char **av)
