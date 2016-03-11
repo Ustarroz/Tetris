@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Tue Mar  8 09:41:08 2016 edouard puillandre
+** Last update Thu Mar 10 16:27:23 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -65,15 +65,15 @@ t_game		*my_def_game()
 
 void	my_def_cmd(t_tetris *tetris)
 {
-  tetris->cmd[ID_KL].key = my_strdup("kl");
-  tetris->cmd[ID_KR].key = my_strdup("kr");
-  tetris->cmd[ID_KT].key = my_strdup("kt");
-  tetris->cmd[ID_KD].key = my_strdup("kd");
+  tetris->cmd[ID_KL].key = my_strdup("^EOD");
+  tetris->cmd[ID_KR].key = my_strdup("^EOC");
+  tetris->cmd[ID_KT].key = my_strdup("^EOA");
+  tetris->cmd[ID_KD].key = my_strdup("^EOB");
   tetris->cmd[ID_KQ].key = my_strdup("q");
   tetris->cmd[ID_KP].key = my_strdup(" ");
 }
 
-t_tetris	*my_def_tetris(int argc, char **env)
+t_tetris	*my_def_tetris(char **env)
 {
   t_tetris	*tetris;
 
@@ -84,7 +84,6 @@ t_tetris	*my_def_tetris(int argc, char **env)
       return (NULL);
     }
   tetris->debug = false;
-  tetris->nb_opt = argc - 1;
   if ((tetris->map = my_def_map()) == NULL)
     {
       my_putstr_error(MALLOC_ERR_MSG);

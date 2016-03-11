@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:46:48 2016 edouard puillandre
-** Last update Tue Mar  8 09:26:29 2016 edouard puillandre
+** Last update Thu Mar 10 16:30:09 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -36,7 +36,7 @@ int		main(int argc, char **argv, char **env)
   t_tetris	*tetris;
   int		check;
 
-  if ((tetris = my_def_tetris(argc, env)) == NULL)
+  if ((tetris = my_def_tetris(env)) == NULL)
     return (- 1);
   if ((check = start_tetris(argc, argv, tetris)) == 1)
     return (0);

@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 17:14:22 2016 edouard puillandre
-** Last update Mon Mar  7 17:42:55 2016 edouard puillandre
+** Last update Thu Mar 10 16:30:28 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -30,7 +30,7 @@ int	my_check_opt(char **argv, int *k, t_opt opt, t_tetris *tetris)
 
   if (my_strcmp(argv[*k], opt.str) == 0)
     {
-      if ((check = opt.fct(tetris, k, argv, false)) != 0)
+      if ((check = opt.fct(tetris, k, argv, opt.arg)) != 0)
 	return (check);
       else
 	return (2);
@@ -39,7 +39,7 @@ int	my_check_opt(char **argv, int *k, t_opt opt, t_tetris *tetris)
     return (0);
   if (my_strncmp(argv[*k], opt.eq, my_strlen(opt.eq)) == 0)
     {
-      if ((check = opt.fct(tetris, k, argv, true)) != 0)
+      if ((check = opt.fct_eq(tetris, k, argv)) != 0)
 	return (check);
       else
 	return (2);
@@ -56,7 +56,7 @@ int	my_check_arg(int argc, char **argv, t_tetris *tetris)
   t_opt	opt[OPT_LEN];
 
   k = 0;
-  init_tab_opt(opt);
+  init_tab_opt(opt, argc);
   while (++k < argc)
     {
       end = false;

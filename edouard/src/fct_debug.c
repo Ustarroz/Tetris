@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Tue Mar  8 15:15:49 2016 edouard puillandre
+** Last update Wed Mar  9 11:54:58 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -15,15 +15,23 @@ void	my_print_tetrimino(t_tetris *tetris)
   (void) tetris;
 }
 
+void	my_str_space(char *text, char *str)
+{
+  if (my_strcmp(str, " ") == 0)
+    my_printf("%s%s\n", text, "(space)");
+  else
+    my_printf("%s%s\n", text, str);
+}
+
 void	my_print_data(t_tetris *tetris)
 {
-  my_printf("*** DEBUG MODE ***");
-  my_printf("Key Left : %s\n", tetris->cmd[ID_KL].key);
-  my_printf("Key Right : %s\n", tetris->cmd[ID_KR].key);
-  my_printf("Key Turn : %s\n", tetris->cmd[ID_KT].key);
-  my_printf("Key Drop : %s\n", tetris->cmd[ID_KD].key);
-  my_printf("Key Quit : %s\n", tetris->cmd[ID_KQ].key);
-  my_printf("Key Pause : %s\n", tetris->cmd[ID_KP].key);
+  my_printf("*** DEBUG MODE ***\n");
+  my_str_space("Key Left : ", tetris->cmd[ID_KL].key);
+  my_str_space("Key Right : ", tetris->cmd[ID_KR].key);
+  my_str_space("Key Turn : ", tetris->cmd[ID_KT].key);
+  my_str_space("Key Drop : ", tetris->cmd[ID_KD].key);
+  my_str_space("Key Quit : ", tetris->cmd[ID_KQ].key);
+  my_str_space("Key Pause : ", tetris->cmd[ID_KP].key);
   my_printf("Next : %s\n", (tetris->game->next) ? "Yes" : "No");
   my_printf("Level : %d\n", tetris->game->lvl);
   my_printf("Size : %d*%d\n", tetris->map->width, tetris->map->height);
