@@ -1,11 +1,11 @@
 /*
-** main.c for tetris in /home/voyevoda/rendu/systeme_unix/PSU_2015bstetris
+** fct_parsing.c for tetris in /home/voyevoda/rendu/systeme_unix/
 **
 ** Made by Voyevoda
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Fri Mar 11 11:27:07 2016 Voyevoda
+** Last update Fri Mar 11 15:03:54 2016 edouard puillandre
 */
 #include "../include/tetris.h"
 
@@ -39,11 +39,11 @@ int		fill_struct(t_piece *alphabet, int fd)
 {
   char          *buffer;
   int		k;
-  int		cols;
-  int		line;
-  
-  cols = 0;
-  line = 0;
+  /* int		cols; */
+  /* int		line; */
+
+  /* cols = 0; */
+  /* line = 0; */
   k = -1;
   while ((buffer = get_next_line(fd)) != NULL && ++k < alphabet->height)
     {
@@ -108,7 +108,7 @@ int	check_tetrimino(char *str, t_piece *alphabet, int fd)
   return (0);
 }
 
-int		load_info(char *av)
+int		load_info(char *av, t_piece *list)
 {
   int		fd;
   char		*buffer;
@@ -120,23 +120,10 @@ int		load_info(char *av)
       fprintf(stderr, "OPEN ERROR\n");
       return (-1);
     }
-  if ((alphabet = malloc(sizeof(t_piece)) == NULL)
+  if ((alphabet = malloc(sizeof(t_piece))) == NULL)
       return (-2);
-      if ((check_tetrimino(buffer, alphabet, fd)) == -1)
-	return (-1);
-      return (0);
-}
-
-int	main(int ac, char **av)
-{
-  if (ac == 2)
-    {
-      if (load_info(av[1]) != 0)
-	return(-1);
-    }
-  else
-    {
-      printf("aurevoir");
-    }
-  return(0);
+  if ((check_tetrimino(buffer, alphabet, fd)) == -1)
+    return (-1);
+  add_elem(alphabet, list);
+  return (0);
 }

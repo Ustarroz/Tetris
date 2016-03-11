@@ -5,26 +5,16 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Thu Mar  3 15:54:35 2016 Voyevoda
-** Last update Fri Mar 11 13:28:33 2016 Voyevoda
+** Last update Fri Mar 11 15:02:47 2016 edouard puillandre
 */
 #include "../include/tetris.h"
-
-int	my_strlen(char *str)
-{
-  int	i;
-
-  i = 0;
-  while (str[i] != '\0')
-    i++;
-  return (i);
-}
 
 int	my_strcmp_tetrimino(char *file)
 {
   int	i;
   char	*test;
   int	k;
-  
+
   k = 10;
   test = ".tetrimino";
   i = my_strlen(file);
@@ -32,11 +22,11 @@ int	my_strcmp_tetrimino(char *file)
     {
       if (file[i] == test[k])
 	{
-	i--;
-	k--;
-	if (file[i] != test[k])
-	  return (-1);
-      }
+	  i--;
+	  k--;
+	  if (file[i] != test[k])
+	    return (-1);
+	}
     }
   return (0);
 }
@@ -48,32 +38,30 @@ char	*my_strcat(char *av, char *av2)
   int	size;
   char	*name;
 
-  k = 0;
+  k = - 1;
   i = -1;
   size = my_strlen(av) + my_strlen(av2);
-  name = malloc(size + 1);
-  while (++i != name)
+  if ((name = malloc(size + 1)) == NULL)
     {
-      name[i] = av[i];
-      if (av[i] == '\0');
-      {
-	k = i;
-	i = 0;
-	while (av2[++i] != '\0')
-	  name[k++] = av2[i];
-      }
+      my_putstr_error(MALLOC_ERR_MSG);
+      return (NULL);
     }
-  name[++k] = '\0';
+  while (++i != size)
+    if (i < my_strlen(av))
+      name[i] = av[i];
+    else
+      name[i] = av2[++k];
+  name[i] = '\0';
   return (name);
 }
 
-int		files()
+int		files(t_piece *list)
 {
   DIR		*dir;
   struct dirent *file;
   int		files;
   char		*name;
-  
+
   files = 0;
   if ((dir = opendir("./tetriminos")) == NULL)
     {
@@ -81,25 +69,22 @@ int		files()
       return (-1);
     }
   else
-    {
-      while ((file = readdir(dir)) != NULL)
+    while ((file = readdir(dir)) != NULL)
+      if (my_strcmp_tetrimino(file->d_name) == 0)
 	{
-	  if (my_strcmp_tetrimino(file->d_name) == 0)
-	    {
-	      name = my_strcat("./tetrimino", file->d_name);
-	      files++;
-	      if ((load_info(name)) == 0)
-		return (0);
-	    }
+	  if ((name = my_strcat("./tetrimino", file->d_name)) == NULL)
+	    return (- 1);
+	  files++;
+	  if ((load_info(name, list)) == 0)
+	    return (0);
 	}
-    }
   return (files);
 }
 
 int	malloc_piece(t_piece *alphabet)
 {
   int	i;
-  
+
   i = -1;
   if ((alphabet->shape = malloc(sizeof(char *) * (alphabet->height))) == NULL)
     return (-1);
