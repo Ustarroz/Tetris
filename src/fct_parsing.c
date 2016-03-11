@@ -5,11 +5,11 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Fri Mar 11 15:03:54 2016 edouard puillandre
+** Last update Fri Mar 11 14:53:14 2016 Voyevoda
 */
 #include "../include/tetris.h"
 
-int	fill_piece(t_piece *alphabet, char *buffer, int line)
+int	fill_piece(t_piece *alphabet, char *buffer, int line, int *cols)
 {
   int	i;
   int	k;
@@ -17,18 +17,19 @@ int	fill_piece(t_piece *alphabet, char *buffer, int line)
   k = 0;
   i = -1;
   while (buffer[++i] != '\0')
-    {
-      if (buffer[i] != ' ' && buffer[i] != '*')
-	return (-1);
-      if (i > alphabet->width && buffer[i] != ' ')
-	return (-1);
-    }
+    if (buffer[i] != ' ' && buffer[i] != '*')
+      return (-1);
+    else if (i > alphabet->width && buffer[i] != ' ')
+      return (-1);
   i = -1;
   while (++i != alphabet->width)
     {
       if (buffer[i] == '*' && i <= alphabet->width)
 	k++;
-      if (i == alphabet->width && k == 0 && line < alphabet->height)
+      if (i == alphabet->width - 1 && buffer[i] == '*')
+	*cols = 1;
+      if (i == alphabet->width - 1 && k == 0 && 
+	  (line == 0 || line == alphabet->height - 1))
 	return (-1);
       alphabet->shape[line][i] = buffer[i];
     }
@@ -39,23 +40,25 @@ int		fill_struct(t_piece *alphabet, int fd)
 {
   char          *buffer;
   int		k;
-  /* int		cols; */
-  /* int		line; */
+  int		cols;
 
-  /* cols = 0; */
-  /* line = 0; */
+  cols = 0;
   k = -1;
   while ((buffer = get_next_line(fd)) != NULL && ++k < alphabet->height)
     {
-      if ((fill_piece(alphabet, buffer, k)) == -1)
+      if ((fill_piece(alphabet, buffer, k, &cols)) == -1)
 	{
-	  printf("%s", buffer);
-	  printf("OPEN ERROR\n");
+	  my_putstr_error(OPEN_ERR_ERROR);
 	  return (-1);
 	}
-      if (buffer == NULL && (k < alphabet->height || k > alphabet->height))
-	return (-1);
     }
+  if ((buffer == NULL && k < alphabet->height) ||
+      (buffer != NULL && k == alphabet->height) || (cols == 0))
+    {
+      alphabet->valid = false;
+      return (-1);
+    }
+  alphabet->valid = true;
   return (0);
 }
 
@@ -117,7 +120,7 @@ int		load_info(char *av, t_piece *list)
   fd = open(av, O_RDONLY);
   if ((buffer = get_next_line(fd)) == NULL)
     {
-      fprintf(stderr, "OPEN ERROR\n");
+      my_putstr_error(OPEN_ERR_MSG);
       return (-1);
     }
   if ((alphabet = malloc(sizeof(t_piece))) == NULL)

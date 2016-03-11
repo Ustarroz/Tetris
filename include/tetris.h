@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Fri Mar 11 15:06:44 2016 edouard puillandre
+** Last update Fri Mar 11 14:43:55 2016 Voyevoda
 */
 
 #ifndef		TETRIS_H_
@@ -64,7 +64,7 @@ typedef struct	s_map
 
 typedef struct		s_piece
 {
-  bool			error;
+  bool			valid;
   int			width;
   int			height;
   int			col;
