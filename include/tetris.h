@@ -5,13 +5,13 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Fri Mar 11 14:43:55 2016 Voyevoda
+** Last update Fri Mar 11 16:15:18 2016 Voyevoda
 */
 
 #ifndef		TETRIS_H_
 # define	TETRIS_H_
 
-# include <ncurses/curses.h>
+# include <curses.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>

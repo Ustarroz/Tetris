@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Fri Mar 11 14:53:14 2016 Voyevoda
+** Last update Fri Mar 11 16:22:14 2016 Voyevoda
 */
 #include "../include/tetris.h"
 
@@ -48,7 +48,7 @@ int		fill_struct(t_piece *alphabet, int fd)
     {
       if ((fill_piece(alphabet, buffer, k, &cols)) == -1)
 	{
-	  my_putstr_error(OPEN_ERR_ERROR);
+	  my_putstr_error(OPEN_ERR_MSG);
 	  return (-1);
 	}
     }
