@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Thu Mar  3 15:54:35 2016 Voyevoda
-** Last update Tue Mar  8 11:36:08 2016 Voyevoda
+** Last update Fri Mar 11 13:28:33 2016 Voyevoda
 */
 #include "../include/tetris.h"
 
@@ -24,26 +24,47 @@ int	my_strcmp_tetrimino(char *file)
   int	i;
   char	*test;
   int	k;
-
+  
   k = 10;
   test = ".tetrimino";
   i = my_strlen(file);
   while (i != 0)
     {
       if (file[i] == test[k])
-      {
+	{
 	i--;
 	k--;
 	if (file[i] != test[k])
-	return (-1);
+	  return (-1);
       }
     }
   return (0);
 }
 
-char	*my_strcat(char*av, char *av2)
+char	*my_strcat(char *av, char *av2)
 {
-  
+  int	k;
+  int	i;
+  int	size;
+  char	*name;
+
+  k = 0;
+  i = -1;
+  size = my_strlen(av) + my_strlen(av2);
+  name = malloc(size + 1);
+  while (++i != name)
+    {
+      name[i] = av[i];
+      if (av[i] == '\0');
+      {
+	k = i;
+	i = 0;
+	while (av2[++i] != '\0')
+	  name[k++] = av2[i];
+      }
+    }
+  name[++k] = '\0';
+  return (name);
 }
 
 int		files()
@@ -51,7 +72,8 @@ int		files()
   DIR		*dir;
   struct dirent *file;
   int		files;
-    
+  char		*name;
+  
   files = 0;
   if ((dir = opendir("./tetriminos")) == NULL)
     {
@@ -64,23 +86,28 @@ int		files()
 	{
 	  if (my_strcmp_tetrimino(file->d_name) == 0)
 	    {
+	      name = my_strcat("./tetrimino", file->d_name);
 	      files++;
-	      load_info("./tetriminos/"file->d_name);
+	      if ((load_info(name)) == 0)
+		return (0);
 	    }
 	}
     }
-  return (0);
+  return (files);
 }
 
-void	malloc_piece(t_piece *alphabet)
+int	malloc_piece(t_piece *alphabet)
 {
   int	i;
   
   i = -1;
-  alphabet->shape = malloc(sizeof(char *) * (alphabet->height));
+  if ((alphabet->shape = malloc(sizeof(char *) * (alphabet->height))) == NULL)
+    return (-1);
   while (++i < alphabet->height)
     {
-      alphabet->shape[i] = malloc(sizeof(char) * alphabet->width + 1);
+      if ((alphabet->shape[i] = malloc(sizeof(char) * alphabet->width + 1)) == NULL)
+	return (-1);
       alphabet->shape[i][alphabet->width] = '\0';
     }
+  return (0);
 }

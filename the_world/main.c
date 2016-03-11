@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Tue Mar  8 14:15:58 2016 Voyevoda
+** Last update Fri Mar 11 11:27:07 2016 Voyevoda
 */
 #include "../include/tetris.h"
 
@@ -81,7 +81,8 @@ int	get_to_space(int i, char *str,t_piece *alphabet)
    l++;
    if (l == 3)
      l = 0;
-   malloc_piece(alphabet);
+   if ((malloc_piece(alphabet)) == -1)
+     return (-1);
    return (0);
  }
 
