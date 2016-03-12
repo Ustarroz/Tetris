@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Sat Mar 12 12:16:23 2016 edouard puillandre
+** Last update Sat Mar 12 12:27:44 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -15,7 +15,7 @@ int	my_map_tab(t_map *map)
   int	i;
   int	j;
 
-  if ((map->tab = malloc(sizeof(char *) * (map->height + 1))) == NULL)
+  if ((map->form = malloc(sizeof(char *) * (map->height + 1))) == NULL)
     {
       my_putstr_error(MALLOC_ERR_MSG);
       return (- 1);
@@ -24,16 +24,16 @@ int	my_map_tab(t_map *map)
   while (++i < map->height)
     {
       j = - 1;
-      if ((map->tab[i] = malloc(map->width + 1)) == NULL)
+      if ((map->form[i] = malloc(map->width + 1)) == NULL)
 	{
 	  my_putstr_error(MALLOC_ERR_MSG);
 	  return (- 1);
 	}
       while (++j < map->width)
-	map->tab[i][j] = ' ';
-      map->tab[i][j] = '\0';
+	map->form[i][j] = ' ';
+      map->form[i][j] = '\0';
     }
-  map->tab[i] = NULL;
+  map->form[i] = NULL;
   return (0);
 }
 

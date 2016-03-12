@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Sat Mar 12 12:23:32 2016 edouard puillandre
+** Last update Sat Mar 12 12:27:03 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -63,7 +63,7 @@ typedef struct	s_map
 {
   int		width;
   int		height;
-  char		**tab;
+  char		**form;
 }		t_map;
 
 typedef struct		s_piece

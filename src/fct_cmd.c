@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Sat Mar 12 11:29:56 2016 edouard puillandre
-** Last update Sat Mar 12 12:19:01 2016 edouard puillandre
+** Last update Sat Mar 12 12:32:31 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -35,6 +35,7 @@ char	*get_keypad(char *cap)
       my_putstr_error(CAP_ERR_MSG);
       return (NULL);
     }
+  my_printf("%s\n", str);
   if ((str = my_strdup(str)) == NULL)
     return (NULL);
   return (str);
