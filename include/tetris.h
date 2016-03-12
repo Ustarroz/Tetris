@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Fri Mar 11 16:15:18 2016 Voyevoda
+** Last update Sat Mar 12 11:29:29 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -134,6 +134,7 @@ int		set_kq_eq(t_tetris *tetris, int *i, char **argv);
 int		set_kp_eq(t_tetris *tetris, int *i, char **argv);
 int		set_debug_eq(t_tetris *tetris, int *i, char **argv);
 t_tetris	*my_def_tetris(char **env);
+int		my_def_cmd(t_tetris *tetris, char **env);
 int		my_check_arg(int argc, char **argv, t_tetris *tetris);
 void		my_putnbr_error(int nb, bool first);
 int		my_map_tab(t_map *map);
