@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Thu Mar  3 15:54:35 2016 Voyevoda
-** Last update Fri Mar 11 15:02:47 2016 edouard puillandre
+** Last update Sat Mar 12 14:41:07 2016 Voyevoda
 */
 #include "../include/tetris.h"
 
@@ -90,7 +90,8 @@ int	malloc_piece(t_piece *alphabet)
     return (-1);
   while (++i < alphabet->height)
     {
-      if ((alphabet->shape[i] = malloc(sizeof(char) * alphabet->width + 1)) == NULL)
+      if ((alphabet->shape[i] =
+	   malloc(sizeof(char) * alphabet->width + 1)) == NULL)
 	return (-1);
       alphabet->shape[i][alphabet->width] = '\0';
     }
