@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Sat Mar 12 12:10:08 2016 edouard puillandre
+** Last update Sat Mar 12 12:23:32 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -21,6 +21,8 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <fcntl.h>
+# include <ncurses/curses.h>
+# include <term.h>
 # include "my.h"
 
 # define PATH_SCORE "./ressource/high"
@@ -43,7 +45,7 @@
 # define ID_W (9)
 # define ID_D (10)
 # define ARG_ERR_MSG "Error: incorrect argument "
-# define CAP_ERR_MSG "Error: capability can't be found\n "
+# define CAP_ERR_MSG "Error: capability can't be found\n"
 # define MALLOC_ERR_MSG "Malloc error\n"
 # define READ_ERR_MSG "Read line error\n"
 # define OPEN_ERR_MSG "Open error\n"
