@@ -1,11 +1,11 @@
 /*
 ** tetris.h for PSU_2015_tetris in /home/puilla_e/Semestre2/
-** 
+**
 ** Made by edouard puillandre
 ** Login   <puilla_e@epitech.net>
-** 
+**
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Sat Mar 12 12:27:03 2016 edouard puillandre
+** Last update Sat Mar 12 12:37:27 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -150,5 +150,8 @@ char		*get_next_line(const int fd);
 int		malloc_piece(t_piece *piece);
 int		files(t_piece *list);
 int		load_info(char *str, t_piece *list);
+int		add_elem(t_piece *elem, t_piece **list);
+int		swap_struc_elem(t_piece *elem, t_piece **list, t_piece *tmp);
+int		sort_list(t_piece **list, t_piece *elem);
 
 #endif /* !TETRIS_H_ */
