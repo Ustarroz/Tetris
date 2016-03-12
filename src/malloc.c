@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Thu Mar  3 15:54:35 2016 Voyevoda
-** Last update Sat Mar 12 14:41:07 2016 Voyevoda
+** Last update Sat Mar 12 18:02:17 2016 edouard puillandre
 */
 #include "../include/tetris.h"
 
@@ -76,7 +76,7 @@ int		files(t_piece *list)
 	    return (- 1);
 	  files++;
 	  if ((load_info(name, list)) == 0)
-	    return (0);
+	    return (- 1);
 	}
   return (files);
 }

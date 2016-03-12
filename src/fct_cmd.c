@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Sat Mar 12 11:29:56 2016 edouard puillandre
-** Last update Sat Mar 12 14:53:44 2016 edouard puillandre
+** Last update Sat Mar 12 17:59:39 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -56,6 +56,10 @@ int	my_def_cmd(t_tetris *tetris, char **env)
   if ((tetris->cmd[ID_KT].key = get_keypad("kcuu1")) == NULL)
     return (- 1);
   if ((tetris->cmd[ID_KD].key = get_keypad("kcud1")) == NULL)
+    return (- 1);
+  if ((tetris->cmd[ID_KQ].key = my_strdup("q")) == NULL)
+    return (- 1);
+  if ((tetris->cmd[ID_KP].key = my_strdup(" ")) == NULL)
     return (- 1);
   /*del_curterm(cur_term);*/
   free(str);

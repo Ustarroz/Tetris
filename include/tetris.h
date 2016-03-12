@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Sat Mar 12 17:48:40 2016 edouard puillandre
+** Last update Sat Mar 12 18:02:53 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -83,7 +83,7 @@ typedef struct	s_clock
   int		sec;
 }		t_clock;
 
-typdef struct	s_next
+typedef struct	s_next
 {
   bool		valid;
   int		x;
@@ -106,7 +106,7 @@ typedef struct	s_tetris
   t_cmd		cmd[KEY_LEN];
   t_map		*map;
   t_game	*game;
-  int		n_piece;
+  int		nb_piece;
   t_piece	*piece;
 }		t_tetris;
 
