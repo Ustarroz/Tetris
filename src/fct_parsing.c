@@ -5,9 +5,9 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Fri Mar 11 16:22:14 2016 Voyevoda
+** Last update Sat Mar 12 12:35:11 2016 Voyevoda
 */
-#include "../include/tetris.h"
+#include "tetris.h"
 
 int	fill_piece(t_piece *alphabet, char *buffer, int line, int *cols)
 {
@@ -28,7 +28,7 @@ int	fill_piece(t_piece *alphabet, char *buffer, int line, int *cols)
 	k++;
       if (i == alphabet->width - 1 && buffer[i] == '*')
 	*cols = 1;
-      if (i == alphabet->width - 1 && k == 0 && 
+      if (i == alphabet->width - 1 && k == 0 &&
 	  (line == 0 || line == alphabet->height - 1))
 	return (-1);
       alphabet->shape[line][i] = buffer[i];
@@ -92,7 +92,7 @@ int	get_to_space(int i, char *str,t_piece *alphabet)
 int	check_tetrimino(char *str, t_piece *alphabet, int fd)
 {
   int	i;
-  int	tab[3];
+  int	tabloid[3];
   int	j;
 
   i = -1;
@@ -103,7 +103,7 @@ int	check_tetrimino(char *str, t_piece *alphabet, int fd)
 	{
 	  if ((str[i] != ' ') && (str[i] < '0' || str[i] > '9'))
 	     return (-1);
-	  else if ((tab[j++] = get_to_space(i, str, alphabet)) == -1)
+	  else if ((tabloid[j++] = get_to_space(i, str, alphabet)) == -1)
 	     return (-1);
 	}
     }
@@ -127,6 +127,6 @@ int		load_info(char *av, t_piece *list)
       return (-2);
   if ((check_tetrimino(buffer, alphabet, fd)) == -1)
     return (-1);
-  add_elem(alphabet, list);
+  add_elem(alphabet, &list);
   return (0);
 }
