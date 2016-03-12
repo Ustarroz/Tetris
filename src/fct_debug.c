@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Wed Mar  9 11:54:58 2016 edouard puillandre
+** Last update Sat Mar 12 13:20:33 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -19,6 +19,10 @@ void	my_str_space(char *text, char *str)
 {
   if (my_strcmp(str, " ") == 0)
     my_printf("%s%s\n", text, "(space)");
+  else if (str[0] == 27)
+    {
+      my_printf("%s^E%s\n", text, str + 1);
+    }
   else
     my_printf("%s%s\n", text, str);
 }

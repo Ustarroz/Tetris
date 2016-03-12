@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Sat Mar 12 11:29:56 2016 edouard puillandre
-** Last update Sat Mar 12 12:32:31 2016 edouard puillandre
+** Last update Sat Mar 12 14:53:44 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -29,16 +29,16 @@ char	*my_find_term(char **env)
 char	*get_keypad(char *cap)
 {
   char	*str;
+  char	*ptr;
 
   if ((str = tigetstr(cap)) == NULL)
     {
       my_putstr_error(CAP_ERR_MSG);
       return (NULL);
     }
-  my_printf("%s\n", str);
-  if ((str = my_strdup(str)) == NULL)
+  if ((ptr = my_strdup(str)) == NULL)
     return (NULL);
-  return (str);
+  return (ptr);
 }
 
 int	my_def_cmd(t_tetris *tetris, char **env)
@@ -47,7 +47,7 @@ int	my_def_cmd(t_tetris *tetris, char **env)
 
   if ((str = my_find_term(env)) == NULL)
     return (- 1);
-  if (setupterm(str, 1, NULL) == - 1)
+    if (setupterm(str, 1, NULL) == - 1)
     return (- 1);
   if ((tetris->cmd[ID_KL].key = get_keypad("kcub1")) == NULL)
     return (- 1);
@@ -57,8 +57,7 @@ int	my_def_cmd(t_tetris *tetris, char **env)
     return (- 1);
   if ((tetris->cmd[ID_KD].key = get_keypad("kcud1")) == NULL)
     return (- 1);
-  tetris->cmd[ID_KQ].key = my_strdup("q");
-  tetris->cmd[ID_KP].key = my_strdup(" ");
+  /*del_curterm(cur_term);*/
   free(str);
   return (0);
 }
