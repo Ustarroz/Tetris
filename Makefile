@@ -5,7 +5,7 @@
 ## Login   <puilla_e@epitech.net>
 ## 
 ## Started on  Thu Feb 25 18:45:44 2016 edouard puillandre
-## Last update Sat Mar 12 12:34:41 2016 edouard puillandre
+## Last update Sat Mar 12 12:38:52 2016 edouard puillandre
 ##
 
 DEBUG	=	yes
@@ -42,7 +42,8 @@ SRC	=	src/main.c		\
 		src/get_next_line.c	\
 		src/fct_cmd.c		\
 		src/malloc.c		\
-		src/fct_parsing.c
+		src/fct_parsing.c	\
+		src/fct_list.c
 
 RM	=	rm -f
 
