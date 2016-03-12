@@ -1,18 +1,31 @@
 /*
 ** fct_debug.c for PSU_2015_tetris in /home/puilla_e/Semestre2/psu/rendu/
-** 
+**
 ** Made by edouard puillandre
 ** Login   <puilla_e@epitech.net>
-** 
+**
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Sat Mar 12 13:20:33 2016 edouard puillandre
+** Last update Sat Mar 12 19:12:07 2016 Voyevoda
 */
 
 #include "tetris.h"
 
 void	my_print_tetrimino(t_tetris *tetris)
 {
-  (void) tetris;
+  int	x;
+  int	y;
+
+  x = 0;
+  y = 0;
+  while (x <= tetris->map->width && y <= tetris->map->height)
+    {
+      my_putchar(tetris->map->form[x][y++]);
+      if (tetris->map->form[x][y] == '\0')
+	{
+	  x++;
+	  y = 0;
+	}
+    }
 }
 
 void	my_str_space(char *text, char *str)
@@ -48,7 +61,7 @@ int			my_print_debug(t_tetris *tetris)
   char			buff[1];
   struct termios	termios_p;
   struct termios	save;
-  
+
   my_print_data(tetris);
   if (ioctl(0, TCGETS, &save) == - 1)
     return (- 1);
