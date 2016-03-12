@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 14:11:01 2016 edouard puillandre
-** Last update Fri Mar  4 17:40:40 2016 edouard puillandre
+** Last update Sat Mar 12 11:59:49 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -18,7 +18,10 @@ char	*my_strdup(char *str)
 
   len = my_strlen(str);
   if ((ptr = malloc(len + 1)) == NULL)
-    return (NULL);
+    {
+      my_putstr_error(MALLOC_ERR_MSG);
+      return (NULL);
+    }
   i = - 1;
   while (str[++i] != '\0')
     ptr[i] = str[i];

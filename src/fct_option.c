@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 14:11:01 2016 edouard puillandre
-** Last update Thu Mar 10 16:26:24 2016 edouard puillandre
+** Last update Sat Mar 12 11:49:22 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -23,7 +23,8 @@ int	set_kr(t_tetris *tetris, int *i, char **argv, int argc)
       return (- 1);
     }
   free(tetris->cmd[ID_KR].key);
-  tetris->cmd[ID_KR].key = my_strdup(argv[*i]);
+  if ((tetris->cmd[ID_KR].key = my_strdup(argv[*i])) == NULL)
+      return (- 1);
   return (0);
 }
 

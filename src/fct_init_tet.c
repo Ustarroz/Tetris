@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Sat Mar 12 11:30:39 2016 edouard puillandre
+** Last update Sat Mar 12 12:16:23 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -83,6 +83,7 @@ t_tetris	*my_def_tetris(char **env)
     return (NULL);
   if ((tetris->game = my_def_game()) == NULL)
     return (NULL);
-  my_def_cmd(tetris, env);
+  if (my_def_cmd(tetris, env) == - 1)
+    return (NULL);
   return (tetris);
 }

@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Sat Mar 12 11:29:29 2016 edouard puillandre
+** Last update Sat Mar 12 12:10:08 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -26,6 +26,7 @@
 # define PATH_SCORE "./ressource/high"
 # define TETRIMINO "./tetriminos/"
 # define INT_MAX "2147483647"
+# define ENV_TERM "TERM="
 # define WIDTH_DEF (10)
 # define HEIGHT_DEF (20)
 # define OPT_LEN (11)
@@ -42,6 +43,7 @@
 # define ID_W (9)
 # define ID_D (10)
 # define ARG_ERR_MSG "Error: incorrect argument "
+# define CAP_ERR_MSG "Error: capability can't be found\n "
 # define MALLOC_ERR_MSG "Malloc error\n"
 # define READ_ERR_MSG "Read line error\n"
 # define OPEN_ERR_MSG "Open error\n"
