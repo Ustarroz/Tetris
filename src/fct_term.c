@@ -5,11 +5,13 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar 11 13:47:41 2016 edouard puillandre
-** Last update Fri Mar 11 14:28:45 2016 edouard puillandre
+** Last update Sat Mar 12 15:18:28 2016 edouard puillandre
 */
 
 #include "tetris.h"
 
-int	the_game()
+int	the_game(t_tetris *tetris)
 {
+  (void) tetris;
+  
 }

@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Sat Mar 12 12:27:44 2016 edouard puillandre
+** Last update Sat Mar 12 15:19:30 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -48,6 +48,7 @@ t_map	*my_def_map()
     }
   map->width = HEIGHT_DEF;
   map->height = WIDTH_DEF;
+  map->form = NULL;
   return (map);
 }
 

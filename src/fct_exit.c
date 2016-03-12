@@ -5,16 +5,16 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Sat Mar  5 14:16:24 2016 edouard puillandre
-** Last update Sat Mar 12 14:31:07 2016 edouard puillandre
+** Last update Sat Mar 12 15:19:03 2016 edouard puillandre
 */
 
 #include "tetris.h"
 
-void	my_free_tetris(t_tetris *tetris, bool map_def)
+void	my_free_tetris(t_tetris *tetris)
 {
   int	i;
 
-  if (map_def)
+  if (tetris->map->form != NULL)
     {
       i = - 1;
       while (tetris->map->form[++i] != NULL)

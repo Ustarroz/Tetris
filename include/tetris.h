@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Sat Mar 12 12:37:27 2016 edouard puillandre
+** Last update Sat Mar 12 16:18:32 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -84,6 +84,13 @@ typedef struct	s_clock
   int		sec;
 }		t_clock;
 
+typdef struct	s_next
+{
+  bool		valid;
+  int		x;
+  int		y;
+}		t_next;
+
 typedef struct	s_game
 {
   bool		next;
@@ -91,6 +98,7 @@ typedef struct	s_game
   t_clock	t;
   int		score;
   int		high_score;
+  int		line;
 }		t_game;
 
 typedef struct	s_tetris
@@ -142,7 +150,7 @@ int		my_def_cmd(t_tetris *tetris, char **env);
 int		my_check_arg(int argc, char **argv, t_tetris *tetris);
 void		my_putnbr_error(int nb, bool first);
 int		my_map_tab(t_map *map);
-void		my_free_tetris(t_tetris *tetris, bool map_true);
+void		my_free_tetris(t_tetris *tetris);
 int		my_print_debug(t_tetris *tetris);
 int		my_got_high(t_tetris *tetris);
 int		my_save_high(t_tetris *tetris);
