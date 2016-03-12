@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Sat Mar 12 16:18:32 2016 edouard puillandre
+** Last update Sat Mar 12 17:48:40 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -21,7 +21,6 @@
 # include <sys/stat.h>
 # include <dirent.h>
 # include <fcntl.h>
-# include <ncurses/curses.h>
 # include <term.h>
 # include "my.h"
 
@@ -161,5 +160,6 @@ int		load_info(char *str, t_piece *list);
 int		add_elem(t_piece *elem, t_piece **list);
 int		swap_struc_elem(t_piece *elem, t_piece **list, t_piece *tmp);
 int		sort_list(t_piece **list, t_piece *elem);
+void		free_list(t_piece *list);
 
 #endif /* !TETRIS_H_ */

@@ -5,10 +5,49 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Sat Mar 12 12:33:22 2016 Voyevoda
+** Last update Sat Mar 12 16:42:54 2016 Voyevoda
 */
 
 #include "tetris.h"
+
+int	swap_struct_elem(t_piece *elem, t_piece *tmp)
+{
+  elem->next = tmp->next;
+  tmp->next = elem;
+  /* elem->next = tmp->next; */
+  /* tmp->next->valid = elem->valid; */
+  /* tmp->next->width = elem->width; */
+  /* tmp->next->height = elem->height; */
+  /* tmp->next->col = elem->col; */
+  /* tmp->next->name = elem->name; */
+  /* tmp->next->shape = elem->shape; */
+  /* tmp->next = elem; */
+  return (0);
+}
+
+int		sort_list(t_piece **list, t_piece *elem)
+{
+  t_piece	*tmp;
+
+  if ((tmp = malloc(sizeof(t_piece))) == NULL)
+    return (-1);
+  tmp = *list;
+  if ((my_strcmp((*list)->name, elem->name)) < 0)
+    {
+      while (tmp->next != *list)
+	tmp = tmp->next;
+      swap_struct_elem(elem, *list);
+      return (0);
+    }
+  while ((tmp->next != *list || my_strcmp(tmp->next->name, elem->name)) >= 0)
+    tmp = tmp->next;
+  if ((my_strcmp((*list)->name, tmp->name)) < 0)
+    {
+      swap_struct_elem(elem, tmp);
+      return (0);
+    }
+  return (-1);
+}
 
 int		add_elem(t_piece *elem, t_piece **list)
 {
@@ -21,60 +60,50 @@ int		add_elem(t_piece *elem, t_piece **list)
       if ((list = malloc(sizeof(t_piece))) == NULL)
 	return (-1);
       *list = elem;
-      *list->next = list;
+      (*list)->next = *list;
     }
   else
     {
-      if ((sort_list(list, elem)) = -1);
-      {
-	while (tmp->next != *list)
-	  tmp = tmp->next;
-	swap_struct_elem(elem, list, tmp);
-	tmp->next = *list;
-      }
+      if ((sort_list(list, elem)) == -1)
+	{
+	  while (tmp->next != *list)
+	    tmp = tmp->next;
+	  swap_struct_elem(elem, tmp);
+	  /* tmp->next = *list; */
+	}
     }
   return (0);
 }
 
-int	swap_struct_elem(t_piece *elem, t_piece **list, t_piece *tmp)
-{
-  elem->next = tmp->next;
-  tmp->next->valid = elem->valid;
-  tmp->next->width = elem->width;
-  tmp->next->height = list->height;
-  tmp->next->col = list->col;
-  tmp->next->name = list->name;
-  tmp->next->shape = elem->shape;
-  tmp->next = elem;
-  return (0);
-}
-
-int	rm_elem(t_piece *elem, t_piece **list);
-{
-
-  return (0);
-}
-
-int		sort_list(t_piece **list, t_piece *elem)
+void	free_list(t_piece *list)
 {
   t_piece	*tmp;
+  t_piece	*end;
 
-  if ((tmp = malloc(sizeof(t_piece))) == NULL)
-    return (-1);
-  tmp = *list;
-  if ((mycmp(*list->name, elem->name)) < 0)
+  end = list;
+  list = list->next;
+  while (list != end)
     {
-      while (tmp->next != list)
-	tmp = tmp->next;
-      swap_struct_elem(elem, list, tmp);
-      return (0);
+      tmp = list;
+      list = list->next;
+      free(tmp);
     }
-  while ((tmp->next != *list || mycmp(tmp->next->name, elem->name)) < 0)
-    tmp = tmp->next;
-  if ((mycmp(list->name, tmp->name)) < 0)
+  free(end);
+}
+
+void		rm_elem(t_piece *list)
+{
+  t_piece	*tmp;
+  t_piece	*tmp2;
+
+  while (tmp->next != list)
     {
-      swap_struct_elem(elem, list, tmp);
-      return (0);
+      if (tmp->next->valid == false)
+	{
+	  tmp2 = tmp->next;
+	  tmp->next = tmp->next->next;
+	  free(tmp2);
+	}
+      tmp = tmp->next;
     }
-  return (-1);
 }
