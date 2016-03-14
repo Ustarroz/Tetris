@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Mon Mar 14 14:26:16 2016 Voyevoda
+** Last update Mon Mar 14 19:58:00 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -16,7 +16,10 @@ void	print_chain(t_piece **list)
   t_list	*end;
 
   end = *list;
-  while(tmp->next != lisr)
+  while(tmp->next != list)
+    {
+
+    }
 }
 
 void	my_print_tetrimino(t_tetris *tetris)
@@ -28,6 +31,9 @@ void	my_print_tetrimino(t_tetris *tetris)
   i = 0;
   x = 0;
   while()
+    {
+    }
+}
 
 void	my_str_space(char *text, char *str)
 {
