@@ -5,28 +5,29 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Sat Mar 12 19:12:07 2016 Voyevoda
+** Last update Mon Mar 14 14:26:16 2016 Voyevoda
 */
 
 #include "tetris.h"
+
+void	print_chain(t_piece **list)
+{
+  t_list	*tmp;
+  t_list	*end;
+
+  end = *list;
+  while(tmp->next != lisr)
+}
 
 void	my_print_tetrimino(t_tetris *tetris)
 {
   int	x;
   int	y;
+  int	i;
 
+  i = 0;
   x = 0;
-  y = 0;
-  while (x <= tetris->map->width && y <= tetris->map->height)
-    {
-      my_putchar(tetris->map->form[x][y++]);
-      if (tetris->map->form[x][y] == '\0')
-	{
-	  x++;
-	  y = 0;
-	}
-    }
-}
+  while()
 
 void	my_str_space(char *text, char *str)
 {
