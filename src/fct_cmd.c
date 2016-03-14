@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Sat Mar 12 11:29:56 2016 edouard puillandre
-** Last update Sat Mar 12 17:59:39 2016 edouard puillandre
+** Last update Mon Mar 14 18:25:54 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -21,6 +21,8 @@ char	*my_find_term(char **env)
   while(end == false && env[++i] != NULL)
     if (my_strncmp(env[i], ENV_TERM, 5) == 0)
       end = true;
+  if (end == false)
+    return (NULL);
   if ((str = my_strdup(env[i] + my_strlen(ENV_TERM))) == NULL)
     return (NULL);
   return (str);
@@ -47,7 +49,7 @@ int	my_def_cmd(t_tetris *tetris, char **env)
 
   if ((str = my_find_term(env)) == NULL)
     return (- 1);
-    if (setupterm(str, 1, NULL) == - 1)
+  if (setupterm(str, 1, NULL) == - 1)
     return (- 1);
   if ((tetris->cmd[ID_KL].key = get_keypad("kcub1")) == NULL)
     return (- 1);
