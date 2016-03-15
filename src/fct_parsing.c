@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Tue Mar 15 23:23:52 2016 Voyevoda
+** Last update Wed Mar 16 00:00:56 2016 edouard puillandre
 */
 #include "tetris.h"
 
@@ -50,7 +50,7 @@ int		fill_struct(t_piece *alphabet, int fd)
     {
       if ((fill_piece(alphabet, buffer, k, &cols)) == - 1)
 	{
-	  my_printf("a %s %s\n", buffer, alphabet->name);
+	  my_printf("b cols %d; k %d; height %d; width %d; buff %s; %s\n", cols, k, alphabet->height, alphabet->width, buffer, alphabet->name);
 	  alphabet->valid = false;
 	  return (0);
 	}
@@ -58,9 +58,8 @@ int		fill_struct(t_piece *alphabet, int fd)
   if ((buffer == NULL && ++k < alphabet->height) ||
       (buffer != NULL && k == alphabet->height) || (cols != 11))
     {
-      my_printf("%d", k);
-      my_printf("%d\n", cols);
-    alphabet->valid = false;
+      my_printf("b cols %d; k %d; height %d; width %d; buff %s; %s\n", cols, k, alphabet->height, alphabet->width, buffer, alphabet->name);
+      alphabet->valid = false;
     }
   else
     alphabet->valid = true;
@@ -135,7 +134,7 @@ int		load_info(char *av, t_piece **list)
   alphabet->name = av;
   if ((buffer = get_next_line(fd)) == NULL)
     {
-      my_printf("b");
+      my_printf("c %s", alphabet->name);
       alphabet->valid = false;
       add_elem(alphabet, list);
       return (0);

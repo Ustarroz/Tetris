@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Tue Mar 15 22:52:18 2016 Voyevoda
+** Last update Tue Mar 15 23:50:27 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -38,7 +38,7 @@ void		my_print_tetrimino(t_tetris *tetris)
       j = len - 1;
       while (tmp->name[++j + end] != '\0')
 	my_printf("%c", tmp->name[j]);
-      my_printf(" ");
+      my_printf(" : ");
       if (tmp->valid)
 	my_print_piece(tmp);
       else
