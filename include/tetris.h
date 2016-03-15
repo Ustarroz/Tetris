@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Sat Mar 12 18:02:53 2016 edouard puillandre
+** Last update Tue Mar 15 11:46:12 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -155,8 +155,8 @@ int		my_got_high(t_tetris *tetris);
 int		my_save_high(t_tetris *tetris);
 char		*get_next_line(const int fd);
 int		malloc_piece(t_piece *piece);
-int		files(t_piece *list);
-int		load_info(char *str, t_piece *list);
+int		files(t_piece **list);
+int		load_info(char *str, t_piece **list);
 int		add_elem(t_piece *elem, t_piece **list);
 int		swap_struc_elem(t_piece *elem, t_piece **list, t_piece *tmp);
 int		sort_list(t_piece **list, t_piece *elem);

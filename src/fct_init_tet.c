@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Sat Mar 12 18:02:50 2016 edouard puillandre
+** Last update Tue Mar 15 10:37:53 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -80,7 +80,7 @@ t_tetris	*my_def_tetris(char **env)
       return (NULL);
     }
   tetris->piece = NULL;
-  if ((tetris->nb_piece = files(tetris->piece)) == - 1)
+  if ((tetris->nb_piece = files(&(tetris->piece))) == - 1)
     return (NULL);
   tetris->debug = false;
   if ((tetris->map = my_def_map()) == NULL)

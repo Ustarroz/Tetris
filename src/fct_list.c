@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Sat Mar 12 16:42:54 2016 Voyevoda
+** Last update Tue Mar 15 10:04:52 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -28,7 +28,7 @@ int	swap_struct_elem(t_piece *elem, t_piece *tmp)
 int		sort_list(t_piece **list, t_piece *elem)
 {
   t_piece	*tmp;
-
+ 
   if ((tmp = malloc(sizeof(t_piece))) == NULL)
     return (-1);
   tmp = *list;

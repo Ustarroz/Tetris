@@ -5,8 +5,9 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Thu Mar  3 15:54:35 2016 Voyevoda
-** Last update Sat Mar 12 19:03:07 2016 Voyevoda
+** Last update Tue Mar 15 11:42:50 2016 edouard puillandre
 */
+
 #include "../include/tetris.h"
 
 int	my_strcmp_tetrimino(char *file)
@@ -15,19 +16,21 @@ int	my_strcmp_tetrimino(char *file)
   char	*test;
   int	k;
 
-  k = 10;
   test = ".tetrimino";
   i = my_strlen(file);
-  while (i != 0)
+  k = my_strlen(test);
+  while (k != 0 && i != 0)
     {
       if (file[i] == test[k])
 	{
 	  i--;
 	  k--;
-	  if (file[i] != test[k])
-	    return (-1);
 	}
+      else
+	return (-1);
     }
+  if (k != 0)
+    return (- 1);
   return (0);
 }
 
@@ -55,7 +58,7 @@ char	*my_strcat(char *av, char *av2)
   return (name);
 }
 
-int		files(t_piece *list)
+int		files(t_piece **list)
 {
   DIR		*dir;
   struct dirent *file;
@@ -72,10 +75,10 @@ int		files(t_piece *list)
     while ((file = readdir(dir)) != NULL)
       if (my_strcmp_tetrimino(file->d_name) == 0)
 	{
-	  if ((name = my_strcat("./tetrimino", file->d_name)) == NULL)
+	  if ((name = my_strcat("./tetriminos/", file->d_name)) == NULL)
 	    return (- 1);
 	  files++;
-	  if ((load_info(name, list)) == 0)
+	  if ((load_info(name, list)) == - 1)
 	    return (- 1);
 	}
   closedir(dir);
@@ -86,14 +89,20 @@ int	malloc_piece(t_piece *alphabet)
 {
   int	i;
 
-  i = -1;
+  i = - 1;
   if ((alphabet->shape = malloc(sizeof(char *) * (alphabet->height))) == NULL)
-    return (-1);
+    {
+      my_putstr_error(MALLOC_ERR_MSG);
+      return (- 1);
+    }
   while (++i < alphabet->height)
     {
       if ((alphabet->shape[i] =
 	   malloc(sizeof(char) * alphabet->width + 1)) == NULL)
-	return (-1);
+	{
+	  my_putstr_error(MALLOC_ERR_MSG);
+	  return (- 1);
+	}
       alphabet->shape[i][alphabet->width] = '\0';
     }
   return (0);

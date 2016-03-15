@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Sat Mar 12 12:35:11 2016 Voyevoda
+** Last update Tue Mar 15 11:53:41 2016 edouard puillandre
 */
 #include "tetris.h"
 
@@ -46,23 +46,21 @@ int		fill_struct(t_piece *alphabet, int fd)
   k = -1;
   while ((buffer = get_next_line(fd)) != NULL && ++k < alphabet->height)
     {
-      if ((fill_piece(alphabet, buffer, k, &cols)) == -1)
+      if ((fill_piece(alphabet, buffer, k, &cols)) == - 1)
 	{
 	  my_putstr_error(OPEN_ERR_MSG);
-	  return (-1);
+	  return (- 1);
 	}
     }
   if ((buffer == NULL && k < alphabet->height) ||
       (buffer != NULL && k == alphabet->height) || (cols == 0))
-    {
-      alphabet->valid = false;
-      return (-1);
-    }
-  alphabet->valid = true;
+    alphabet->valid = false;
+  else
+    alphabet->valid = true;
   return (0);
 }
 
-int	get_to_space(int i, char *str,t_piece *alphabet)
+int	get_to_space(int i, char *str, t_piece *alphabet)
  {
    char		buffer[12];
    int		j;
@@ -84,8 +82,8 @@ int	get_to_space(int i, char *str,t_piece *alphabet)
    l++;
    if (l == 3)
      l = 0;
-   if ((malloc_piece(alphabet)) == -1)
-     return (-1);
+   if ((malloc_piece(alphabet)) == - 1)
+     return (- 2);
    return (0);
  }
 
@@ -102,31 +100,41 @@ int	check_tetrimino(char *str, t_piece *alphabet, int fd)
       if (str[i] >= '0' && str[i] <= '9')
 	{
 	  if ((str[i] != ' ') && (str[i] < '0' || str[i] > '9'))
-	     return (-1);
-	  else if ((tabloid[j++] = get_to_space(i, str, alphabet)) == -1)
-	     return (-1);
+	     return (- 1);
+	  else if ((tabloid[j++] = get_to_space(i, str, alphabet)) == - 2)
+	    return (- 2);
 	}
     }
-  fill_struct(alphabet, fd);
+  if (fill_struct(alphabet, fd) == - 1)
+    return (- 2);
   return (0);
 }
 
-int		load_info(char *av, t_piece *list)
+int		load_info(char *av, t_piece **list)
 {
   int		fd;
+  int		check;
   char		*buffer;
   t_piece	*alphabet;
 
   fd = open(av, O_RDONLY);
+  if ((alphabet = malloc(sizeof(t_piece))) == NULL)
+    {
+      my_putstr_error(MALLOC_ERR_MSG);
+      return (- 1);
+    }
   if ((buffer = get_next_line(fd)) == NULL)
     {
-      my_putstr_error(OPEN_ERR_MSG);
-      return (-1);
+      alphabet->valid = false;
+      return (0);
     }
-  if ((alphabet = malloc(sizeof(t_piece))) == NULL)
-      return (-2);
-  if ((check_tetrimino(buffer, alphabet, fd)) == -1)
-    return (-1);
-  add_elem(alphabet, &list);
+  alphabet->name = av;
+  if ((check = check_tetrimino(buffer, alphabet, fd)) == - 1)
+    alphabet->valid = false;
+  else if (check == 0)
+    alphabet->valid = true;
+  else
+    return (- 1);
+  add_elem(alphabet, list);
   return (0);
 }

@@ -5,33 +5,44 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Mon Mar 14 19:58:00 2016 Voyevoda
+** Last update Tue Mar 15 10:35:26 2016 edouard puillandre
 */
 
 #include "tetris.h"
 
-void	print_chain(t_piece **list)
-{
-  t_list	*tmp;
-  t_list	*end;
-
-  end = *list;
-  while(tmp->next != list)
-    {
-
-    }
-}
-
-void	my_print_tetrimino(t_tetris *tetris)
+void	my_print_piece(t_piece *tmp)
 {
   int	x;
-  int	y;
-  int	i;
 
-  i = 0;
-  x = 0;
-  while()
+  my_printf("Size %d*%d : Color %d :\n", tmp->width, tmp->height, tmp->col);
+  x = - 1;
+  while(++x < tmp->height)
+    my_printf("%s\n", tmp->shape[x]);
+}
+
+void		my_print_tetrimino(t_tetris *tetris)
+{
+  int		i;
+  int		j;
+  int		len;
+  int		end;
+  t_piece	*tmp;
+
+  i = - 1;
+  tmp = tetris->piece;
+  len = my_strlen("./tetriminos/");
+  end = my_strlen(".tetriminos");
+  while(++i < tetris->nb_piece)
     {
+      my_printf("Tetriminos : ");
+      j = len - 1;
+      while (tmp->name[++j + end] != '\0')
+	my_printf("%c", tmp->name[i]);
+      my_printf(" ");
+      if (tmp->valid)
+	my_print_piece(tmp);
+      else
+	my_printf("Error\n");
     }
 }
 
