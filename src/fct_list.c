@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Tue Mar 15 10:04:52 2016 edouard puillandre
+** Last update Tue Mar 15 21:34:43 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -14,34 +14,24 @@ int	swap_struct_elem(t_piece *elem, t_piece *tmp)
 {
   elem->next = tmp->next;
   tmp->next = elem;
-  /* elem->next = tmp->next; */
-  /* tmp->next->valid = elem->valid; */
-  /* tmp->next->width = elem->width; */
-  /* tmp->next->height = elem->height; */
-  /* tmp->next->col = elem->col; */
-  /* tmp->next->name = elem->name; */
-  /* tmp->next->shape = elem->shape; */
-  /* tmp->next = elem; */
   return (0);
 }
 
 int		sort_list(t_piece **list, t_piece *elem)
 {
   t_piece	*tmp;
- 
-  if ((tmp = malloc(sizeof(t_piece))) == NULL)
-    return (-1);
+
   tmp = *list;
-  if ((my_strcmp((*list)->name, elem->name)) < 0)
+  if (my_strcmp((*list)->name, elem->name) > 0)
     {
       while (tmp->next != *list)
 	tmp = tmp->next;
-      swap_struct_elem(elem, *list);
+      swap_struct_elem(elem, tmp);
       return (0);
     }
-  while ((tmp->next != *list || my_strcmp(tmp->next->name, elem->name)) >= 0)
+  while (tmp->next != *list && my_strcmp(tmp->next->name, elem->name) < 0)
     tmp = tmp->next;
-  if ((my_strcmp((*list)->name, tmp->name)) < 0)
+  if (my_strcmp(tmp->next->name, tmp->name) > 0)
     {
       swap_struct_elem(elem, tmp);
       return (0);
@@ -53,12 +43,9 @@ int		add_elem(t_piece *elem, t_piece **list)
 {
   t_piece	*tmp;
 
-  tmp = malloc(sizeof(t_piece));
   tmp = *list;
   if (*list == NULL)
     {
-      if ((list = malloc(sizeof(t_piece))) == NULL)
-	return (-1);
       *list = elem;
       (*list)->next = *list;
     }
@@ -69,7 +56,6 @@ int		add_elem(t_piece *elem, t_piece **list)
 	  while (tmp->next != *list)
 	    tmp = tmp->next;
 	  swap_struct_elem(elem, tmp);
-	  /* tmp->next = *list; */
 	}
     }
   return (0);

@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Tue Mar 15 11:53:41 2016 edouard puillandre
+** Last update Tue Mar 15 21:52:00 2016 Voyevoda
 */
 #include "tetris.h"
 
@@ -22,17 +22,19 @@ int	fill_piece(t_piece *alphabet, char *buffer, int line, int *cols)
     else if (i > alphabet->width && buffer[i] != ' ')
       return (-1);
   i = -1;
-  while (++i != alphabet->width)
+  while (++i != alphabet->width && buffer[i] != '\0')
     {
       if (buffer[i] == '*' && i <= alphabet->width)
 	k++;
-      if (i == alphabet->width - 1 && buffer[i] == '*')
+      if ((i == alphabet->width - 1 && buffer[i] == '*') ||
+	  (i = 0 && buffer[i] =='*'))
 	*cols = 1;
       if (i == alphabet->width - 1 && k == 0 &&
 	  (line == 0 || line == alphabet->height - 1))
 	return (-1);
       alphabet->shape[line][i] = buffer[i];
     }
+  alphabet->shape[line][i] = '\0';
   return (0);
 }
 
@@ -123,12 +125,13 @@ int		load_info(char *av, t_piece **list)
       my_putstr_error(MALLOC_ERR_MSG);
       return (- 1);
     }
+  alphabet->name = av;
   if ((buffer = get_next_line(fd)) == NULL)
     {
       alphabet->valid = false;
+      add_elem(alphabet, list);
       return (0);
     }
-  alphabet->name = av;
   if ((check = check_tetrimino(buffer, alphabet, fd)) == - 1)
     alphabet->valid = false;
   else if (check == 0)
