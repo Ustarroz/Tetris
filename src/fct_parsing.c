@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Tue Mar 15 22:06:56 2016 edouard puillandre
+** Last update Tue Mar 15 23:23:52 2016 Voyevoda
 */
 #include "tetris.h"
 
@@ -50,13 +50,18 @@ int		fill_struct(t_piece *alphabet, int fd)
     {
       if ((fill_piece(alphabet, buffer, k, &cols)) == - 1)
 	{
-	  my_putstr_error(OPEN_ERR_MSG);
-	  return (- 1);
+	  my_printf("a %s %s\n", buffer, alphabet->name);
+	  alphabet->valid = false;
+	  return (0);
 	}
     }
-  if ((buffer == NULL && k < alphabet->height) ||
+  if ((buffer == NULL && ++k < alphabet->height) ||
       (buffer != NULL && k == alphabet->height) || (cols != 11))
+    {
+      my_printf("%d", k);
+      my_printf("%d\n", cols);
     alphabet->valid = false;
+    }
   else
     alphabet->valid = true;
   return (0);
@@ -102,20 +107,22 @@ int	check_tetrimino(char *str, t_piece *alphabet, int fd)
       if (str[i] >= '0' && str[i] <= '9')
 	{
 	  if ((str[i] != ' ') && (str[i] < '0' || str[i] > '9'))
-	     return (- 1);
+	    {
+	      my_printf("b");
+	      alphabet->valid = false;
+	      return (- 1);
+	    }
 	  else if ((tabloid[j++] = get_to_space(i, str, alphabet)) == - 2)
-	    return (- 2);
+	    return (- 1);
 	}
     }
-  if (fill_struct(alphabet, fd) == - 1)
-    return (- 2);
+  fill_struct(alphabet, fd);
   return (0);
 }
 
 int		load_info(char *av, t_piece **list)
 {
   int		fd;
-  int		check;
   char		*buffer;
   t_piece	*alphabet;
 
@@ -128,15 +135,12 @@ int		load_info(char *av, t_piece **list)
   alphabet->name = av;
   if ((buffer = get_next_line(fd)) == NULL)
     {
+      my_printf("b");
       alphabet->valid = false;
       add_elem(alphabet, list);
       return (0);
     }
-  if ((check = check_tetrimino(buffer, alphabet, fd)) == - 1)
-    alphabet->valid = false;
-  else if (check == 0)
-    alphabet->valid = true;
-  else
+  if (check_tetrimino(buffer, alphabet, fd) == - 1)
     return (- 1);
   add_elem(alphabet, list);
   return (0);

@@ -1,11 +1,11 @@
 /*
 ** get_next_line.c for PSU_2015_tetris in /home/puilla_e/Semestre2/psu/
-** 
+**
 ** Made by edouard puillandre
 ** Login   <puilla_e@epitech.net>
-** 
+**
 ** Started on  Fri Mar 11 12:26:18 2016 edouard puillandre
-** Last update Tue Mar 15 23:32:55 2016 edouard puillandre
+** Last update Tue Mar 15 23:34:34 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -89,7 +89,7 @@ char		*get_next_line(const int fd)
   static char	buff[READ_SIZE + 1] = {0};
   char		*str;
   static int	ret = 1;
-  static int	fd_save = fd;
+  static int	fd_save = - 1;
 
   str = NULL;
   if (fd != fd_save)
@@ -109,5 +109,5 @@ char		*get_next_line(const int fd)
       if ((str = my_realloc(str, buff)) == NULL)
 	return (NULL);
     }
-  return (check_ret(ret, str);
+  return (check_ret(ret, str));
 }

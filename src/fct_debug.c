@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Tue Mar 15 19:03:24 2016 Voyevoda
+** Last update Tue Mar 15 22:52:18 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -43,6 +43,7 @@ void		my_print_tetrimino(t_tetris *tetris)
 	my_print_piece(tmp);
       else
 	my_printf("Error\n");
+      tmp = tmp->next;
     }
 }
 
@@ -67,7 +68,7 @@ void	my_print_data(t_tetris *tetris)
   my_str_space("Key Drop : ", tetris->cmd[ID_KD].key);
   my_str_space("Key Quit : ", tetris->cmd[ID_KQ].key);
   my_str_space("Key Pause : ", tetris->cmd[ID_KP].key);
-  my_printf("Next : %s\n", (tetris->game->next) ? "Yes" : "No");
+  my_printf("Next : %s\n", (tetris->next->valid) ? "Yes" : "No");
   my_printf("Level : %d\n", tetris->game->lvl);
   my_printf("Size : %d*%d\n", tetris->map->width, tetris->map->height);
   my_print_tetrimino(tetris);
