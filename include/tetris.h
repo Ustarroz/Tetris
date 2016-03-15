@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Tue Mar 15 21:53:28 2016 edouard puillandre
+** Last update Tue Mar 15 22:52:30 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -124,6 +124,13 @@ typedef struct	s_tetris
   t_next	*next;
 }		t_tetris;
 
+typedef struct	s_win
+{
+  WINDOW	*win;
+  int		x;
+  int		y;
+}		t_win;
+
 typedef struct	s_opt
 {
   char		*str;
@@ -175,5 +182,6 @@ int		add_elem(t_piece *elem, t_piece **list);
 int		swap_struc_elem(t_piece *elem, t_piece **list, t_piece *tmp);
 int		sort_list(t_piece **list, t_piece *elem);
 void		free_list(t_piece *list);
+int		the_game(t_tetris *tetris);
 
 #endif /* !TETRIS_H_ */

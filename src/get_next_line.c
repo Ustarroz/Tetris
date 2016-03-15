@@ -5,22 +5,10 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar 11 12:26:18 2016 edouard puillandre
-** Last update Fri Mar 11 12:26:23 2016 edouard puillandre
+** Last update Tue Mar 15 23:32:55 2016 edouard puillandre
 */
 
 #include "tetris.h"
-
-int	len_str(char *str)
-{
-  int	i;
-
-  i = 0;
-  while (str[i] != '\0' && str[i] != '\n')
-    {
-      i = i + 1;
-    }
-  return (i);
-}
 
 char	*my_realloc(char *str, char *buff)
 {
@@ -33,7 +21,7 @@ char	*my_realloc(char *str, char *buff)
   if (str != NULL)
     {
       tmp = str;
-      str = malloc(sizeof(char *) * (len_str(buff) + len_str(tmp) + 1));
+      str = malloc(sizeof(char *) * (my_strlen(buff) + my_strlen(tmp) + 1));
       if (str == NULL)
 	return (NULL);
       while (tmp[i] != '\0')
@@ -43,7 +31,7 @@ char	*my_realloc(char *str, char *buff)
 	}
       free(tmp);
     }
-  else if ((str = malloc(sizeof(char *) * (len_str(buff) + 1))) == NULL)
+  else if ((str = malloc(sizeof(char *) * (my_strlen(buff) + 1))) == NULL)
     return (NULL);
   while (buff[j] != '\0' && buff[j] != '\n')
     str[i++] = buff[j++];
@@ -84,13 +72,31 @@ int	buff_next(char *buff)
   return (0);
 }
 
+char	*check_ret(int ret, char *str)
+{
+  if (ret == - 1)
+    return (NULL);
+  if (ret == 0 && str != NULL && str[0] == '\0')
+    {
+      free(str);
+      return (NULL);
+    }
+  return (str);
+}
+
 char		*get_next_line(const int fd)
 {
   static char	buff[READ_SIZE + 1] = {0};
   char		*str;
   static int	ret = 1;
+  static int	fd_save = fd;
 
   str = NULL;
+  if (fd != fd_save)
+    {
+      buff[0] = '\0';
+      fd_save = fd;
+    }
   if (ret != 0 && buff[0] != '\0')
     {
       buff_next(buff);
@@ -103,12 +109,5 @@ char		*get_next_line(const int fd)
       if ((str = my_realloc(str, buff)) == NULL)
 	return (NULL);
     }
-  if (ret == - 1)
-    return (NULL);
-  if (ret == 0 && str != NULL && str[0] == '\0')
-    {
-      free(str);
-      return (NULL);
-    }
-  return (str);
+  return (check_ret(ret, str);
 }
