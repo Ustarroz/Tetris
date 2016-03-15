@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Tue Mar 15 21:52:00 2016 Voyevoda
+** Last update Tue Mar 15 22:06:56 2016 edouard puillandre
 */
 #include "tetris.h"
 
@@ -22,13 +22,13 @@ int	fill_piece(t_piece *alphabet, char *buffer, int line, int *cols)
     else if (i > alphabet->width && buffer[i] != ' ')
       return (-1);
   i = -1;
+  if (buffer[alphabet->width - 1] == '*' && *cols % 2 == 0)
+    *cols = *cols + 1;
+  *cols = (buffer[0] == '*' && *cols / 10 == 0) ? *cols + 10 : *cols;
   while (++i != alphabet->width && buffer[i] != '\0')
     {
       if (buffer[i] == '*' && i <= alphabet->width)
 	k++;
-      if ((i == alphabet->width - 1 && buffer[i] == '*') ||
-	  (i = 0 && buffer[i] =='*'))
-	*cols = 1;
       if (i == alphabet->width - 1 && k == 0 &&
 	  (line == 0 || line == alphabet->height - 1))
 	return (-1);
@@ -55,7 +55,7 @@ int		fill_struct(t_piece *alphabet, int fd)
 	}
     }
   if ((buffer == NULL && k < alphabet->height) ||
-      (buffer != NULL && k == alphabet->height) || (cols == 0))
+      (buffer != NULL && k == alphabet->height) || (cols != 11))
     alphabet->valid = false;
   else
     alphabet->valid = true;
