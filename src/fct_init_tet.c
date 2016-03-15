@@ -5,10 +5,38 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Tue Mar 15 10:37:53 2016 edouard puillandre
+** Last update Tue Mar 15 21:53:46 2016 edouard puillandre
 */
 
 #include "tetris.h"
+
+void		my_put_pos(t_tetris *tetris)
+{
+  int		width;
+  t_piece	*tmp;
+
+  width = MAP_POS_X - (GAME_POS_X + tetris->game->width);
+  tetris->game->x = GAME_POS_X;
+  tetris->game->y = GAME_POS_Y;
+  tetris->map->pos_x = MAP_POS_X;
+  tetris->map->pos_y = MAP_POS_Y;
+  tetris->next->x = MAP_POS_X + width + tetris->map->width;
+  tetris->next->y = MAP_POS_Y;
+  tmp = tetris->piece;
+  tetris->next->width = tmp->width;
+  tetris->next->height = tmp->height;
+  while (tmp->next != tetris->piece)
+    {
+      if (tmp->height > tetris->next->height)
+	tetris->next->height = tmp->height;
+      if (tmp->width > tetris->next->width)
+	tetris->next->width = tmp->width;
+      tmp = tmp->next;
+    }
+  tetris->next->width = tetris->next->width + 5;
+  tetris->next->height = tetris->next->height + 2;
+  tetris->game->t = time(NULL);
+}
 
 int	my_map_tab(t_map *map)
 {
@@ -61,12 +89,11 @@ t_game		*my_def_game()
       my_putstr_error(MALLOC_ERR_MSG);
       return (NULL);
     }
-  game->next = true;
   game->lvl = 1;
-  game->t.min = 0;
-  game->t.sec = 0;
   game->score = 0;
   game->high_score = 0;
+  game->width = GAME_WIDTH;
+  game->height = GAME_HEIGHT;
   return (game);
 }
 
@@ -85,6 +112,12 @@ t_tetris	*my_def_tetris(char **env)
   tetris->debug = false;
   if ((tetris->map = my_def_map()) == NULL)
     return (NULL);
+  if ((tetris->next = malloc(sizeof(t_next))) == NULL)
+    {
+      my_putstr_error(MALLOC_ERR_MSG);
+      return (NULL);
+    }
+  tetris->next->valid = true;
   if ((tetris->game = my_def_game()) == NULL)
     return (NULL);
   if (my_def_cmd(tetris, env) == - 1)

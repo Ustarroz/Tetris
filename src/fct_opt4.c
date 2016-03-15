@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 16:51:51 2016 edouard puillandre
-** Last update Thu Mar 10 15:58:51 2016 edouard puillandre
+** Last update Tue Mar 15 19:14:50 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -89,7 +89,7 @@ int	set_w_eq(t_tetris *tetris, int *i, char **argv)
       my_putnbr_error(*i, true);
       return (- 1);
     }
-  tetris->game->next = false;
+  tetris->next->valid = false;
   return (0);
 }
 
@@ -101,6 +101,6 @@ int	set_w(t_tetris *tetris, int *i, char **argv, int argc)
   (void) argc;
   (void) argv;
   (void) *i;
-  tetris->game->next = false;
+  tetris->next->valid = false;
   return (0);
 }

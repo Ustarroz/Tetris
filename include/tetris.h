@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Tue Mar 15 11:46:12 2016 edouard puillandre
+** Last update Tue Mar 15 21:53:28 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -22,6 +22,7 @@
 # include <dirent.h>
 # include <fcntl.h>
 # include <term.h>
+# include <time.h>
 # include "my.h"
 
 # define PATH_SCORE "./ressource/high"
@@ -51,19 +52,18 @@
 # define CLOSE_ERR_MSG "Close error\n"
 # define WRITE_ERR_MSG "Write error\n"
 # define READ_SIZE (4078)
+# define GAME_POS_X (2)
+# define GAME_POS_Y (10)
+# define GAME_WIDTH (25)
+# define GAME_HEIGHT (9)
+# define MAP_POS_X (29)
+# define MAP_POS_Y (2)
 
 typedef struct	s_cmd
 {
   char		*key;
   int		(*fct)();
 }		t_cmd;
-
-typedef struct	s_map
-{
-  int		width;
-  int		height;
-  char		**form;
-}		t_map;
 
 typedef struct		s_piece
 {
@@ -77,28 +77,41 @@ typedef struct		s_piece
   struct s_piece	*turn;
 }			t_piece;
 
-typedef struct	s_clock
+typedef struct	s_map
 {
-  int		min;
-  int		sec;
-}		t_clock;
+  int		pos_x;
+  int		pos_y;
+  int		x;
+  int		y;
+  int		width;
+  int		height;
+  char		**form;
+  t_piece	*curr;
+}		t_map;
+
+typedef struct	s_game
+{
+  int		x;
+  int		y;
+  int		width;
+  int		height;
+  int		lvl;
+  time_t       	t;
+  time_t	pause;
+  int		score;
+  int		high_score;
+  int		line;
+}		t_game;
 
 typedef struct	s_next
 {
   bool		valid;
   int		x;
   int		y;
+  int		width;
+  int		height;
+  t_piece	*piece;
 }		t_next;
-
-typedef struct	s_game
-{
-  bool		next;
-  int		lvl;
-  t_clock	t;
-  int		score;
-  int		high_score;
-  int		line;
-}		t_game;
 
 typedef struct	s_tetris
 {
@@ -108,6 +121,7 @@ typedef struct	s_tetris
   t_game	*game;
   int		nb_piece;
   t_piece	*piece;
+  t_next	*next;
 }		t_tetris;
 
 typedef struct	s_opt
