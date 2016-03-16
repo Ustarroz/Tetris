@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Wed Mar 16 18:06:31 2016 edouard puillandre
+** Last update Wed Mar 16 18:59:28 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -189,9 +189,10 @@ int		swap_struc_elem(t_piece *elem, t_piece **list, t_piece *tmp);
 int		sort_list(t_piece **list, t_piece *elem);
 void		free_list(t_piece *list);
 int		the_game(t_tetris *tetris);
-int		print_all(t_tetris *tetris);
-int		print_game(t_game *game);
+int		print_all(t_tetris *tetris, t_win *win);
+int		print_game(t_game *game, t_win *win);
 int		print_line(int x, int y, int width);
-int		got_cmd(t_tetris *tetris, bool *loop);
+int		got_cmd(t_tetris *tetris, bool *loop, t_win *win);
+void		my_put_pos(t_tetris *tetris);
 
 #endif /* !TETRIS_H_ */

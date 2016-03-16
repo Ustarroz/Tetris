@@ -5,12 +5,12 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Wed Mar 16 15:27:15 2016 edouard puillandre
-** Last update Wed Mar 16 17:57:34 2016 edouard puillandre
+** Last update Wed Mar 16 19:03:39 2016 edouard puillandre
 */
 
 #include "tetris.h"
 
-int	print_line(int x, int y, int width)
+int	print_line(int y, int x, int width)
 {
   int	i;
 
@@ -36,18 +36,19 @@ int	print_int(t_game *game, int j, int nb, char *str)
 int		print_time(t_game *game, int j)
 {
   int		i;
-  t_time	t;
+  time_t	t;
   int		clock;
 
-  mvprintw(game->y + j, game->x, "| Time");
-  i = game->width - 7;
+  mvprintw(game->y + j, game->x, "| Time ");
+  i = my_strlen("| Time ");
   time(&t);
   clock = t - game->t;
-  mvprintw(game->y + j, game->x + i, "%d:%d |", clock / 60, clock % 60);
+  mvprintw(game->y + j, game->x + i, "%d:%d", clock / 60, clock % 60);
+  mvprintw(game->y + j, game->x + game->width, "|");
   return (0);
 }
 
-int	print_game(t_game *game)
+int	print_game(t_game *game, t_win *win)
 {
   int	j;
 
@@ -57,14 +58,22 @@ int	print_game(t_game *game)
   print_int(game, j, game->high_score, "| High Score ");
   j = j + 1;
   print_int(game, j, game->score, "| Score ");
-  j = j + 2;
+  j = j + 1;
+  mvprintw(game->y + j, game->x + game->width, "|");
+  mvprintw(game->y + j, game->x, "|");
+  j = j + 1;
   print_int(game, j, game->lvl, "| Level ");
   j = j + 1;
   print_int(game, j, game->line, "| Line ");
-  j = j + 2;
+  j = j + 1;
+  mvprintw(game->y + j, game->x + game->width, "|");
+  mvprintw(game->y + j, game->x, "|");
+  j = j + 1;
   print_time(game, j);
   j = j + 1;
   print_line(game->y + j, game->x, game->width);
+  j = j + 1;
+  (void) win;
+  /* box(win->win, game->y, game->x); */
   return (0);
 }
-
