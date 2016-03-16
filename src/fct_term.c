@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar 11 13:47:41 2016 edouard puillandre
-** Last update Wed Mar 16 12:30:01 2016 edouard puillandre
+** Last update Wed Mar 16 18:06:43 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -50,6 +50,16 @@ int	start_game(t_tetris *tetris, t_win *win)
   return (check_window(win, tetris));
 }
 
+int	canonical_mode(struct termios *termios_p, struct termios *save)
+{
+  if (iocstl(0, TCGETS, &save) == - 1)
+    return (- 1);
+  termios_p = save;
+  termios_p.c_lflag = ~ (ICANON | ECHO);
+  termios_p.c_cc[VMIN] = 0;
+  return (0);
+}
+
 int			the_game(t_tetris *tetris)
 {
   t_win			win;
@@ -59,20 +69,15 @@ int			the_game(t_tetris *tetris)
 
   if (start_game(tetris, &win) == - 1)
     return (- 1);
-  if (iocstl(0, TCGETS, &save) == - 1)
-    return (- 1);
-  termios_p = save;
-  termios_p.c_lflag = ~ (ICANON | ECHO);
-  termios_p.c_cc[VMIN] = 0;
   loop = true;
   while (loop)
     {
       if (check_window(&win, tetris) == - 1)
 	return (- 1);
-      termios_p.c_cc[VTIME] = (LVL_MAX - tetris->lvl + 1) * 20;
+      termios_p.c_cc[VTIME] = (LVL_MAX - tetris->lvl + 1) * 400000;
       if (ioctl(0, TCSETS, &termios_p) == - 1)
 	return (- 1);
-      got_cmd(tetris);
+      got_cmd(tetris, &loop);
     }
   if (ioctl(0, TCSETS, &save) == - 1)
     return (- 1);
