@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Tue Mar 15 23:50:27 2016 edouard puillandre
+** Last update Wed Mar 16 16:54:17 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -16,7 +16,7 @@ void	my_print_piece(t_piece *tmp)
 
   my_printf("Size %d*%d : Color %d :\n", tmp->width, tmp->height, tmp->col);
   x = - 1;
-  while(++x < tmp->height)
+  while (++x < tmp->height)
     my_printf("%s\n", tmp->shape[x]);
 }
 
@@ -32,7 +32,7 @@ void		my_print_tetrimino(t_tetris *tetris)
   tmp = tetris->piece;
   len = my_strlen("./tetriminos/");
   end = my_strlen(".tetrimino");
-  while(++i < tetris->nb_piece)
+  while (++i < tetris->nb_piece)
     {
       my_printf("Tetriminos : ");
       j = len - 1;

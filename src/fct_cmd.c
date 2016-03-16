@@ -1,11 +1,11 @@
 /*
 ** fct_cmd.c for PSU_2015_tetris in /home/puilla_e/Semestre2/psu/rendu/PSU_2015_tetris
-** 
+**
 ** Made by edouard puillandre
 ** Login   <puilla_e@epitech.net>
-** 
+**
 ** Started on  Sat Mar 12 11:29:56 2016 edouard puillandre
-** Last update Mon Mar 14 18:25:54 2016 edouard puillandre
+** Last update Wed Mar 16 16:53:51 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -18,7 +18,7 @@ char	*my_find_term(char **env)
 
   i = - 1;
   end = false;
-  while(end == false && env[++i] != NULL)
+  while (end == false && env[++i] != NULL)
     if (my_strncmp(env[i], ENV_TERM, 5) == 0)
       end = true;
   if (end == false)
