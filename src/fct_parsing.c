@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Wed Mar 16 00:00:56 2016 edouard puillandre
+** Last update Wed Mar 16 14:34:03 2016 Voyevoda
 */
 #include "tetris.h"
 
@@ -50,17 +50,13 @@ int		fill_struct(t_piece *alphabet, int fd)
     {
       if ((fill_piece(alphabet, buffer, k, &cols)) == - 1)
 	{
-	  my_printf("b cols %d; k %d; height %d; width %d; buff %s; %s\n", cols, k, alphabet->height, alphabet->width, buffer, alphabet->name);
 	  alphabet->valid = false;
 	  return (0);
 	}
-    }
+   }
   if ((buffer == NULL && ++k < alphabet->height) ||
       (buffer != NULL && k == alphabet->height) || (cols != 11))
-    {
-      my_printf("b cols %d; k %d; height %d; width %d; buff %s; %s\n", cols, k, alphabet->height, alphabet->width, buffer, alphabet->name);
-      alphabet->valid = false;
-    }
+    alphabet->valid = false;
   else
     alphabet->valid = true;
   return (0);
@@ -78,7 +74,7 @@ int	get_to_space(int i, char *str, t_piece *alphabet)
    buffer[11] = '\0';
    while (j != 9 && str[k] >= '0' && str[k] <= '9')
      buffer[j++] = str[k++];
-   buffer[++j] = '\0';
+   buffer[j] = '\0';
    if (l == 0)
      alphabet->width = my_getnbr(buffer);
    else if (l == 1)
@@ -96,11 +92,8 @@ int	get_to_space(int i, char *str, t_piece *alphabet)
 int	check_tetrimino(char *str, t_piece *alphabet, int fd)
 {
   int	i;
-  int	tabloid[3];
-  int	j;
 
   i = -1;
-  j = 0;
   while (str[++i] != '\0')
     {
       if (str[i] >= '0' && str[i] <= '9')
@@ -111,8 +104,10 @@ int	check_tetrimino(char *str, t_piece *alphabet, int fd)
 	      alphabet->valid = false;
 	      return (- 1);
 	    }
-	  else if ((tabloid[j++] = get_to_space(i, str, alphabet)) == - 2)
+	  if ((get_to_space(i, str, alphabet)) == - 2)
 	    return (- 1);
+	  while (str[i] != ' ' && str[i + 1] != '\0')
+	    i++;
 	}
     }
   fill_struct(alphabet, fd);
