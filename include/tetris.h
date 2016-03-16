@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Tue Mar 15 22:52:30 2016 edouard puillandre
+** Last update Wed Mar 16 10:44:09 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -44,13 +44,6 @@
 # define ID_MAP (8)
 # define ID_W (9)
 # define ID_D (10)
-# define ARG_ERR_MSG "Error: incorrect argument "
-# define CAP_ERR_MSG "Error: capability can't be found\n"
-# define MALLOC_ERR_MSG "Malloc error\n"
-# define READ_ERR_MSG "Read line error\n"
-# define OPEN_ERR_MSG "Open error\n"
-# define CLOSE_ERR_MSG "Close error\n"
-# define WRITE_ERR_MSG "Write error\n"
 # define READ_SIZE (4078)
 # define GAME_POS_X (2)
 # define GAME_POS_Y (10)
@@ -58,6 +51,17 @@
 # define GAME_HEIGHT (9)
 # define MAP_POS_X (29)
 # define MAP_POS_Y (2)
+# define LVL_MAX (20)
+# define ARG_ERR_MSG "Error: incorrect argument "
+# define CAP_ERR_MSG "Error: capability can't be found\n"
+# define MALLOC_ERR_MSG "Malloc error\n"
+# define READ_ERR_MSG "Read line error\n"
+# define OPEN_ERR_MSG "Open error\n"
+# define CLOSE_ERR_MSG "Close error\n"
+# define WRITE_ERR_MSG "Write error\n"
+# define MAP_ERR_MSG "Error: the map is too short for the piece "
+# define TERM_ERR_MSG "Error: the terminal is too short for this game\n"
+# define WIN_ERR_MSG "Initscr error\n"
 
 typedef struct	s_cmd
 {
