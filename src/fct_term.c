@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 13:47:41 2016 edouard puillandre
-** Last update Wed Mar 16 18:57:55 2016 edouard puillandre
+** Last update Wed Mar 16 19:08:05 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -71,6 +71,7 @@ int			the_game(t_tetris *tetris)
   if (start_game(tetris, &win) == - 1)
     return (- 1);
   loop = true;
+  canonical_mode(&termios_p, &save);
   while (loop)
     {
       if (check_window(&win, tetris) == - 1)
