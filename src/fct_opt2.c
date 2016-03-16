@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 16:51:51 2016 edouard puillandre
-** Last update Sat Mar 12 11:50:48 2016 edouard puillandre
+** Last update Wed Mar 16 14:21:21 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -25,6 +25,12 @@ int	set_lvl_eq(t_tetris *tetris, int *i, char **argv)
       return (- 1);
     }
   tetris->game->lvl = my_getnbr(argv[*i] + len);
+  if (tetris->game->lvl == 0)
+    {
+      my_putstr_error(ARG_ERR_MSG);
+      my_putnbr_error(*i, true);
+      return (- 1);
+    }
   return (0);
 }
 
@@ -41,6 +47,12 @@ int	set_lvl(t_tetris *tetris, int *i, char **argv, int argc)
       return (- 1); 
     }
   tetris->game->lvl = my_getnbr(argv[*i]);
+  if (tetris->game->lvl == 0)
+    {
+      my_putstr_error(ARG_ERR_MSG);
+      my_putnbr_error(*i, true);
+      return (- 1);
+    }
   return (0);
 }
 

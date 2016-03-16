@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 14:11:01 2016 edouard puillandre
-** Last update Sat Mar 12 11:49:22 2016 edouard puillandre
+** Last update Wed Mar 16 14:39:43 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -37,18 +37,18 @@ int	set_help(t_tetris *tetris, int *i, char **argv, int argc)
   my_printf(argv[0]);
   my_printf(" [options]\n");
   my_printf("Options:\n");
-  my_printf("  --help\t\tDisplay this help\n");
-  my_printf("  -l --level={num}\tStart Tetris at level num\n");
-  my_printf("  -kl --key-left={K}\tMove tetrimino on LEFT with key K\n");
-  my_printf("  -kr --key-right={K}\tMove tetrimino on RIGHT with key K\n");
-  my_printf("  -kt --key-turn={K}\tTurn tetrimino with key K\n");
-  my_printf("  -kd --key-drop={K}\tSet default DROP on key K\n");
-  my_printf("  -kq --key-quit={K}\tQuit program when press key K\n");
-  my_printf("  -kp --key-pause={K}\t");
+  my_printf("--help\t\t\tDisplay this help\n");
+  my_printf("-l --level={num}\tStart Tetris at level num\n");
+  my_printf("-kl --key-left={K}\tMove tetrimino on LEFT with key K\n");
+  my_printf("-kr --key-right={K}\tMove tetrimino on RIGHT with key K\n");
+  my_printf("-kt --key-turn={K}\tTurn tetrimino with key K\n");
+  my_printf("-kd --key-drop={K}\tSet default DROP on key K\n");
+  my_printf("-kq --key-quit={K}\tQuit program when press key K\n");
+  my_printf("-kp --key-pause={K}\t");
   my_printf("Pause and restart game when press key K\n");
-  my_printf("  --map-size={row,col}\tSet gamesize at row, col\n");
-  my_printf("  -w --without-next\tHide next tetrimino\n");
-  my_printf("  -d --debug\t\tDebug mode\n");
+  my_printf("--map-size={row,col}\tSet gamesize at row, col\n");
+  my_printf("-w --without-next\tHide next tetrimino\n");
+  my_printf("-d --debug\t\tDebug mode\n");
   return (1);
 }
 

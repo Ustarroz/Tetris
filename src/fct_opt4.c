@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 16:51:51 2016 edouard puillandre
-** Last update Tue Mar 15 19:14:50 2016 edouard puillandre
+** Last update Wed Mar 16 14:26:56 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -49,13 +49,18 @@ int	set_map(t_tetris *tetris, int *i, char **argv, int argc)
     }
   tetris->map->width = my_getnbr(argv[*i]);
   *i = *i + 1;
-  if (check_int(argv[*i]) != 0)
+  if (tetris->map->width == 0 || check_int(argv[*i]) != 0)
     {
       my_putstr_error(ARG_ERR_MSG);
       my_putnbr_error(*i - 2, true);
       return (- 1);
     }
-  tetris->map->height = my_getnbr(argv[*i]);
+  if ((tetris->map->height = my_getnbr(argv[*i])) == 0)
+   {
+      my_putstr_error(ARG_ERR_MSG);
+      my_putnbr_error(*i - 2, true);
+      return (- 1);
+    }
   return (0);
 }
 
