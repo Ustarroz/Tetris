@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Wed Mar 16 14:34:03 2016 Voyevoda
+** Last update Wed Mar 16 16:56:19 2016 Voyevoda
 */
 #include "tetris.h"
 
@@ -62,49 +62,54 @@ int		fill_struct(t_piece *alphabet, int fd)
   return (0);
 }
 
-int	get_to_space(int i, char *str, t_piece *alphabet)
- {
-   char		buffer[12];
-   int		j;
-   int		k;
-   static int	l = 0;
+int	get_to_space(int i, char *str, t_piece *alphabet, int l)
+{
+  char		buffer[12];
+  int		j;
+  int		k;
 
-   k = i;
-   j = 0;
-   buffer[11] = '\0';
-   while (j != 9 && str[k] >= '0' && str[k] <= '9')
-     buffer[j++] = str[k++];
-   buffer[j] = '\0';
-   if (l == 0)
-     alphabet->width = my_getnbr(buffer);
-   else if (l == 1)
-     alphabet->height = my_getnbr(buffer);
-   else if (l == 2)
-     alphabet->col = my_getnbr(buffer);
-   l++;
-   if (l == 3)
-     l = 0;
-   if ((malloc_piece(alphabet)) == - 1)
-     return (- 2);
-   return (0);
- }
+  k = i;
+  j = 0;
+  buffer[11] = '\0';
+  while (j != 9 && str[k] >= '0' && str[k] <= '9')
+    buffer[j++] = str[k++];
+  buffer[j] = '\0';
+  if (l == 0)
+    {
+      alphabet->width = my_getnbr(buffer);
+      my_printf("piece %s width %d\n ", alphabet->name, alphabet->width);
+    }
+  else if (l == 1)
+    alphabet->height = my_getnbr(buffer);
+  else if (l == 2)
+    alphabet->col = my_getnbr(buffer);
+  if (++l == 3)
+    {
+      l = 0;
+      if ((malloc_piece(alphabet)) == - 1)
+	return (- 2);
+    }
+  return (0);
+}
 
 int	check_tetrimino(char *str, t_piece *alphabet, int fd)
 {
   int	i;
+  int	l;
 
   i = -1;
+  l = -1;
   while (str[++i] != '\0')
     {
+      if ((str[i] != ' ') && (str[i] < '0' || str[i] > '9'))
+	{
+	  my_printf("name %s buffer %s\n", alphabet->name, str);
+	  alphabet->valid = false;
+	  return (0);
+	}
       if (str[i] >= '0' && str[i] <= '9')
 	{
-	  if ((str[i] != ' ') && (str[i] < '0' || str[i] > '9'))
-	    {
-	      my_printf("b");
-	      alphabet->valid = false;
-	      return (- 1);
-	    }
-	  if ((get_to_space(i, str, alphabet)) == - 2)
+	  if ((get_to_space(i, str, alphabet, ++l)) == - 2)
 	    return (- 1);
 	  while (str[i] != ' ' && str[i + 1] != '\0')
 	    i++;
@@ -129,7 +134,6 @@ int		load_info(char *av, t_piece **list)
   alphabet->name = av;
   if ((buffer = get_next_line(fd)) == NULL)
     {
-      my_printf("c %s", alphabet->name);
       alphabet->valid = false;
       add_elem(alphabet, list);
       return (0);

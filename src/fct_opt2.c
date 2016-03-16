@@ -1,11 +1,11 @@
 /*
 ** fct_opt2.c for PSU_2015_tetris in /home/puilla_e/Semestre2/psu/rendu/
-** 
+**
 ** Made by edouard puillandre
 ** Login   <puilla_e@epitech.net>
-** 
+**
 ** Started on  Thu Mar  3 16:51:51 2016 edouard puillandre
-** Last update Wed Mar 16 14:21:21 2016 edouard puillandre
+** Last update Wed Mar 16 16:54:56 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -44,7 +44,7 @@ int	set_lvl(t_tetris *tetris, int *i, char **argv, int argc)
     {
       my_putstr_error(ARG_ERR_MSG);
       my_putnbr_error(*i - 1, true);
-      return (- 1); 
+      return (- 1);
     }
   tetris->game->lvl = my_getnbr(argv[*i]);
   if (tetris->game->lvl == 0)
