@@ -5,17 +5,10 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Tue Mar 15 22:15:14 2016 Voyevoda
+** Last update Wed Mar 16 20:49:14 2016 Voyevoda
 */
 
 #include "tetris.h"
-
-int	swap_struct_elem(t_piece *elem, t_piece *tmp)
-{
-  elem->next = tmp->next;
-  tmp->next = elem;
-  return (0);
-}
 
 int		sort_list(t_piece **list, t_piece *elem)
 {
@@ -26,17 +19,21 @@ int		sort_list(t_piece **list, t_piece *elem)
     {
       while (tmp->next != *list)
 	tmp = tmp->next;
-      swap_struct_elem(elem, tmp);
+      elem->next = tmp->next;
+      tmp->next = elem;
+      elem = (*list);
       return (0);
     }
   while (tmp->next != *list && my_strcmp(tmp->next->name, elem->name) < 0)
     tmp = tmp->next;
-  if (my_strcmp(tmp->next->name, tmp->name) > 0)
+  if (my_strcmp(tmp->next->name, elem->name) > 0)
     {
-      swap_struct_elem(elem, tmp);
+      elem->next = tmp->next;
+      tmp->next = elem;
       return (0);
     }
-  return (-1);
+  else
+    return (-1);
 }
 
 int		add_elem(t_piece *elem, t_piece **list)
@@ -55,7 +52,8 @@ int		add_elem(t_piece *elem, t_piece **list)
 	{
 	  while (tmp->next != *list)
 	    tmp = tmp->next;
-	  swap_struct_elem(elem, tmp);
+	  elem->next = tmp->next;
+	  tmp->next = elem;
 	}
     }
   return (0);
