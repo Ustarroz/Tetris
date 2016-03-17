@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 14:11:01 2016 edouard puillandre
-** Last update Wed Mar 16 14:39:43 2016 edouard puillandre
+** Last update Thu Mar 17 12:23:32 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -23,7 +23,8 @@ int	set_kr(t_tetris *tetris, int *i, char **argv, int argc)
       return (- 1);
     }
   free(tetris->cmd[ID_KR].key);
-  if ((tetris->cmd[ID_KR].key = my_strdup(argv[*i])) == NULL)
+  if ((tetris->cmd[ID_KR].key = my_strdup(argv[*i])) == NULL ||
+      tetris->cmd[ID_KR].key[0] == '\0')
       return (- 1);
   return (0);
 }
@@ -46,7 +47,7 @@ int	set_help(t_tetris *tetris, int *i, char **argv, int argc)
   my_printf("-kq --key-quit={K}\tQuit program when press key K\n");
   my_printf("-kp --key-pause={K}\t");
   my_printf("Pause and restart game when press key K\n");
-  my_printf("--map-size={row,col}\tSet gamesize at row, col\n");
+  my_printf("--map-size={row,col}\tSet game size at row, col\n");
   my_printf("-w --without-next\tHide next tetrimino\n");
   my_printf("-d --debug\t\tDebug mode\n");
   return (1);

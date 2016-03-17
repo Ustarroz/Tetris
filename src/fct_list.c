@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Thu Mar 17 11:27:27 2016 Voyevoda
+** Last update Thu Mar 17 12:14:14 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -21,7 +21,7 @@ int		sort_list(t_piece **list, t_piece *elem)
 	tmp = tmp->next;
       elem->next = tmp->next;
       tmp->next = elem;
-      elem = (*list);
+      *list = elem;
       return (0);
     }
   while (tmp->next != *list && my_strcmp(tmp->next->name, elem->name) < 0)
