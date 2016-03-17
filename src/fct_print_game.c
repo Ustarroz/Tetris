@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Wed Mar 16 15:27:15 2016 edouard puillandre
-** Last update Wed Mar 16 19:03:39 2016 edouard puillandre
+** Last update Thu Mar 17 11:09:58 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -48,7 +48,7 @@ int		print_time(t_game *game, int j)
   return (0);
 }
 
-int	print_game(t_game *game, t_win *win)
+int	print_game(t_game *game)
 {
   int	j;
 
@@ -73,7 +73,5 @@ int	print_game(t_game *game, t_win *win)
   j = j + 1;
   print_line(game->y + j, game->x, game->width);
   j = j + 1;
-  (void) win;
-  /* box(win->win, game->y, game->x); */
   return (0);
 }

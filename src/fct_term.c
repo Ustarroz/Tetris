@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 13:47:41 2016 edouard puillandre
-** Last update Wed Mar 16 19:31:20 2016 edouard puillandre
+** Last update Thu Mar 17 11:12:14 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -79,7 +79,7 @@ int			the_game(t_tetris *tetris)
       termios_p.c_cc[VTIME] = (LVL_MAX - tetris->game->lvl + 1) * 400000;
       if (ioctl(0, TCSETS, &termios_p) == - 1)
 	return (- 1);
-      got_cmd(tetris, &loop, &win);
+      got_cmd(tetris, &loop);
       refresh();
     }
   if (ioctl(0, TCSETS, &save) == - 1)

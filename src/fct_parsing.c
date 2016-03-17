@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Wed Mar 16 19:34:53 2016 edouard puillandre
+** Last update Thu Mar 17 11:14:07 2016 edouard puillandre
 */
 #include "tetris.h"
 
@@ -136,6 +136,7 @@ int		load_info(char *av, t_piece **list)
   if ((buffer = get_next_line(fd)) == NULL)
     {
       alphabet->valid = false;
+      alphabet->shape = NULL;
       add_elem(alphabet, list);
       return (0);
     }
