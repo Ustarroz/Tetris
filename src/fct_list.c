@@ -5,38 +5,36 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Tue Mar 15 22:15:14 2016 Voyevoda
+** Last update Thu Mar 17 11:22:59 2016 Voyevoda
 */
 
 #include "tetris.h"
-
-int	swap_struct_elem(t_piece *elem, t_piece *tmp)
-{
-  elem->next = tmp->next;
-  tmp->next = elem;
-  return (0);
-}
 
 int		sort_list(t_piece **list, t_piece *elem)
 {
   t_piece	*tmp;
 
   tmp = *list;
+  my_printf("(*list)->name");
   if (my_strcmp((*list)->name, elem->name) > 0)
     {
       while (tmp->next != *list)
 	tmp = tmp->next;
-      swap_struct_elem(elem, tmp);
+      elem->next = tmp->next;
+      tmp->next = elem;
+      elem = (*list);
       return (0);
     }
   while (tmp->next != *list && my_strcmp(tmp->next->name, elem->name) < 0)
     tmp = tmp->next;
-  if (my_strcmp(tmp->next->name, tmp->name) > 0)
+  if (my_strcmp(tmp->next->name, elem->name) > 0)
     {
-      swap_struct_elem(elem, tmp);
+      elem->next = tmp->next;
+      tmp->next = elem;
       return (0);
     }
-  return (-1);
+  else
+    return (-1);
 }
 
 int		add_elem(t_piece *elem, t_piece **list)
@@ -55,7 +53,8 @@ int		add_elem(t_piece *elem, t_piece **list)
 	{
 	  while (tmp->next != *list)
 	    tmp = tmp->next;
-	  swap_struct_elem(elem, tmp);
+	  elem->next = tmp->next;
+	  tmp->next = elem;
 	}
     }
   return (0);
@@ -77,19 +76,32 @@ void	free_list(t_piece *list)
   free(end);
 }
 
-void		rm_elem(t_piece *list)
+int		rm_elem(t_piece *list)
 {
   t_piece	*tmp;
   t_piece	*tmp2;
+  int		i;
+  int		j;
 
+  j = -1;
+  i = 0;
+  tmp = list;
   while (tmp->next != list)
     {
       if (tmp->next->valid == false)
 	{
 	  tmp2 = tmp->next;
 	  tmp->next = tmp->next->next;
+	  if (tmp2->shape != NULL)
+	    {
+	      while (++j != list->height)
+		free(list->shape[j]);
+	      free(list->shape);
+	    }
 	  free(tmp2);
+	  i++;
 	}
       tmp = tmp->next;
     }
+  return (i);
 }

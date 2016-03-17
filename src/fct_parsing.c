@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Thu Mar 17 11:14:07 2016 edouard puillandre
+** Last update Thu Mar 17 11:23:57 2016 edouard puillandre
 */
 #include "tetris.h"
 
@@ -53,7 +53,7 @@ int		fill_struct(t_piece *alphabet, int fd)
 	  alphabet->valid = false;
 	  return (0);
 	}
-   }
+    }
   if ((buffer == NULL && ++k < alphabet->height) ||
       (buffer != NULL && k == alphabet->height) || (cols != 11))
     alphabet->valid = false;
@@ -75,10 +75,7 @@ int	get_to_space(int i, char *str, t_piece *alphabet, int l)
     buffer[j++] = str[k++];
   buffer[j] = '\0';
   if (l == 0)
-    {
-      alphabet->width = my_getnbr(buffer);
-      my_printf("piece %s width %d\n ", alphabet->name, alphabet->width);
-    }
+    alphabet->width = my_getnbr(buffer);
   else if (l == 1)
     alphabet->height = my_getnbr(buffer);
   else if (l == 2)
@@ -103,7 +100,6 @@ int	check_tetrimino(char *str, t_piece *alphabet, int fd)
     {
       if ((str[i] != ' ') && (str[i] < '0' || str[i] > '9'))
 	{
-	  my_printf("name %s buffer %s\n", alphabet->name, str);
 	  alphabet->valid = false;
 	  alphabet->shape = NULL;
 	  return (0);
@@ -126,7 +122,8 @@ int		load_info(char *av, t_piece **list)
   char		*buffer;
   t_piece	*alphabet;
 
-  fd = open(av, O_RDONLY);
+  if ((fd = open(av, O_RDONLY)) == -1)
+    return (-1);
   if ((alphabet = malloc(sizeof(t_piece))) == NULL)
     {
       my_putstr_error(MALLOC_ERR_MSG);
