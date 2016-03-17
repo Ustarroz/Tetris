@@ -5,14 +5,34 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Wed Mar 16 15:18:59 2016 edouard puillandre
-** Last update Thu Mar 17 11:21:47 2016 edouard puillandre
+** Last update Thu Mar 17 14:27:19 2016 edouard puillandre
 */
 
 #include "tetris.h"
 
-int	print_next(t_next *next)
+int	print_piece_next(t_next *next)
 {
   (void) next;
+  return (0);
+}
+
+int	print_next(t_next *next)
+{
+  int	j;
+
+  j = 0;
+  mvprintw(next->y + j, next->x + 1, "Next");
+  j = j + 1;
+  print_line(next->y + j, next->x, next->width);
+  j = j + 1;
+  mvprintw(next->y + j, next->x + next->width, "|");
+  mvprintw(next->y + j, next->x, "|");
+  j = j + 1;
+  j = print_piece_next(next);
+  print_line(next->y + j, next->x, next->width);
+  j = j + 1;
+  mvprintw(next->y + j, next->x + next->width, "|");
+  mvprintw(next->y + j, next->x, "|");
   return (0);
 }
 

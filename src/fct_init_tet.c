@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Tue Mar 15 21:53:46 2016 edouard puillandre
+** Last update Thu Mar 17 14:04:20 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -33,8 +33,8 @@ void		my_put_pos(t_tetris *tetris)
 	tetris->next->width = tmp->width;
       tmp = tmp->next;
     }
-  tetris->next->width = tetris->next->width + 5;
-  tetris->next->height = tetris->next->height + 2;
+  tetris->next->width = tetris->next->width + 4;
+  tetris->next->height = tetris->next->height + 5;
   tetris->game->t = time(NULL);
 }
 

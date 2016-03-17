@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 16:54:44 2016 edouard puillandre
-** Last update Thu Mar 17 12:17:20 2016 edouard puillandre
+** Last update Thu Mar 17 14:29:09 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -108,7 +108,7 @@ int	set_kq(t_tetris *tetris, int *i, char **argv, int argc)
     }
   free(tetris->cmd[ID_KQ].key);
   tetris->cmd[ID_KQ].key = my_strdup(argv[*i]);
-  if (tetris->cmd[ID_KQ].key == NULL || tetris->cmd[ID_KQ].key[0] == '\0')
+  if (tetris->cmd[ID_KQ].key == NULL)
     return (- 1);
   if (tetris->cmd[ID_KQ].key[0] == '\0')
     {
