@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Wed Mar 16 17:51:33 2016 Voyevoda
+** Last update Wed Mar 16 20:51:42 2016 Voyevoda
 */
 #include "tetris.h"
 
@@ -101,6 +101,7 @@ int	check_tetrimino(char *str, t_piece *alphabet, int fd)
       if ((str[i] != ' ') && (str[i] < '0' || str[i] > '9'))
 	{
 	  alphabet->valid = false;
+	  alphabet->shape = NULL;
 	  return (0);
 	}
       if (str[i] >= '0' && str[i] <= '9')

@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Sat Mar 12 11:29:56 2016 edouard puillandre
-** Last update Wed Mar 16 16:53:51 2016 Voyevoda
+** Last update Wed Mar 16 18:08:57 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -63,7 +63,7 @@ int	my_def_cmd(t_tetris *tetris, char **env)
     return (- 1);
   if ((tetris->cmd[ID_KP].key = my_strdup(" ")) == NULL)
     return (- 1);
-  /*del_curterm(cur_term);*/
+  del_curterm(cur_term);
   free(str);
   return (0);
 }
