@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Thu Mar 17 15:20:36 2016 Voyevoda
+** Last update Thu Mar 17 16:15:48 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -63,17 +63,15 @@ void	free_list(t_piece *list)
 {
   t_piece	*tmp;
   t_piece	*tmp2;
-  t_piece	*end;
 
-  end = list;
-  list = list->next;
-  while (list != end)
+  tmp = list;
+  while (tmp != list)
     {
-      tmp = list;
-      list = list->next;
-      free(tmp);
+      tmp2 = tmp;
+      tmp = tmp->next;
+      free(tmp2);
     }
-  free(end);
+  free(list);
 }
 
 int	rm_first_elem(t_piece **list, int *i)
@@ -83,7 +81,7 @@ int	rm_first_elem(t_piece **list, int *i)
   int		k;
 
   k = -1;
-  tmp = list;
+  tmp = *list;
   while (tmp->next != *list)
     tmp = tmp->next;
   tmp2 = tmp->next;
@@ -91,12 +89,12 @@ int	rm_first_elem(t_piece **list, int *i)
   if (tmp2->shape != NULL)
     {
       while (++k < tmp->height)
-	free(tmp->shape[j]);
+	free(tmp->shape[k]);
       free(tmp->shape);
     }
   free(tmp2);
   *list = tmp->next;
-  return (++i);
+  return (++(*i));
 }
 
 int		rm_elem(t_piece **list)
@@ -112,15 +110,15 @@ int		rm_elem(t_piece **list)
     {
       j = -1;
       if (tmp->next->valid == false)
-	rm_first_elem(*list, &i);
+	rm_first_elem(list, &i);
       tmp = tmp->next;
       tmp2 = tmp->next;
       tmp->next = tmp->next->next;
       if (tmp2->shape != NULL)
 	{
-	  while (++j != list->height)
-	    free(list->shape[j]);
-	  free(list->shape);
+	  while (++j != (*list)->height)
+	    free((*list)->shape[j]);
+	  free((*list)->shape);
 	}
       free(tmp2);
       i++;
