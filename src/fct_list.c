@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Wed Mar 16 20:49:14 2016 Voyevoda
+** Last update Thu Mar 17 11:17:32 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -75,19 +75,29 @@ void	free_list(t_piece *list)
   free(end);
 }
 
-void		rm_elem(t_piece *list)
+int		rm_elem(t_piece *list)
 {
   t_piece	*tmp;
   t_piece	*tmp2;
+  int		i;
+  int		j;
 
+  j = -1;
+  i = 0;
+  tmp = list;
   while (tmp->next != list)
     {
       if (tmp->next->valid == false)
 	{
 	  tmp2 = tmp->next;
 	  tmp->next = tmp->next->next;
+	  if (tmp2->shape != NULL)
+	    while (++j != list->height)
+	      free(shape[j]);
 	  free(tmp2);
+	  i++;
 	}
       tmp = tmp->next;
     }
+  return (i);
 }
