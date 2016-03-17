@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Sat Mar  5 14:16:24 2016 edouard puillandre
-** Last update Tue Mar 15 21:44:53 2016 edouard puillandre
+** Last update Thu Mar 17 16:05:05 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -14,12 +14,12 @@ void	my_free_tetris(t_tetris *tetris)
 {
   int	i;
 
-  if (tetris->map->form != NULL)
+  if (tetris->map->col != NULL)
     {
       i = - 1;
-      while (tetris->map->form[++i] != NULL)
-	free(tetris->map->form[i]);
-      free(tetris->map->form);
+      while (tetris->map->col[++i] != NULL)
+	free(tetris->map->col[i]);
+      free(tetris->map->col);
     }
   i = - 1;
   while (++i < KEY_LEN)

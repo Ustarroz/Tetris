@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:46:48 2016 edouard puillandre
-** Last update Thu Mar 17 11:22:33 2016 edouard puillandre
+** Last update Thu Mar 17 16:47:58 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -42,7 +42,7 @@ int		main(int argc, char **argv, char **env)
   else if (check == - 1)
     return (- 1);
   my_put_pos(tetris);
-  /*  the_game(tetris);*/
+  the_game(tetris);
   my_free_tetris(tetris);
   return (0);
 }

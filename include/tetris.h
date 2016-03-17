@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Thu Mar 17 11:19:33 2016 edouard puillandre
+** Last update Thu Mar 17 16:31:48 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -52,6 +52,7 @@
 # define MAP_POS_X (29)
 # define MAP_POS_Y (2)
 # define LVL_MAX (20)
+# define NB_COL (7)
 # define ARG_ERR_MSG "Error: incorrect argument "
 # define CAP_ERR_MSG "Error: capability can't be found\n"
 # define MALLOC_ERR_MSG "Malloc error\n"
@@ -91,7 +92,7 @@ typedef struct	s_map
   int		y;
   int		width;
   int		height;
-  char		**form;
+  int		**col;
   t_piece	*piece;
 }		t_map;
 

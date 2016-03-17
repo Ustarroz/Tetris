@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 13:47:41 2016 edouard puillandre
-** Last update Thu Mar 17 11:12:14 2016 edouard puillandre
+** Last update Thu Mar 17 16:51:21 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -22,6 +22,18 @@ int	check_window(t_win *win, t_tetris *tetris)
       return (- 1);
     }
   return (0);
+}
+
+void	my_init_color()
+{
+  init_pair(0, COLOR_RED, COLOR_BLACK);
+  init_pair(1, COLOR_GREEN, COLOR_BLACK);
+  init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+  init_pair(3, COLOR_BLUE, COLOR_BLACK);
+  init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
+  init_pair(5, COLOR_CYAN, COLOR_BLACK);
+  init_pair(6, COLOR_WHITE, COLOR_BLACK);
+  init_pair(7, COLOR_WHITE, COLOR_BLACK);
 }
 
 int	start_game(t_tetris *tetris, t_win *win)
@@ -48,6 +60,8 @@ int	start_game(t_tetris *tetris, t_win *win)
       return (- 1);
     }
   clear();
+  start_color();
+  my_init_color();
   return (check_window(win, tetris));
 }
 

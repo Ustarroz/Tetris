@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Thu Mar 17 14:04:20 2016 edouard puillandre
+** Last update Thu Mar 17 16:55:20 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -20,7 +20,7 @@ void		my_put_pos(t_tetris *tetris)
   tetris->game->y = GAME_POS_Y;
   tetris->map->pos_x = MAP_POS_X;
   tetris->map->pos_y = MAP_POS_Y;
-  tetris->next->x = MAP_POS_X + width + tetris->map->width;
+  tetris->next->x = MAP_POS_X + width + tetris->map->width + 2;
   tetris->next->y = MAP_POS_Y;
   tmp = tetris->piece;
   tetris->next->width = tmp->width;
@@ -33,7 +33,7 @@ void		my_put_pos(t_tetris *tetris)
 	tetris->next->width = tmp->width;
       tmp = tmp->next;
     }
-  tetris->next->width = tetris->next->width + 4;
+  tetris->next->width = tetris->next->width + 3;
   tetris->next->height = tetris->next->height + 5;
   tetris->game->t = time(NULL);
 }
@@ -43,7 +43,7 @@ int	my_map_tab(t_map *map)
   int	i;
   int	j;
 
-  if ((map->form = malloc(sizeof(char *) * (map->height + 1))) == NULL)
+  if ((map->col = malloc(sizeof(int *) * (map->height + 1))) == NULL)
     {
       my_putstr_error(MALLOC_ERR_MSG);
       return (- 1);
@@ -52,16 +52,15 @@ int	my_map_tab(t_map *map)
   while (++i < map->height)
     {
       j = - 1;
-      if ((map->form[i] = malloc(map->width + 1)) == NULL)
+      if ((map->col[i] = malloc(sizeof(int) * map->width)) == NULL)
 	{
 	  my_putstr_error(MALLOC_ERR_MSG);
 	  return (- 1);
 	}
       while (++j < map->width)
-	map->form[i][j] = ' ';
-      map->form[i][j] = '\0';
+	map->col[i][j] = - 1;
     }
-  map->form[i] = NULL;
+  map->col[i] = NULL;
   return (0);
 }
 
@@ -74,9 +73,9 @@ t_map	*my_def_map()
       my_putstr_error(MALLOC_ERR_MSG);
       return (NULL);
     }
-  map->width = HEIGHT_DEF;
-  map->height = WIDTH_DEF;
-  map->form = NULL;
+  map->width = WIDTH_DEF;
+  map->height = HEIGHT_DEF;
+  map->col = NULL;
   return (map);
 }
 

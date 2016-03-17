@@ -5,15 +5,50 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Wed Mar 16 15:18:59 2016 edouard puillandre
-** Last update Thu Mar 17 14:27:19 2016 edouard puillandre
+** Last update Thu Mar 17 16:54:15 2016 edouard puillandre
 */
 
 #include "tetris.h"
 
-int	print_piece_next(t_next *next)
+int	print_map(t_map *map)
 {
-  (void) next;
+  int	x;
+  int	y;
+
+  y = - 1;
+  print_line(map->pos_y, map->pos_x, map->width + 2);
+  while (++y < map->height)
+    {
+      x = - 1;
+      mvprintw(map->pos_y + y + 1, map->pos_x, "|");
+      mvprintw(map->pos_y + y + 1, map->pos_x + map->width + 2, "|");
+      while (++x < map->width)
+	if (map->col[y][x] != - 1)
+	  {
+	    attron(COLOR_PAIR(map->col[y][x] % NB_COL));
+	    mvprintw(map->pos_y + y + 1, map->pos_x + x + 1, "*");
+	    attron(COLOR_PAIR(NB_COL));
+	  }
+    }
+  print_line(map->pos_y + y, map->pos_x, map->width + 2);
   return (0);
+}
+
+int	print_piece_next(t_next *next, int j)
+{
+  int	x;
+
+  x = - 1;
+  while (++x < next->piece->height)
+    {
+      mvprintw(next->y + j, next->x, "|");
+      attron(COLOR_PAIR(next->piece->col % NB_COL));
+      mvprintw(next->y + j, next->x + 2, "%s", next->piece->shape[x]);
+      attron(COLOR_PAIR(NB_COL));
+      mvprintw(next->y + j, next->x + next->width, "|");
+      j = j + 1;
+    }
+  return (j);
 }
 
 int	print_next(t_next *next)
@@ -25,14 +60,8 @@ int	print_next(t_next *next)
   j = j + 1;
   print_line(next->y + j, next->x, next->width);
   j = j + 1;
-  mvprintw(next->y + j, next->x + next->width, "|");
-  mvprintw(next->y + j, next->x, "|");
-  j = j + 1;
-  j = print_piece_next(next);
+  j = print_piece_next(next, j);
   print_line(next->y + j, next->x, next->width);
-  j = j + 1;
-  mvprintw(next->y + j, next->x + next->width, "|");
-  mvprintw(next->y + j, next->x, "|");
   return (0);
 }
 
@@ -43,5 +72,6 @@ int	print_all(t_tetris *tetris)
   print_game(tetris->game);
   if (tetris->next->valid)
     print_next(tetris->next);
+  print_map(tetris->map);
   return (0);
 }
