@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Thu Mar 17 11:17:32 2016 Voyevoda
+** Last update Thu Mar 17 11:22:59 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -15,6 +15,7 @@ int		sort_list(t_piece **list, t_piece *elem)
   t_piece	*tmp;
 
   tmp = *list;
+  my_printf("(*list)->name");
   if (my_strcmp((*list)->name, elem->name) > 0)
     {
       while (tmp->next != *list)
@@ -92,8 +93,11 @@ int		rm_elem(t_piece *list)
 	  tmp2 = tmp->next;
 	  tmp->next = tmp->next->next;
 	  if (tmp2->shape != NULL)
-	    while (++j != list->height)
-	      free(shape[j]);
+	    {
+	      while (++j != list->height)
+		free(list->shape[j]);
+	      free(list->shape);
+	    }
 	  free(tmp2);
 	  i++;
 	}
