@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Fri Mar 18 11:49:27 2016 Voyevoda
+** Last update Fri Mar 18 12:54:02 2016 Voyevoda
 */
 
 #ifndef		TETRIS_H_
@@ -208,4 +208,5 @@ int		fct_drop(t_tetris *tetris, int *n);
 int		fct_turn(t_tetris *tetris, int *n);
 int		fct_left(t_tetris *tetris, int *n);
 int		fct_right(t_tetris *tetris, int *n);
+void		free_tab(t_piece *tmp2);
 #endif /* !TETRIS_H_ */
