@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Fri Mar 18 11:57:58 2016 Voyevoda
+** Last update Fri Mar 18 12:01:42 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -81,7 +81,7 @@ int			my_print_debug(t_tetris *tetris)
   struct termios	termios_p;
   struct termios	save;
 
-  /* rm_elem(&tetris->piece); */
+  rm_elem(&tetris->piece);
   my_print_data(tetris);
   if (ioctl(0, TCGETS, &save) == - 1)
     return (- 1);

@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Fri Mar 18 14:09:49 2016 edouard puillandre
+** Last update Fri Mar 18 14:16:12 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -212,5 +212,6 @@ int		fct_drop(t_tetris *tetris);
 int		check_piece_place(t_map *map);
 void		put_piece_place(t_map *map, int nb);
 t_piece		*random_piece(t_tetris *tetris);
+void		free_tab(t_piece *tmp2);
 
 #endif /* !TETRIS_H_ */

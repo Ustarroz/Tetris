@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Fri Mar 18 11:43:33 2016 Voyevoda
+** Last update Fri Mar 18 12:52:29 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -65,8 +65,8 @@ void		free_list(t_piece *list)
   t_piece	*tmp2;
   int		k;
 
-  tmp = list;
-  while (tmp->next != list)
+  tmp = list->next;
+  while (tmp != list)
     {
       k = - 1;
       tmp2 = tmp;
@@ -74,7 +74,6 @@ void		free_list(t_piece *list)
       while (++k < tmp2->height)
 	free(tmp2->shape[k]);
       free(tmp2->shape);
-      tmp2->next = NULL;
       free(tmp2);
     }
   k = -1;
@@ -93,18 +92,22 @@ int	rm_first_elem(t_piece **list, int *i)
   k = -1;
   tmp = *list;
   tmp2 = *list;
-  while (tmp->next != *list)
-    tmp = tmp->next;
-  tmp->next = tmp2->next;
+  if ((*list)->next == *list)
+    tmp = NULL;
+  else
+    {
+      while (tmp->next != *list)
+	tmp = tmp->next;
+      tmp->next = tmp2->next;
+    }
   if (tmp2->shape != NULL)
     {
       while (++k < tmp2->height)
 	free(tmp2->shape[k]);
       free(tmp2->shape);
     }
-  tmp2->next = NULL;
+  *list = (tmp == NULL) ? NULL : tmp->next;
   free(tmp2);
-  *list = tmp;
   return ((++*i));
 }
 
@@ -113,33 +116,24 @@ int		rm_elem(t_piece **list)
   t_piece	*tmp;
   t_piece	*tmp2;
   int		i;
-  int		j;
 
   i = 0;
   tmp = (*list);
+  while ((*list)->valid == false)
+    rm_first_elem(list, &i);
   while (tmp->next != *list)
     {
-      j = - 1;
-      if ((*list)->valid == false)
-	rm_first_elem(list, &i);
-      tmp2 = tmp;
-      tmp = tmp->next;
-      if (tmp->valid == false)
+      if (tmp->next->valid == false)
 	{
-	  tmp2->next = tmp2->next->next;
-	  tmp2 = tmp;
-	  tmp = tmp->next;
+	  tmp2 = tmp->next;
+	  tmp = tmp->next->next;
 	  if (tmp2->shape != NULL)
-	    {
-	      while(++j < tmp2->height)
-		free(tmp2->shape[j]);
-	      free(tmp2->shape);
-	    }
-
-	  tmp2->next = NULL;
+	    free_tab(tmp2);
 	  free(tmp2);
+	  i++;
 	}
+      else
+	tmp = tmp->next;
     }
-  i++;
   return (i);
 }
