@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Fri Mar 18 11:46:55 2016 Voyevoda
+** Last update Fri Mar 18 11:56:14 2016 Voyevoda
 */
 #include "tetris.h"
 
@@ -54,13 +54,13 @@ int		fill_struct(t_piece *alphabet, int fd)
 	  free(buffer);
 	  return (0);
 	}
+      free(buffer);
     }
   if ((buffer == NULL && ++k < alphabet->height) ||
       (buffer != NULL && k == alphabet->height) || (cols != 11))
     alphabet->valid = false;
   else
     alphabet->valid = true;
-  free(buffer);
   return (0);
 }
 
@@ -139,12 +139,10 @@ int		load_info(char *av, t_piece **list)
       alphabet->valid = false;
       alphabet->shape = NULL;
       add_elem(alphabet, list);
-      free(buffer);
       return (0);
     }
   if (check_tetrimino(buffer, alphabet, fd) == - 1)
     return (- 1);
   add_elem(alphabet, list);
-  free(buffer);
   return (0);
 }

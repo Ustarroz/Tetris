@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Fri Mar 18 11:47:21 2016 Voyevoda
+** Last update Fri Mar 18 11:49:27 2016 Voyevoda
 */
 
 #ifndef		TETRIS_H_
@@ -200,16 +200,12 @@ int		print_game(t_game *game);
 int		print_line(int x, int y, int width);
 int		got_cmd(t_tetris *tetris, int *n);
 void		my_put_pos(t_tetris *tetris);
-<<<<<<< HEAD
 int		rm_elem(t_piece **list);
 int		rm_first_elem(t_piece **list, int *i);
-=======
 int		fct_quit(t_tetris *tetris, int *n);
 int		fct_pause(t_tetris *tetris, int *n);
 int		fct_drop(t_tetris *tetris, int *n);
 int		fct_turn(t_tetris *tetris, int *n);
 int		fct_left(t_tetris *tetris, int *n);
 int		fct_right(t_tetris *tetris, int *n);
-
->>>>>>> b09561044f194877165d4f9224a0f5091f2ce165
 #endif /* !TETRIS_H_ */
