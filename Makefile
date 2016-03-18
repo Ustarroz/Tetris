@@ -5,7 +5,7 @@
 ## Login   <puilla_e@epitech.net>
 ## 
 ## Started on  Thu Feb 25 18:45:44 2016 edouard puillandre
-## Last update Thu Mar 17 11:23:38 2016 edouard puillandre
+## Last update Fri Mar 18 00:20:41 2016 edouard puillandre
 ##
 
 DEBUG	=	no
@@ -47,7 +47,9 @@ SRC	=	src/main.c		\
 		src/fct_in_game.c	\
 		src/fct_print.c		\
 		src/fct_print_game.c	\
-		src/fct_term.c
+		src/fct_term.c		\
+		src/fct_term_cmd.c	\
+		src/fct_term_cmd2.c
 
 RM	=	rm -f
 

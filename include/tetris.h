@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Thu Mar 17 20:12:25 2016 Voyevoda
+** Last update Fri Mar 18 11:47:21 2016 Voyevoda
 */
 
 #ifndef		TETRIS_H_
@@ -51,7 +51,8 @@
 # define GAME_HEIGHT (9)
 # define MAP_POS_X (29)
 # define MAP_POS_Y (2)
-# define LVL_MAX (20)
+# define LVL_MAX (10)
+# define NB_COL (7)
 # define ARG_ERR_MSG "Error: incorrect argument "
 # define CAP_ERR_MSG "Error: capability can't be found\n"
 # define MALLOC_ERR_MSG "Malloc error\n"
@@ -59,16 +60,21 @@
 # define OPEN_ERR_MSG "Open error\n"
 # define CLOSE_ERR_MSG "Close error\n"
 # define WRITE_ERR_MSG "Write error\n"
+# define ENV_ERR_MSG "Error: no defined environment\n"
 # define MAP_ERR_MSG "Error: the map is too short for the piece "
 # define TERM_ERR_MSG "Error: the terminal is too short for this game\n"
+# define PATH_ERR_MSG "Error: no directory ./tetriminos/\n"
+# define TET_ERR_MSG "Error: can't find any .tetrimino\n"
 # define WIN_ERR_MSG "Initscr error\n"
 # define NAME_GAME "Tetros®"
 # define COPYRIGHT "Made in Taiwan"
 
+typedef struct s_tetris * nom;
+
 typedef struct	s_cmd
 {
   char		*key;
-  int		(*fct)();
+  int		(*fct)(nom, int *n);
 }		t_cmd;
 
 typedef struct		s_piece
@@ -91,7 +97,7 @@ typedef struct	s_map
   int		y;
   int		width;
   int		height;
-  char		**form;
+  int		**col;
   t_piece	*piece;
 }		t_map;
 
@@ -175,7 +181,7 @@ t_tetris	*my_def_tetris(char **env);
 int		my_def_cmd(t_tetris *tetris, char **env);
 int		my_check_arg(int argc, char **argv, t_tetris *tetris);
 void		my_putnbr_error(int nb, bool first);
-int		my_map_tab(t_map *map);
+int		my_map_tab(t_tetris *tetris);
 void		my_free_tetris(t_tetris *tetris);
 int		my_print_debug(t_tetris *tetris);
 int		my_got_high(t_tetris *tetris);
@@ -192,8 +198,18 @@ int		the_game(t_tetris *tetris);
 int		print_all(t_tetris *tetris);
 int		print_game(t_game *game);
 int		print_line(int x, int y, int width);
-int		got_cmd(t_tetris *tetris, bool *loop);
+int		got_cmd(t_tetris *tetris, int *n);
 void		my_put_pos(t_tetris *tetris);
+<<<<<<< HEAD
 int		rm_elem(t_piece **list);
 int		rm_first_elem(t_piece **list, int *i);
+=======
+int		fct_quit(t_tetris *tetris, int *n);
+int		fct_pause(t_tetris *tetris, int *n);
+int		fct_drop(t_tetris *tetris, int *n);
+int		fct_turn(t_tetris *tetris, int *n);
+int		fct_left(t_tetris *tetris, int *n);
+int		fct_right(t_tetris *tetris, int *n);
+
+>>>>>>> b09561044f194877165d4f9224a0f5091f2ce165
 #endif /* !TETRIS_H_ */

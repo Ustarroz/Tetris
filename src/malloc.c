@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Thu Mar  3 15:54:35 2016 Voyevoda
-** Last update Wed Mar 16 16:43:49 2016 Voyevoda
+** Last update Fri Mar 18 11:13:50 2016 edouard puillandre
 */
 
 #include "../include/tetris.h"
@@ -68,7 +68,7 @@ int		files(t_piece **list)
   files = 0;
   if ((dir = opendir("./tetriminos")) == NULL)
     {
-      printf("no tetriminos available here");
+      my_putstr_error(PATH_ERR_MSG);
       return (-1);
     }
   else
@@ -82,7 +82,9 @@ int		files(t_piece **list)
 	    return (- 1);
 	}
   closedir(dir);
-  return (files);
+  if (files == 0)
+    my_putstr_error(TET_ERR_MSG);
+  return ((files == 0) ? - 1 : files);
 }
 
 int	malloc_piece(t_piece *alphabet)

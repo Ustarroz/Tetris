@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Thu Mar 17 14:04:20 2016 edouard puillandre
+** Last update Fri Mar 18 00:25:08 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -20,7 +20,7 @@ void		my_put_pos(t_tetris *tetris)
   tetris->game->y = GAME_POS_Y;
   tetris->map->pos_x = MAP_POS_X;
   tetris->map->pos_y = MAP_POS_Y;
-  tetris->next->x = MAP_POS_X + width + tetris->map->width;
+  tetris->next->x = MAP_POS_X + width + tetris->map->width + 2;
   tetris->next->y = MAP_POS_Y;
   tmp = tetris->piece;
   tetris->next->width = tmp->width;
@@ -33,35 +33,36 @@ void		my_put_pos(t_tetris *tetris)
 	tetris->next->width = tmp->width;
       tmp = tmp->next;
     }
-  tetris->next->width = tetris->next->width + 4;
+  tetris->next->width = tetris->next->width + 3;
   tetris->next->height = tetris->next->height + 5;
   tetris->game->t = time(NULL);
 }
 
-int	my_map_tab(t_map *map)
+int	my_map_tab(t_tetris *tetris)
 {
   int	i;
   int	j;
 
-  if ((map->form = malloc(sizeof(char *) * (map->height + 1))) == NULL)
+  if ((tetris->map->col = malloc(sizeof(int *) * (tetris->map->height + 3)))
+      == NULL)
     {
       my_putstr_error(MALLOC_ERR_MSG);
       return (- 1);
     }
   i = - 1;
-  while (++i < map->height)
+  while (++i < tetris->map->height + 2)
     {
       j = - 1;
-      if ((map->form[i] = malloc(map->width + 1)) == NULL)
+      if ((tetris->map->col[i] = malloc(sizeof(int) * tetris->map->width))
+	  == NULL)
 	{
 	  my_putstr_error(MALLOC_ERR_MSG);
 	  return (- 1);
 	}
-      while (++j < map->width)
-	map->form[i][j] = ' ';
-      map->form[i][j] = '\0';
+      while (++j < tetris->map->width)
+	tetris->map->col[i][j] = - 1;
     }
-  map->form[i] = NULL;
+  tetris->map->col[i] = NULL;
   return (0);
 }
 
@@ -74,9 +75,9 @@ t_map	*my_def_map()
       my_putstr_error(MALLOC_ERR_MSG);
       return (NULL);
     }
-  map->width = HEIGHT_DEF;
-  map->height = WIDTH_DEF;
-  map->form = NULL;
+  map->width = WIDTH_DEF;
+  map->height = HEIGHT_DEF;
+  map->col = NULL;
   return (map);
 }
 
@@ -91,6 +92,7 @@ t_game		*my_def_game()
     }
   game->lvl = 1;
   game->score = 0;
+  game->pause = 0;
   game->high_score = 0;
   game->width = GAME_WIDTH;
   game->height = GAME_HEIGHT;

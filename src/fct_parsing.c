@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Fri Mar 18 11:45:17 2016 Voyevoda
+** Last update Fri Mar 18 11:46:55 2016 Voyevoda
 */
 #include "tetris.h"
 
