@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Thu Mar 17 16:15:48 2016 Voyevoda
+** Last update Fri Mar 18 11:43:33 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -59,18 +59,28 @@ int		add_elem(t_piece *elem, t_piece **list)
   return (0);
 }
 
-void	free_list(t_piece *list)
+void		free_list(t_piece *list)
 {
   t_piece	*tmp;
   t_piece	*tmp2;
+  int		k;
 
   tmp = list;
-  while (tmp != list)
+  while (tmp->next != list)
     {
+      k = - 1;
       tmp2 = tmp;
       tmp = tmp->next;
+      while (++k < tmp2->height)
+	free(tmp2->shape[k]);
+      free(tmp2->shape);
+      tmp2->next = NULL;
       free(tmp2);
     }
+  k = -1;
+  while (++k < tmp->height)
+    free(tmp->shape[k]);
+  free(tmp->shape);
   free(list);
 }
 
@@ -82,19 +92,20 @@ int	rm_first_elem(t_piece **list, int *i)
 
   k = -1;
   tmp = *list;
+  tmp2 = *list;
   while (tmp->next != *list)
     tmp = tmp->next;
-  tmp2 = tmp->next;
-  tmp->next = tmp->next->next;
+  tmp->next = tmp2->next;
   if (tmp2->shape != NULL)
     {
-      while (++k < tmp->height)
-	free(tmp->shape[k]);
-      free(tmp->shape);
+      while (++k < tmp2->height)
+	free(tmp2->shape[k]);
+      free(tmp2->shape);
     }
+  tmp2->next = NULL;
   free(tmp2);
-  *list = tmp->next;
-  return (++(*i));
+  *list = tmp;
+  return ((++*i));
 }
 
 int		rm_elem(t_piece **list)
@@ -105,23 +116,30 @@ int		rm_elem(t_piece **list)
   int		j;
 
   i = 0;
-  tmp = *list;
+  tmp = (*list);
   while (tmp->next != *list)
     {
-      j = -1;
-      if (tmp->next->valid == false)
+      j = - 1;
+      if ((*list)->valid == false)
 	rm_first_elem(list, &i);
+      tmp2 = tmp;
       tmp = tmp->next;
-      tmp2 = tmp->next;
-      tmp->next = tmp->next->next;
-      if (tmp2->shape != NULL)
+      if (tmp->valid == false)
 	{
-	  while (++j != (*list)->height)
-	    free((*list)->shape[j]);
-	  free((*list)->shape);
+	  tmp2->next = tmp2->next->next;
+	  tmp2 = tmp;
+	  tmp = tmp->next;
+	  if (tmp2->shape != NULL)
+	    {
+	      while(++j < tmp2->height)
+		free(tmp2->shape[j]);
+	      free(tmp2->shape);
+	    }
+
+	  tmp2->next = NULL;
+	  free(tmp2);
 	}
-      free(tmp2);
-      i++;
     }
+  i++;
   return (i);
 }

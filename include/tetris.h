@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Thu Mar 17 11:19:33 2016 edouard puillandre
+** Last update Thu Mar 17 20:12:25 2016 Voyevoda
 */
 
 #ifndef		TETRIS_H_
@@ -194,5 +194,6 @@ int		print_game(t_game *game);
 int		print_line(int x, int y, int width);
 int		got_cmd(t_tetris *tetris, bool *loop);
 void		my_put_pos(t_tetris *tetris);
-
+int		rm_elem(t_piece **list);
+int		rm_first_elem(t_piece **list, int *i);
 #endif /* !TETRIS_H_ */

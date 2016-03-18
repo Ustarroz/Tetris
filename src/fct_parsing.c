@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Thu Mar 17 11:23:57 2016 edouard puillandre
+** Last update Fri Mar 18 11:45:17 2016 Voyevoda
 */
 #include "tetris.h"
 
@@ -51,6 +51,7 @@ int		fill_struct(t_piece *alphabet, int fd)
       if ((fill_piece(alphabet, buffer, k, &cols)) == - 1)
 	{
 	  alphabet->valid = false;
+	  free(buffer);
 	  return (0);
 	}
     }
@@ -59,6 +60,7 @@ int		fill_struct(t_piece *alphabet, int fd)
     alphabet->valid = false;
   else
     alphabet->valid = true;
+  free(buffer);
   return (0);
 }
 
@@ -79,7 +81,7 @@ int	get_to_space(int i, char *str, t_piece *alphabet, int l)
   else if (l == 1)
     alphabet->height = my_getnbr(buffer);
   else if (l == 2)
-    alphabet->col = my_getnbr(buffer);
+    alphabet->col = my_getnbr(buffer) % NB_COL;
   if (++l == 3)
     {
       l = 0;
@@ -102,6 +104,7 @@ int	check_tetrimino(char *str, t_piece *alphabet, int fd)
 	{
 	  alphabet->valid = false;
 	  alphabet->shape = NULL;
+	  free(str);
 	  return (0);
 	}
       if (str[i] >= '0' && str[i] <= '9')
@@ -113,6 +116,7 @@ int	check_tetrimino(char *str, t_piece *alphabet, int fd)
 	}
     }
   fill_struct(alphabet, fd);
+  free(str);
   return (0);
 }
 
@@ -135,10 +139,12 @@ int		load_info(char *av, t_piece **list)
       alphabet->valid = false;
       alphabet->shape = NULL;
       add_elem(alphabet, list);
+      free(buffer);
       return (0);
     }
   if (check_tetrimino(buffer, alphabet, fd) == - 1)
     return (- 1);
   add_elem(alphabet, list);
+  free(buffer);
   return (0);
 }
