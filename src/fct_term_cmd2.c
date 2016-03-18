@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar 18 00:12:47 2016 edouard puillandre
-** Last update Fri Mar 18 14:06:08 2016 edouard puillandre
+** Last update Fri Mar 18 14:38:23 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -54,10 +54,10 @@ int	fct_drop(t_tetris *tetris, int *n)
     tetris->map->x = tetris->map->y + 1;
   tetris->map->x = tetris->map->y - 1;
   put_piece_place(tetris->map, tetris->map->piece->col + NB_COL);
-  tetris->map->piece = tetris->map->next;
+  tetris->map->piece = tetris->next->piece;
+  tetris->next->piece = random_piece(tetris);
   tetris->map->x = tetris->map->width + 1 / 2;
   tetris->map->y = 0;
-  tetris->next->piece = random_piece(tetris);
   *n = 0;
   return (0);
 }

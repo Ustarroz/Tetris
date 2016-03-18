@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Wed Mar 16 14:58:53 2016 edouard puillandre
-** Last update Fri Mar 18 14:07:57 2016 edouard puillandre
+** Last update Fri Mar 18 14:37:42 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -48,7 +48,6 @@ void	put_piece_place(t_map *map, int nb)
 	if (y >= 0)
 	  map->col[y][x] = nb;
     }
-  return (0);
 }
 
 void	print_and_n(t_tetris *tetris, int *n)

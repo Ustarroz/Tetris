@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Thu Mar  3 15:54:35 2016 Voyevoda
-** Last update Fri Mar 18 12:50:14 2016 Voyevoda
+** Last update Fri Mar 18 15:56:25 2016 edouard puillandre
 */
 
 #include "../include/tetris.h"
@@ -110,12 +110,17 @@ int	malloc_piece(t_piece *alphabet)
   return (0);
 }
 
-void	free_tab(t_piece *tmp2)
+void	free_piece(t_piece *tmp2)
 {
   int	j;
 
   j = -1;
-  while (++j < tmp2->height)
-    free(tmp2->shape[j]);
-  free(tmp2->shape);
+  free(tmp2->name);
+  if (tmp2->shape != NULL)
+    {
+      while (++j < tmp2->height)
+	free(tmp2->shape[j]);
+      free(tmp2->shape);
+    }
+  free(tmp2);
 }

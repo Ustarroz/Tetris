@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Fri Mar 18 11:56:14 2016 Voyevoda
+** Last update Fri Mar 18 15:43:07 2016 edouard puillandre
 */
 #include "tetris.h"
 
@@ -19,21 +19,21 @@ int	fill_piece(t_piece *alphabet, char *buffer, int line, int *cols)
   while (buffer[++i] != '\0')
     if (buffer[i] != ' ' && buffer[i] != '*')
       return (-1);
-    else if (i > alphabet->width && buffer[i] != ' ')
+    else if (i >= alphabet->width && buffer[i] != ' ')
       return (-1);
-  i = -1;
-  if (buffer[alphabet->width - 1] == '*' && *cols % 2 == 0)
+  if (my_strlen(buffer) >= alphabet->width &&
+      buffer[alphabet->width - 1] == '*' && (*cols) % 2 == 0)
     *cols = *cols + 1;
   *cols = (buffer[0] == '*' && *cols / 10 == 0) ? *cols + 10 : *cols;
-  while (++i != alphabet->width && buffer[i] != '\0')
+  i = -1;
+  while (++i < alphabet->width && buffer[i] != '\0')
     {
-      if (buffer[i] == '*' && i <= alphabet->width)
+      if (buffer[i] == '*')
 	k++;
-      if (i == alphabet->width - 1 && k == 0 &&
-	  (line == 0 || line == alphabet->height - 1))
-	return (-1);
       alphabet->shape[line][i] = buffer[i];
     }
+  if (k == 0 && (line == 0 || line == alphabet->height - 1))
+    return (-1);
   alphabet->shape[line][i] = '\0';
   return (0);
 }
@@ -56,11 +56,13 @@ int		fill_struct(t_piece *alphabet, int fd)
 	}
       free(buffer);
     }
-  if ((buffer == NULL && ++k < alphabet->height) ||
-      (buffer != NULL && k == alphabet->height) || (cols != 11))
+  if ((buffer == NULL && ++k < alphabet->height) || (cols != 11) ||
+      (buffer != NULL && k == alphabet->height))
     alphabet->valid = false;
   else
     alphabet->valid = true;
+  if (buffer != NULL)
+    free(buffer);
   return (0);
 }
 

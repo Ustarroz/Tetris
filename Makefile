@@ -5,10 +5,10 @@
 ## Login   <puilla_e@epitech.net>
 ## 
 ## Started on  Thu Feb 25 18:45:44 2016 edouard puillandre
-## Last update Fri Mar 18 00:20:41 2016 edouard puillandre
+## Last update Fri Mar 18 15:27:17 2016 edouard puillandre
 ##
 
-DEBUG	=	no
+DEBUG	=	yes
 
 CC	=	gcc
 

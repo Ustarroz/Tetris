@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:46:48 2016 edouard puillandre
-** Last update Fri Mar 18 14:54:09 2016 edouard puillandre
+** Last update Fri Mar 18 16:08:04 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -29,26 +29,40 @@ int	start_tetris(int argc, char **argv, t_tetris *tetris)
   return (0);
 }
 
-int		main(int argc, char **argv, char **env)
+int		main()
 {
-  t_tetris	*tetris;
-  int		check;
+  t_piece	*list;
+  int		n;
+  int		i;
+  int		j;
+  t_piece	*tmp;
 
-  if (env == NULL)
+  list = NULL;
+  n = files(&list);
+  i = - 1;
+  tmp = list;
+  while (++i < n)
     {
-      my_putstr_error(ENV_ERR_MSG);
-      return (- 1);
+      my_printf("Name %s", tmp->name);
+      if (tmp->valid)
+	my_printf(" true\n");
+      else
+	my_printf(" false\n");
+      tmp = tmp->next;
     }
-  if ((tetris = my_def_tetris(env)) == NULL)
+  if ((j = rm_elem(&list)) == - 1)
     return (- 1);
-  if ((check = start_tetris(argc, argv, tetris)) == 1)
-    return (0);
-  else if (check == - 1)
-    return (- 1);
-  if (the_game(tetris) == - 1)
-    return (- 1);
-  if (my_save_high(tetris) == - 1)
-  return (- 1);
-  my_free_tetris(tetris);
+  my_printf("\n\nI rm %d files!\n\n", j);
+  n = n - j;
+  i = - 1;
+  tmp = list;
+  while (++i < n)
+    {
+      my_printf("Name %s\n", tmp->name);
+      if (tmp->valid)
+	my_print_piece(tmp);
+      tmp = tmp->next;
+    }
+  free_list(list);
   return (0);
 }

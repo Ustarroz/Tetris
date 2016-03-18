@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Fri Mar 18 12:52:29 2016 Voyevoda
+** Last update Fri Mar 18 16:14:23 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -71,25 +71,31 @@ void		free_list(t_piece *list)
       k = - 1;
       tmp2 = tmp;
       tmp = tmp->next;
-      while (++k < tmp2->height)
-	free(tmp2->shape[k]);
-      free(tmp2->shape);
+      free(tmp2->name);
+      if (tmp2->shape != NULL)
+	{
+	  while (++k < tmp2->height)
+	    free(tmp2->shape[k]);
+	  free(tmp2->shape);
+	}
       free(tmp2);
     }
   k = -1;
-  while (++k < tmp->height)
-    free(tmp->shape[k]);
-  free(tmp->shape);
+  if (tmp->shape != NULL)
+    {
+      free(tmp->name);
+      while (++k < tmp->height)
+	free(tmp->shape[k]);
+      free(tmp->shape);
+    }
   free(list);
 }
 
-int	rm_first_elem(t_piece **list, int *i)
+int		rm_first_elem(t_piece **list, int *i)
 {
   t_piece	*tmp;
   t_piece	*tmp2;
-  int		k;
 
-  k = -1;
   tmp = *list;
   tmp2 = *list;
   if ((*list)->next == *list)
@@ -99,16 +105,12 @@ int	rm_first_elem(t_piece **list, int *i)
       while (tmp->next != *list)
 	tmp = tmp->next;
       tmp->next = tmp2->next;
+      tmp = tmp->next;
     }
-  if (tmp2->shape != NULL)
-    {
-      while (++k < tmp2->height)
-	free(tmp2->shape[k]);
-      free(tmp2->shape);
-    }
-  *list = (tmp == NULL) ? NULL : tmp->next;
-  free(tmp2);
-  return ((++*i));
+  free_piece(tmp2);
+  *list = tmp;
+  *i = *i + 1;
+  return (0);
 }
 
 int		rm_elem(t_piece **list)
@@ -116,24 +118,26 @@ int		rm_elem(t_piece **list)
   t_piece	*tmp;
   t_piece	*tmp2;
   int		i;
-
+  bool		first;
+  
   i = 0;
-  tmp = (*list);
   while ((*list)->valid == false)
     rm_first_elem(list, &i);
-  while (tmp->next != *list)
-    {
-      if (tmp->next->valid == false)
-	{
-	  tmp2 = tmp->next;
-	  tmp = tmp->next->next;
-	  if (tmp2->shape != NULL)
-	    free_tab(tmp2);
-	  free(tmp2);
-	  i++;
-	}
-      else
+  if ((tmp = (*list)) == NULL)
+    return (- 1);
+  first = true;
+  while (tmp != *list || first == true)
+    if (tmp->next->valid == false)
+      {
+	tmp2 = tmp->next;
+	tmp->next = tmp2->next;
+	free_piece(tmp2);
+	i++;
+      }
+    else
+      {
 	tmp = tmp->next;
-    }
+	first = false;
+      }
   return (i);
 }
