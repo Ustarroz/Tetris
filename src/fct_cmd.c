@@ -5,12 +5,12 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Sat Mar 12 11:29:56 2016 edouard puillandre
-** Last update Wed Mar 16 18:08:57 2016 edouard puillandre
+** Last update Fri Mar 18 00:10:48 2016 edouard puillandre
 */
 
 #include "tetris.h"
 
-char	*my_find_term(char **env)
+int	my_find_term(char **env)
 {
   char	*str;
   int	i;
@@ -22,10 +22,13 @@ char	*my_find_term(char **env)
     if (my_strncmp(env[i], ENV_TERM, 5) == 0)
       end = true;
   if (end == false)
-    return (NULL);
+    return (- 1);
   if ((str = my_strdup(env[i] + my_strlen(ENV_TERM))) == NULL)
-    return (NULL);
-  return (str);
+    return (- 1);
+  if (setupterm(str, 1, NULL) == - 1)
+    return (- 1);
+  free(str);
+  return (0);
 }
 
 char	*get_keypad(char *cap)
@@ -45,11 +48,7 @@ char	*get_keypad(char *cap)
 
 int	my_def_cmd(t_tetris *tetris, char **env)
 {
-  char	*str;
-
-  if ((str = my_find_term(env)) == NULL)
-    return (- 1);
-  if (setupterm(str, 1, NULL) == - 1)
+  if (my_find_term(env) == - 1)
     return (- 1);
   if ((tetris->cmd[ID_KL].key = get_keypad("kcub1")) == NULL)
     return (- 1);
@@ -63,7 +62,12 @@ int	my_def_cmd(t_tetris *tetris, char **env)
     return (- 1);
   if ((tetris->cmd[ID_KP].key = my_strdup(" ")) == NULL)
     return (- 1);
+  tetris->cmd[ID_KL].fct = (&fct_left);
+  tetris->cmd[ID_KR].fct = (&fct_right);
+  tetris->cmd[ID_KT].fct = (&fct_turn);
+  tetris->cmd[ID_KD].fct = (&fct_drop);
+  tetris->cmd[ID_KQ].fct = (&fct_quit);
+  tetris->cmd[ID_KP].fct = (&fct_pause);
   del_curterm(cur_term);
-  free(str);
   return (0);
 }

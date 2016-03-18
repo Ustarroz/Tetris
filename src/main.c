@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Feb 25 18:46:48 2016 edouard puillandre
-** Last update Thu Mar 17 16:47:58 2016 edouard puillandre
+** Last update Fri Mar 18 11:03:36 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -21,7 +21,8 @@ int	start_tetris(int argc, char **argv, t_tetris *tetris)
     }
   else if (check == - 1)
     return (- 1);
-  if (my_map_tab(tetris->map) == - 1)
+  my_put_pos(tetris);
+  if (my_map_tab(tetris) == - 1)
     return (- 1);
   if (tetris->debug == true)
     my_print_debug(tetris);
@@ -34,15 +35,20 @@ int		main(int argc, char **argv, char **env)
   int		check;
 
   if (env == NULL)
-    return (- 1);
+    {
+      my_putstr_error(ENV_ERR_MSG);
+      return (- 1);
+    }
   if ((tetris = my_def_tetris(env)) == NULL)
     return (- 1);
   if ((check = start_tetris(argc, argv, tetris)) == 1)
     return (0);
   else if (check == - 1)
     return (- 1);
-  my_put_pos(tetris);
-  the_game(tetris);
+  /*if (the_game(tetris) == - 1)
+    return (- 1);
+  if (my_save_high(tetris) == - 1)
+  return (- 1);*/
   my_free_tetris(tetris);
   return (0);
 }

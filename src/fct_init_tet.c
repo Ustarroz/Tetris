@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Thu Mar 17 16:55:20 2016 edouard puillandre
+** Last update Fri Mar 18 00:25:08 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -38,29 +38,31 @@ void		my_put_pos(t_tetris *tetris)
   tetris->game->t = time(NULL);
 }
 
-int	my_map_tab(t_map *map)
+int	my_map_tab(t_tetris *tetris)
 {
   int	i;
   int	j;
 
-  if ((map->col = malloc(sizeof(int *) * (map->height + 1))) == NULL)
+  if ((tetris->map->col = malloc(sizeof(int *) * (tetris->map->height + 3)))
+      == NULL)
     {
       my_putstr_error(MALLOC_ERR_MSG);
       return (- 1);
     }
   i = - 1;
-  while (++i < map->height)
+  while (++i < tetris->map->height + 2)
     {
       j = - 1;
-      if ((map->col[i] = malloc(sizeof(int) * map->width)) == NULL)
+      if ((tetris->map->col[i] = malloc(sizeof(int) * tetris->map->width))
+	  == NULL)
 	{
 	  my_putstr_error(MALLOC_ERR_MSG);
 	  return (- 1);
 	}
-      while (++j < map->width)
-	map->col[i][j] = - 1;
+      while (++j < tetris->map->width)
+	tetris->map->col[i][j] = - 1;
     }
-  map->col[i] = NULL;
+  tetris->map->col[i] = NULL;
   return (0);
 }
 
@@ -90,6 +92,7 @@ t_game		*my_def_game()
     }
   game->lvl = 1;
   game->score = 0;
+  game->pause = 0;
   game->high_score = 0;
   game->width = GAME_WIDTH;
   game->height = GAME_HEIGHT;

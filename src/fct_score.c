@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar 11 11:01:16 2016 edouard puillandre
-** Last update Fri Mar 11 12:22:40 2016 edouard puillandre
+** Last update Fri Mar 18 00:40:24 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -21,15 +21,13 @@ int	my_got_high(t_tetris *tetris)
       return (- 1);
     }
   if ((str = get_next_line(fd)) == NULL)
-    {
-      my_putstr_error(READ_ERR_MSG);
-      return (- 1);
-    }
-  if (check_int(str) == - 1)
+      tetris->game->high_score = 0;
+  else if (check_int(str) == - 1)
     tetris->game->high_score = 0;
   else
     tetris->game->high_score = my_getnbr(str);
-  free(str);
+  if (str != NULL)
+    free(str);
   if (close(fd) == - 1)
     {
       my_putstr_error(CLOSE_ERR_MSG);
