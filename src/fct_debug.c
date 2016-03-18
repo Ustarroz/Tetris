@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Fri Mar 18 12:01:42 2016 Voyevoda
+** Last update Fri Mar 18 19:16:09 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -70,7 +70,8 @@ void	my_print_data(t_tetris *tetris)
   my_str_space("Key Pause : ", tetris->cmd[ID_KP].key);
   my_printf("Next : %s\n", (tetris->next->valid) ? "Yes" : "No");
   my_printf("Level : %d\n", tetris->game->lvl);
-  my_printf("Size : %d*%d\n", tetris->map->width, tetris->map->height);
+  my_printf("Size : %d*%d\n", tetris->map->height, tetris->map->width);
+  my_printf("Tetriminos : %d\n", tetris->nb_piece);
   my_print_tetrimino(tetris);
   my_printf("Press a key to start Tetris\n");
 }
@@ -81,7 +82,6 @@ int			my_print_debug(t_tetris *tetris)
   struct termios	termios_p;
   struct termios	save;
 
-  rm_elem(&tetris->piece);
   my_print_data(tetris);
   if (ioctl(0, TCGETS, &save) == - 1)
     return (- 1);

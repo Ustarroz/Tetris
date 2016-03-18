@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar  4 10:13:01 2016 edouard puillandre
-** Last update Fri Mar 18 00:25:08 2016 edouard puillandre
+** Last update Fri Mar 18 17:47:32 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -14,10 +14,9 @@ void		my_put_pos(t_tetris *tetris)
 {
   int		width;
   t_piece	*tmp;
+  int		i;
 
   width = MAP_POS_X - (GAME_POS_X + tetris->game->width);
-  tetris->game->x = GAME_POS_X;
-  tetris->game->y = GAME_POS_Y;
   tetris->map->pos_x = MAP_POS_X;
   tetris->map->pos_y = MAP_POS_Y;
   tetris->next->x = MAP_POS_X + width + tetris->map->width + 2;
@@ -25,7 +24,8 @@ void		my_put_pos(t_tetris *tetris)
   tmp = tetris->piece;
   tetris->next->width = tmp->width;
   tetris->next->height = tmp->height;
-  while (tmp->next != tetris->piece)
+  i = - 1;
+  while (++i < tetris->nb_piece)
     {
       if (tmp->height > tetris->next->height)
 	tetris->next->height = tmp->height;
@@ -96,6 +96,8 @@ t_game		*my_def_game()
   game->high_score = 0;
   game->width = GAME_WIDTH;
   game->height = GAME_HEIGHT;
+  game->x = GAME_POS_X;
+  game->y = GAME_POS_Y;
   return (game);
 }
 

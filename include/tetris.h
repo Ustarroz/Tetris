@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Fri Mar 18 15:57:35 2016 edouard puillandre
+** Last update Fri Mar 18 17:50:33 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -65,6 +65,7 @@
 # define TERM_ERR_MSG "Error: the terminal is too short for this game\n"
 # define PATH_ERR_MSG "Error: no directory ./tetriminos/\n"
 # define TET_ERR_MSG "Error: can't find any .tetrimino\n"
+# define TET2_ERR_MSG "Error: all .tetrimino are wrong\n"
 # define WIN_ERR_MSG "Initscr error\n"
 # define NAME_GAME "Tetros®"
 # define COPYRIGHT "Made in Taiwan"
@@ -214,5 +215,6 @@ void		put_piece_place(t_map *map, int nb);
 t_piece		*random_piece(t_tetris *tetris);
 void		free_piece(t_piece *tmp);
 void		my_print_piece(t_piece *tmp);
+int		print_piece(t_piece *piece, int x, int y, int nb);
 
 #endif /* !TETRIS_H_ */
