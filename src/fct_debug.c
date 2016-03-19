@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Tue Mar  8 09:33:56 2016 edouard puillandre
-** Last update Fri Mar 18 19:16:09 2016 edouard puillandre
+** Last update Sat Mar 19 15:24:18 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -49,14 +49,18 @@ void		my_print_tetrimino(t_tetris *tetris)
 
 void	my_str_space(char *text, char *str)
 {
-  if (my_strcmp(str, " ") == 0)
-    my_printf("%s%s\n", text, "(space)");
-  else if (str[0] == 27)
-    {
-      my_printf("%s^E%s\n", text, str + 1);
-    }
-  else
-    my_printf("%s%s\n", text, str);
+  int	i;
+
+  i = - 1;
+  my_printf(text);
+  while (str[++i] != '\0')
+    if (str[i] == ' ')
+      my_printf("(space)");
+    else if (str[i] == 27)
+      my_printf("^E");
+    else
+      my_printf("%c", str[i]);
+  my_printf("\n");
 }
 
 void	my_print_data(t_tetris *tetris)

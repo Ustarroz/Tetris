@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 13:47:41 2016 edouard puillandre
-** Last update Fri Mar 18 18:59:03 2016 edouard puillandre
+** Last update Fri Mar 18 23:55:27 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -73,7 +73,8 @@ int	init_mode(struct termios	*termios_p,
   tetris->next->piece = random_piece(tetris);
   tetris->map->piece = random_piece(tetris);
   tetris->map->x = (tetris->map->width - 1) / 2;
-  tetris->map->y = (tetris->map->piece->height - 1) / 2;
+  /* tetris->map->y = (tetris->map->piece->height - 1) / 2; */
+  tetris->map->y = 0;
   if (ioctl(0, TCGETS, save) == - 1)
     return (- 1);
   *termios_p = *save;

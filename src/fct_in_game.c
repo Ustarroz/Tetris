@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Wed Mar 16 14:58:53 2016 edouard puillandre
-** Last update Fri Mar 18 19:00:15 2016 edouard puillandre
+** Last update Fri Mar 18 23:56:29 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -64,7 +64,8 @@ void	print_and_n(t_tetris *tetris, int *n)
       if (check_piece_place(tetris->map) == - 1)
 	{
 	  tetris->map->y = tetris->map->y - 1;
-	  if (tetris->map->y == (tetris->map->piece->height - 1) / 2)
+	  /* if (tetris->map->y == (tetris->map->piece->height - 1) / 2) */
+	  if (tetris->map->y == 0)
 	    {
 	      *n = - 1;
 	      return ;
@@ -75,7 +76,8 @@ void	print_and_n(t_tetris *tetris, int *n)
 		      tetris->next->y + 2, NB_COL);
 	  tetris->next->piece = random_piece(tetris);
 	  tetris->map->x = (tetris->map->width - 1) / 2;
-	  tetris->map->y = (tetris->map->piece->height - 1) / 2;
+	  /* tetris->map->y = (tetris->map->piece->height - 1) / 2; */
+	  tetris->map->y = 0;
 	}
       else
 	put_piece_place(tetris->map, tetris->map->piece->col);
