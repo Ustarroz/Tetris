@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Thu Mar  3 16:51:51 2016 edouard puillandre
-** Last update Wed Mar 16 14:26:56 2016 edouard puillandre
+** Last update Sat Mar 19 15:41:37 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -72,8 +72,8 @@ int	set_map_eq(t_tetris *tetris, int *i, char **argv)
   my_printf("map eq\n");
 #endif
   len = my_strlen("--map-size=");
-  tetris->map->width = get_cpl_nbr(argv[*i] + len, true);
-  tetris->map->height = get_cpl_nbr(argv[*i] + len, false);
+  tetris->map->height = get_cpl_nbr(argv[*i] + len, true);
+  tetris->map->width = get_cpl_nbr(argv[*i] + len, false);
   if (tetris->map->width == - 1 || tetris->map->height == - 1)
     {
       my_putstr_error(ARG_ERR_MSG);
