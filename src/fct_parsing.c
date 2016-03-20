@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Tue Feb 23 16:59:20 2016 Voyevoda
-** Last update Fri Mar 18 15:43:07 2016 edouard puillandre
+** Last update Sun Mar 20 14:03:41 2016 Voyevoda
 */
 #include "tetris.h"
 
@@ -48,6 +48,7 @@ int		fill_struct(t_piece *alphabet, int fd)
   k = -1;
   while ((buffer = get_next_line(fd)) != NULL && ++k < alphabet->height)
     {
+      buffer = epur_star(buffer);
       if ((fill_piece(alphabet, buffer, k, &cols)) == - 1)
 	{
 	  alphabet->valid = false;
@@ -61,6 +62,7 @@ int		fill_struct(t_piece *alphabet, int fd)
     alphabet->valid = false;
   else
     alphabet->valid = true;
+
   if (buffer != NULL)
     free(buffer);
   return (0);
