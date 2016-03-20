@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Wed Mar 16 15:18:59 2016 edouard puillandre
-** Last update Sun Mar 20 03:04:38 2016 edouard puillandre
+** Last update Sun Mar 20 12:34:33 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -21,7 +21,7 @@ int	print_piece(t_piece *piece, int x, int y, int nb)
   while (++i < piece->height)
     {
       j = - 1;
-      while (++j < piece->width)
+      while (piece->shape[i][++j] != '\0')
 	{
 	  c = piece->shape[i][j];
 	  if (c == '*' && nb != NB_COL)

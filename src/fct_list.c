@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Fri Mar 18 16:14:23 2016 edouard puillandre
+** Last update Sun Mar 20 12:58:08 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -99,7 +99,9 @@ int		rm_first_elem(t_piece **list, int *i)
   tmp = *list;
   tmp2 = *list;
   if ((*list)->next == *list)
-    tmp = NULL;
+    {
+      tmp = NULL;
+    }
   else
     {
       while (tmp->next != *list)
@@ -121,7 +123,7 @@ int		rm_elem(t_piece **list)
   bool		first;
   
   i = 0;
-  while ((*list)->valid == false)
+  while (*list != NULL && (*list)->valid == false)
     rm_first_elem(list, &i);
   if ((tmp = (*list)) == NULL)
     return (- 1);

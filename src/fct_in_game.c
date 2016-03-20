@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Wed Mar 16 14:58:53 2016 edouard puillandre
-** Last update Sun Mar 20 11:56:27 2016 edouard puillandre
+** Last update Sun Mar 20 13:25:56 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -22,13 +22,16 @@ int	check_piece_place(t_map	*map)
   y = map->y - h - 1;
   while (++y < map->y - h + map->piece->height)
     {
-      x = map->x - w - 1;
-      while (++x < map->x - w + map->piece->width &&
+      x = map->x - w;
+      while (x < map->x - w + map->piece->width &&
 	     map->piece->shape[y - map->y + h][x - map->x + w] != '\0')
-	if (map->piece->shape[y - map->y + h][x - map->x + w] == '*' &&
-	  (x < 0 || x >= map->width || y >= map->height + 2 ||
-	   (y > 0 && map->col[y][x] >= NB_COL)))
-	  return (- 1);
+	{
+	  if (map->piece->shape[y - map->y + h][x - map->x + w] == '*' &&
+	      (x < 0 || x >= map->width || y >= map->height + 2 ||
+	       (y >= 0 && map->col[y][x] >= NB_COL)))
+	    return (- 1);
+	  x = x + 1;
+	}
     }
   return (0);
 }
@@ -45,12 +48,17 @@ void	put_piece_place(t_map *map, int nb)
   y = map->y - h - 1;
   while (++y < map->y - h + map->piece->height)
     {
-      x = map->x - w - 1;
-      while (++x < map->x - w + map->piece->width &&
+      x = map->x - w;
+      while (x < map->x - w + map->piece->width &&
 	     map->piece->shape[y - map->y + h][x - map->x + w] != '\0')
-	if (y >= 0 &&
-	    map->piece->shape[y - map->y + h][x - map->x + w] == '*')
-	  map->col[y][x] = nb;
+	{
+	  if (y >= 0 &&
+	      map->piece->shape[y - map->y + h][x - map->x + w] == '*')
+	    map->col[y][x] = nb;
+	  else if (y >= 0)
+	    map->col[y][x] = - 1;
+	  x = x + 1;
+	}
     }
 }
 
@@ -70,9 +78,9 @@ void	print_and_n(t_tetris *tetris, int *n)
 	}
       put_piece_place(tetris->map, tetris->map->piece->col + NB_COL);
       tetris->map->piece = tetris->next->piece;
+      tetris->next->piece = random_piece(tetris);
       print_piece(tetris->next->piece, tetris->next->x + 2,
 		  tetris->next->y + 2, NB_COL);
-      tetris->next->piece = random_piece(tetris);
       tetris->map->x = (tetris->map->width - 1) / 2;
       tetris->map->y = - (tetris->map->piece->height - 1) / 2 + 1;
     }
