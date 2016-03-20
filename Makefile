@@ -5,7 +5,7 @@
 ## Login   <puilla_e@epitech.net>
 ## 
 ## Started on  Thu Feb 25 18:45:44 2016 edouard puillandre
-## Last update Sun Mar 20 14:14:43 2016 Voyevoda
+## Last update Sun Mar 20 23:26:56 2016 edouard puillandre
 ##
 
 DEBUG	=	no
@@ -50,7 +50,8 @@ SRC	=	src/main.c		\
 		src/fct_term.c		\
 		src/fct_term_cmd.c	\
 		src/fct_term_cmd2.c	\
-		src/fct_parsing2.c
+		src/fct_parsing2.c	\
+		src/fct_full_line.c
 
 RM	=	rm -f
 

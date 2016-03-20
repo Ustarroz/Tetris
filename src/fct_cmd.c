@@ -5,16 +5,10 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Sat Mar 12 11:29:56 2016 edouard puillandre
-** Last update Sun Mar 20 02:32:19 2016 edouard puillandre
+** Last update Sun Mar 20 23:12:44 2016 edouard puillandre
 */
 
 #include "tetris.h"
-
-int	my_putchar_bis(int c)
-{
-  write(1, &c, 1);
-  return (0);
-}
 
 int	my_find_term(char **env)
 {

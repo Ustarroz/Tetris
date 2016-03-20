@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Wed Mar 16 14:58:53 2016 edouard puillandre
-** Last update Sun Mar 20 13:25:56 2016 edouard puillandre
+** Last update Sun Mar 20 23:12:01 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -77,6 +77,7 @@ void	print_and_n(t_tetris *tetris, int *n)
 	  return ;
 	}
       put_piece_place(tetris->map, tetris->map->piece->col + NB_COL);
+      check_full_line(tetris);
       tetris->map->piece = tetris->next->piece;
       tetris->next->piece = random_piece(tetris);
       print_piece(tetris->next->piece, tetris->next->x + 2,
