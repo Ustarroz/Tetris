@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 10:43:08 2016 edouard puillandre
-** Last update Sun Mar 20 12:58:08 2016 edouard puillandre
+** Last update Mon Mar 21 00:34:56 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -71,14 +71,7 @@ void		free_list(t_piece *list)
       k = - 1;
       tmp2 = tmp;
       tmp = tmp->next;
-      free(tmp2->name);
-      if (tmp2->shape != NULL)
-	{
-	  while (++k < tmp2->height)
-	    free(tmp2->shape[k]);
-	  free(tmp2->shape);
-	}
-      free(tmp2);
+      free_piece(tmp2);
     }
   k = -1;
   if (tmp->shape != NULL)
@@ -121,7 +114,7 @@ int		rm_elem(t_piece **list)
   t_piece	*tmp2;
   int		i;
   bool		first;
-  
+
   i = 0;
   while (*list != NULL && (*list)->valid == false)
     rm_first_elem(list, &i);
