@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Fri Mar 18 17:50:33 2016 edouard puillandre
+** Last update Sun Mar 20 02:53:58 2016 edouard puillandre
 */
 
 #ifndef		TETRIS_H_
@@ -216,5 +216,7 @@ t_piece		*random_piece(t_tetris *tetris);
 void		free_piece(t_piece *tmp);
 void		my_print_piece(t_piece *tmp);
 int		print_piece(t_piece *piece, int x, int y, int nb);
+int		my_putchar_bis(int c);
+int		my_find_term(char **env);
 
 #endif /* !TETRIS_H_ */

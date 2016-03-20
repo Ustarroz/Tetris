@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Fri Mar 11 13:47:41 2016 edouard puillandre
-** Last update Fri Mar 18 23:55:27 2016 edouard puillandre
+** Last update Sun Mar 20 11:45:28 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -66,15 +66,17 @@ int	start_game(t_tetris *tetris, t_win *win)
 
 int	init_mode(struct termios	*termios_p,
 		  struct termios	*save,
-		  t_tetris		*tetris)
+		  t_tetris		*tetris,
+		  t_win			*win)
 {
+  if (start_game(tetris, win) == - 1)
+    return (- 1);
   if (my_got_high(tetris) == - 1)
     return (- 1);
   tetris->next->piece = random_piece(tetris);
   tetris->map->piece = random_piece(tetris);
   tetris->map->x = (tetris->map->width - 1) / 2;
-  /* tetris->map->y = (tetris->map->piece->height - 1) / 2; */
-  tetris->map->y = 0;
+  tetris->map->y = - (tetris->map->piece->height - 1) / 2 + 1;
   if (ioctl(0, TCGETS, save) == - 1)
     return (- 1);
   *termios_p = *save;
@@ -94,11 +96,12 @@ int			the_game(t_tetris *tetris)
   struct termios	termios_p;
   struct termios	save;
   int			n;
+  char			*str;
 
-  if (start_game(tetris, &win) == - 1)
+  if (init_mode(&termios_p, &save, tetris, &win) == - 1)
     return (- 1);
-  if (init_mode(&termios_p, &save, tetris) == - 1)
-    return (- 1);
+  if ((str = tigetstr("smkx")) != NULL)
+    my_putstr(str);
   n = 0;
   while (n != - 1)
     {
@@ -108,6 +111,8 @@ int			the_game(t_tetris *tetris)
 	return (- 1);
       refresh();
     }
+  if (str != NULL && (str = tigetstr("rmkx")) != NULL)
+    my_putstr(str);
   if (ioctl(0, TCSETS, &save) == - 1)
     return (- 1);
   endwin();

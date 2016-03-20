@@ -5,10 +5,16 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Sat Mar 12 11:29:56 2016 edouard puillandre
-** Last update Fri Mar 18 00:10:48 2016 edouard puillandre
+** Last update Sun Mar 20 02:32:19 2016 edouard puillandre
 */
 
 #include "tetris.h"
+
+int	my_putchar_bis(int c)
+{
+  write(1, &c, 1);
+  return (0);
+}
 
 int	my_find_term(char **env)
 {
@@ -46,6 +52,16 @@ char	*get_keypad(char *cap)
   return (ptr);
 }
 
+void	att_cmd_func(t_tetris *tetris)
+{
+  tetris->cmd[ID_KL].fct = (&fct_left);
+  tetris->cmd[ID_KR].fct = (&fct_right);
+  tetris->cmd[ID_KT].fct = (&fct_turn);
+  tetris->cmd[ID_KD].fct = (&fct_drop);
+  tetris->cmd[ID_KQ].fct = (&fct_quit);
+  tetris->cmd[ID_KP].fct = (&fct_pause);
+}
+
 int	my_def_cmd(t_tetris *tetris, char **env)
 {
   if (my_find_term(env) == - 1)
@@ -62,12 +78,7 @@ int	my_def_cmd(t_tetris *tetris, char **env)
     return (- 1);
   if ((tetris->cmd[ID_KP].key = my_strdup(" ")) == NULL)
     return (- 1);
-  tetris->cmd[ID_KL].fct = (&fct_left);
-  tetris->cmd[ID_KR].fct = (&fct_right);
-  tetris->cmd[ID_KT].fct = (&fct_turn);
-  tetris->cmd[ID_KD].fct = (&fct_drop);
-  tetris->cmd[ID_KQ].fct = (&fct_quit);
-  tetris->cmd[ID_KP].fct = (&fct_pause);
+  att_cmd_func(tetris);
   del_curterm(cur_term);
   return (0);
 }

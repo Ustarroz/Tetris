@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Wed Mar 16 14:58:53 2016 edouard puillandre
-** Last update Fri Mar 18 23:56:29 2016 edouard puillandre
+** Last update Sun Mar 20 11:56:27 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -48,51 +48,46 @@ void	put_piece_place(t_map *map, int nb)
       x = map->x - w - 1;
       while (++x < map->x - w + map->piece->width &&
 	     map->piece->shape[y - map->y + h][x - map->x + w] != '\0')
-	if (map->piece->shape[y - map->y + h][x - map->x + w] == '*'
-	    && y >= 0)
+	if (y >= 0 &&
+	    map->piece->shape[y - map->y + h][x - map->x + w] == '*')
 	  map->col[y][x] = nb;
     }
 }
 
 void	print_and_n(t_tetris *tetris, int *n)
 {
-  if (*n == LVL_MAX - tetris->game->lvl + 1)
+  *n = 0;
+  if (tetris->map->y > - (tetris->map->piece->height - 1) / 2 + 1)
+    put_piece_place(tetris->map, - 1);
+  tetris->map->y = tetris->map->y + 1;
+  if (check_piece_place(tetris->map) == - 1)
     {
-      *n = 0;
-      put_piece_place(tetris->map, - 1);
-      tetris->map->y = tetris->map->y + 1;
-      if (check_piece_place(tetris->map) == - 1)
+      tetris->map->y = tetris->map->y - 1;
+      if (tetris->map->y == - (tetris->map->piece->height - 1) / 2 + 1)
 	{
-	  tetris->map->y = tetris->map->y - 1;
-	  /* if (tetris->map->y == (tetris->map->piece->height - 1) / 2) */
-	  if (tetris->map->y == 0)
-	    {
-	      *n = - 1;
-	      return ;
-	    }
-	  put_piece_place(tetris->map, tetris->map->piece->col + NB_COL);
-	  tetris->map->piece = tetris->next->piece;
-	  print_piece(tetris->next->piece, tetris->next->x + 2,
-		      tetris->next->y + 2, NB_COL);
-	  tetris->next->piece = random_piece(tetris);
-	  tetris->map->x = (tetris->map->width - 1) / 2;
-	  /* tetris->map->y = (tetris->map->piece->height - 1) / 2; */
-	  tetris->map->y = 0;
+	  *n = - 1;
+	  return ;
 	}
-      else
-	put_piece_place(tetris->map, tetris->map->piece->col);
+      put_piece_place(tetris->map, tetris->map->piece->col + NB_COL);
+      tetris->map->piece = tetris->next->piece;
+      print_piece(tetris->next->piece, tetris->next->x + 2,
+		  tetris->next->y + 2, NB_COL);
+      tetris->next->piece = random_piece(tetris);
+      tetris->map->x = (tetris->map->width - 1) / 2;
+      tetris->map->y = - (tetris->map->piece->height - 1) / 2 + 1;
     }
-  print_all(tetris);
+  else
+    put_piece_place(tetris->map, tetris->map->piece->col);
 }
 
 int	take_cmd(t_tetris *tetris, int *n)
 {
   int	i;
-  char	buff[10];
+  char	buff[11];
   int	ret;
 
   i = - 1;
-  if ((ret = read(1, buff, 1)) == - 1)
+  if ((ret = read(1, buff, 10)) == - 1)
     {
       my_putstr_error(READ_ERR_MSG);
       return (- 1);
@@ -111,7 +106,9 @@ int	got_cmd(t_tetris *tetris, int *n)
   if (*n != - 1 && tetris->game->pause == 0)
     {
       *n = *n + 1;
-      print_and_n(tetris, n);
+      if (*n == LVL_MAX - tetris->game->lvl + 1)
+	print_and_n(tetris, n);
+      print_all(tetris);
     }
   return (0);
 }
