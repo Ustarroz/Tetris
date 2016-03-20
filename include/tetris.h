@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:47:38 2016 edouard puillandre
-** Last update Sun Mar 20 02:53:58 2016 edouard puillandre
+** Last update Sun Mar 20 14:04:26 2016 Voyevoda
 */
 
 #ifndef		TETRIS_H_
@@ -218,5 +218,6 @@ void		my_print_piece(t_piece *tmp);
 int		print_piece(t_piece *piece, int x, int y, int nb);
 int		my_putchar_bis(int c);
 int		my_find_term(char **env);
+char		*epur_star(char *str);
 
 #endif /* !TETRIS_H_ */
