@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 **
 ** Started on  Thu Feb 25 18:46:48 2016 edouard puillandre
-** Last update Sun Mar 20 21:34:51 2016 edouard puillandre
+** Last update Mon Mar 21 00:09:04 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -52,10 +52,10 @@ int		main(int argc, char **argv, char **env)
     return (0);
   else if (check == - 1)
     return (- 1);
-  /* if (the_game(tetris) == - 1) */
-  /*   return (- 1); */
-  /* if (my_save_high(tetris) == - 1) */
-  /*   return (- 1); */
+  if (the_game(tetris) == - 1)
+    return (- 1);
+  if (my_save_high(tetris) == - 1)
+    return (- 1);
   my_free_tetris(tetris);
   return (0);
 }
