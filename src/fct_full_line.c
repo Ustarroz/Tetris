@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Sun Mar 20 23:16:55 2016 edouard puillandre
-** Last update Sun Mar 20 23:39:12 2016 edouard puillandre
+** Last update Sun Mar 20 23:45:46 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -46,7 +46,7 @@ int	check_full_line(t_tetris *tetris)
 
   y = - 1;
   line = 0;
-  while (++y < tetris->map->width + 2)
+  while (++y < tetris->map->height + 2)
     {
       if (check_one_line(tetris->map->col[y], tetris->map->width) == 1)
 	{

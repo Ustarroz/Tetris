@@ -5,7 +5,7 @@
 ** Login   <puilla_e@epitech.net>
 ** 
 ** Started on  Fri Mar 18 00:12:47 2016 edouard puillandre
-** Last update Sun Mar 20 23:26:40 2016 edouard puillandre
+** Last update Sun Mar 20 23:42:15 2016 edouard puillandre
 */
 
 #include "tetris.h"
@@ -59,6 +59,7 @@ int	fct_drop(t_tetris *tetris, int *n)
       return (0);
     }
   put_piece_place(tetris->map, tetris->map->piece->col + NB_COL);
+  check_full_line(tetris);
   tetris->map->piece = tetris->next->piece;
   print_piece(tetris->next->piece, tetris->next->x + 2,
 	      tetris->next->y + 2, NB_COL);
