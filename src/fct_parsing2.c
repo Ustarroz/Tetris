@@ -5,7 +5,7 @@
 ** Login   <voyevoda@epitech.net>
 **
 ** Started on  Sun Mar 20 13:51:37 2016 Voyevoda
-** Last update Sun Mar 20 14:13:56 2016 Voyevoda
+** Last update Sun Mar 20 22:47:40 2016 Voyevoda
 */
 
 #include "tetris.h"
@@ -21,8 +21,8 @@ char	*epur_star(char *str)
     {
       if (str[i] == '*')
 	k = i;
-      if (str[i] == '\0' && k != -1)
-	str[++k] = '\0';
+      if (str[i + 1] == '\0' && k != -1)
+	str[k + 1] = '\0';
     }
   return (str);
 }
